@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -14,7 +15,7 @@ header h1 { color: #ff0000; margin: 0; font-size:24px; }
 .details h2 { margin-top:0; color:#ff0000; }
 .details p { color:#ccc; margin:5px 0; }
 .video { width:100%; text-align:center; margin-top:20px; }
-.video iframe, .video video { width:90%; height:500px; border:none; border-radius:10px; }
+.video video { width:90%; height:auto; border-radius:10px; }
 a { color:#ff0000; text-decoration:none; }
 </style>
 </head>
@@ -35,13 +36,3 @@ a { color:#ff0000; text-decoration:none; }
         <p><strong>Актёры:</strong> Томми Ли Джонс, Хавьер Бардем, Джош Бролин</p>
         <p>Сюжет рассказывает о человеке, который случайно находит деньги, украденные наркоторговцами, и оказывается в смертельной игре с убийцей и шерифом.</p>
         <a href="index.html">← Назад к фильмам</a>
-    </div>
-</div>
-
-<div class="video">
-    <!-- Встроенное видео фильма -->
-    <iframe src="https://www.youtube.com/embed/38A__WT3-o0" allowfullscreen></iframe>
-</div>
-
-</body>
-</html>
