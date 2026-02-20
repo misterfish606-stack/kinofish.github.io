@@ -1,44 +1,90 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>KinoFish 🎬</title>
-    <style>
-        body { font-family: Arial; background: #121212; color: #fff; margin: 0; padding: 0; }
-        header { background: #1f1f1f; padding: 20px; text-align: center; }
-        h1 { color: #ff0000; margin: 0; }
-        .movies { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
-        .movie { background: #1f1f1f; margin: 10px; padding: 10px; width: 200px; text-align: center; border-radius: 10px; }
-        .movie img { width: 100%; border-radius: 10px; }
-        .movie h3 { margin: 10px 0 5px 0; }
-        .movie p { font-size: 14px; color: #ccc; }
-        a { color: #ff0000; text-decoration: none; }
-    </style>
+<meta charset="UTF-8">
+<title>KinoFish 🎬</title>
+<style>
+    body { font-family: Arial; background: #121212; color: #fff; margin: 0; padding: 0; }
+    header { background: #1f1f1f; padding: 20px; text-align: center; }
+    h1 { color: #ff0000; margin: 0; }
+    .movies { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
+    .movie { background: #1f1f1f; margin: 10px; padding: 10px; width: 200px; text-align: center; border-radius: 10px; cursor: pointer; }
+    .movie img { width: 100%; border-radius: 10px; }
+    .movie h3 { margin: 10px 0 5px 0; }
+    .movie span { display: block; font-size: 12px; color: #888; margin-bottom: 5px; }
+
+    /* Модальное окно */
+    .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); justify-content:center; align-items:center; }
+    .modal-content { background: #1f1f1f; padding: 20px; border-radius: 10px; width: 300px; text-align:center; position: relative; }
+    .close { position: absolute; top:10px; right:15px; cursor:pointer; font-size: 20px; color: #fff; }
+    .modal img { width: 100%; border-radius: 10px; margin-bottom: 10px; }
+    .modal a { color: #ff0000; text-decoration: none; display:block; margin-top: 10px; }
+</style>
 </head>
 <body>
-    <header>
-        <h1>KinoFish 🎬</h1>
-    </header>
-    <div class="movies">
-        <div class="movie">
-            <img src="https://via.placeholder.com/200x300?text=Фильм+1" alt="Фильм 1">
-            <h3>Фильм 1</h3>
-            <p>Описание фильма 1</p>
-            <a href="https://www.youtube.com/" target="_blank">Смотреть трейлер</a>
-        </div>
-        <div class="movie">
-            <img src="https://via.placeholder.com/200x300?text=Фильм+2" alt="Фильм 2">
-            <h3>Фильм 2</h3>
-            <p>Описание фильма 2</p>
-            <a href="https://www.youtube.com/" target="_blank">Смотреть трейлер</a>
-        </div>
-        <div class="movie">
-            <img src="https://via.placeholder.com/200x300?text=Фильм+3" alt="Фильм 3">
-            <h3>Фильм 3</h3>
-            <p>Описание фильма 3</p>
-            <a href="https://www.youtube.com/" target="_blank">Смотреть трейлер</a>
-        </div>
+
+<header>
+    <h1>KinoFish 🎬</h1>
+</header>
+
+<div class="movies">
+    <div class="movie" data-title="Игра в кальмара" data-genre="Драма / Триллер" data-desc="Выживание в смертельной игре с большими ставками." data-trailer="https://www.youtube.com/watch?v=oqxAJKy0ii4" data-img="https://m.media-amazon.com/images/I/81iqZ2HHD-L._AC_SY679_.jpg">
+        <img src="https://m.media-amazon.com/images/I/81iqZ2HHD-L._AC_SY679_.jpg" alt="Игра в кальмара">
+        <h3>Игра в кальмара</h3>
     </div>
+    <div class="movie" data-title="Дюна" data-genre="Фантастика / Приключения" data-desc="Борьба за контроль над планетой Арракис." data-trailer="https://www.youtube.com/watch?v=n9xhJrPXop4" data-img="https://upload.wikimedia.org/wikipedia/en/8/8a/Dune_2021_film_poster.jpg">
+        <img src="https://upload.wikimedia.org/wikipedia/en/8/8a/Dune_2021_film_poster.jpg" alt="Дюна">
+        <h3>Дюна</h3>
+    </div>
+    <div class="movie" data-title="Всё везде и сразу" data-genre="Комедия / Фантастика" data-desc="Смешная и невероятная история с многомерными приключениями." data-trailer="https://www.youtube.com/watch?v=wxN1T1uxQ2g" data-img="https://upload.wikimedia.org/wikipedia/en/6/6c/Everything_Everywhere_All_At_Once_poster.jpeg">
+        <img src="https://upload.wikimedia.org/wikipedia/en/6/6c/Everything_Everywhere_All_At_Once_poster.jpeg" alt="Всё везде и сразу">
+        <h3>Всё везде и сразу</h3>
+    </div>
+</div>
+
+<!-- Модальное окно -->
+<div class="modal" id="movieModal">
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <img id="modalImg" src="" alt="">
+        <h2 id="modalTitle"></h2>
+        <span id="modalGenre"></span>
+        <p id="modalDesc"></p>
+        <a id="modalTrailer" href="" target="_blank">Смотреть трейлер</a>
+    </div>
+</div>
+
+<script>
+    const movies = document.querySelectorAll('.movie');
+    const modal = document.getElementById('movieModal');
+    const closeBtn = document.getElementById('closeModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalGenre = document.getElementById('modalGenre');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalTrailer = document.getElementById('modalTrailer');
+    const modalImg = document.getElementById('modalImg');
+
+    movies.forEach(movie => {
+        movie.addEventListener('click', () => {
+            modal.style.display = 'flex';
+            modalTitle.textContent = movie.dataset.title;
+            modalGenre.textContent = "Жанр: " + movie.dataset.genre;
+            modalDesc.textContent = movie.dataset.desc;
+            modalTrailer.href = movie.dataset.trailer;
+            modalImg.src = movie.dataset.img;
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if(e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+</script>
+
 </body>
 </html>
-
