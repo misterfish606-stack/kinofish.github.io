@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Старикам тут не место 🎬</title>
+<style>
+body { font-family: Arial; background: #121212; color: #fff; margin: 0; padding: 0; }
+header { background: #1f1f1f; padding: 10px 20px; display:flex; align-items:center; }
+header h1 { color: #ff0000; margin: 0; font-size:24px; }
+.container { display:flex; flex-wrap: wrap; padding: 20px; justify-content:center; }
+.banner { flex:1 1 400px; max-width: 600px; margin: 10px; }
+.banner img { width:100%; border-radius:10px; }
+.details { flex:1 1 300px; max-width: 400px; margin: 10px; padding: 10px; background:#1f1f1f; border-radius:10px; }
+.details h2 { margin-top:0; color:#ff0000; }
+.details p { color:#ccc; margin:5px 0; }
+.video { width:100%; text-align:center; margin-top:20px; }
+.video iframe, .video video { width:90%; height:500px; border:none; border-radius:10px; }
+a { color:#ff0000; text-decoration:none; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Старикам тут не место 🎬</h1>
+</header>
+
+<div class="container">
+    <div class="banner">
+        <img src="https://upload.wikimedia.org/wikipedia/en/8/8b/No_Country_for_Old_Men_poster.jpg" alt="Старикам тут не место">
+    </div>
+    <div class="details">
+        <h2>Описание фильма</h2>
+        <p><strong>Жанр:</strong> Триллер / Драма / Криминал</p>
+        <p><strong>Год выпуска:</strong> 2007</p>
+        <p><strong>Актёры:</strong> Томми Ли Джонс, Хавьер Бардем, Джош Бролин</p>
+        <p>Сюжет рассказывает о человеке, который случайно находит деньги, украденные наркоторговцами, и оказывается в смертельной игре с убийцей и шерифом.</p>
+        <a href="index.html">← Назад к фильмам</a>
+    </div>
+</div>
+
+<div class="video">
+    <!-- Встроенное видео фильма -->
+    <iframe src="https://www.youtube.com/embed/38A__WT3-o0" allowfullscreen></iframe>
+</div>
+
+</body>
+</html>
