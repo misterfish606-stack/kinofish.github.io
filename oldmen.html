@@ -204,3 +204,209 @@ function addComment(){
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Хороший, плохой, злой</title>
+
+<style>
+body{
+    margin:0;
+    background:black;
+    color:white;
+    font-family:Arial, sans-serif;
+}
+
+/* Боковые черные зоны /
+.wrapper{
+    width:60%;
+    margin:0 auto;
+}
+
+/ Верхний блок /
+.top{
+    display:flex;
+    gap:30px;
+    margin-top:40px;
+}
+
+/ Постер /
+.poster img{
+    width:250px;
+    border-radius:10px;
+}
+
+/ Инфо /
+.info h2{
+    margin-top:0;
+}
+
+.info p{
+    margin:6px 0;
+}
+
+/ Описание /
+.description{
+    margin-top:30px;
+    line-height:1.6;
+}
+
+/ Видео /
+.video-section{
+    margin-top:40px;
+    text-align:center;
+}
+
+video{
+    width:100%;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+/ Кнопки /
+.controls{
+    margin-top:10px;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+button, select{
+    padding:8px 12px;
+    background:#222;
+    color:white;
+    border:1px solid #555;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#444;
+}
+
+/ Комментарии */
+.comments{
+    margin-top:50px;
+}
+
+.comment-box{
+    margin-top:10px;
+}
+
+.comment{
+    background:#111;
+    padding:10px;
+    margin-top:10px;
+    border-radius:5px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<div class="top">
+    <div class="poster">
+        <img src="https://upload.wikimedia.org/wikipedia/en/4/45/Good_the_bad_and_the_ugly_poster.jpg">
+    </div>
+
+    <div class="info">
+        <h2>Хороший, плохой, злой</h2>
+        <p><b>Год выпуска:</b> 1966</p>
+        <p><b>Оригинальное название:</b> The Good, the Bad and the Ugly</p>
+        <p><b>Страна:</b> Италия, Испания</p>
+        <p><b>Рейтинг КиноПоиска:</b> 8.6</p>
+        <p><b>Рейтинг IMDb:</b> 8.8</p>
+        <p><b>Режиссер:</b> Серджо Леоне</p>
+        <p><b>Главные актеры:</b> Клинт Иствуд, Ли Ван Клиф, Илай Уоллак</p>
+    </div>
+</div>
+
+<div class="description">
+<p>
+Во времена Гражданской войны в США трое авантюристов охотятся за спрятанным золотом.
+Каждый из них преследует собственную выгоду, но обстоятельства заставляют их временно объединиться.
+Фильм стал культовым представителем жанра спагетти-вестерна, прославился своей атмосферой,
+величественной музыкой Эннио Морриконе и харизматичными героями.
+Картина сочетает напряжение, философию и иронию, а финальная дуэль на кладбище
+считается одной из величайших сцен в истории кино.
+</p>
+</div>
+
+<div class="video-section">
+
+<div class="controls">
+    <button onclick="toggleVideo()">Открыть / Закрыть</button>
+    <button onclick="pauseVideo()">Пауза</button>
+
+    <!-- Громкость -->
+    <input type="range" min="0" max="1" step="0.1" value="1" onchange="setVolume(this.value)">
+
+    <!-- Качество (пример) -->
+    <select onchange="changeQuality(this.value)">
+        <option value="360">360p</option>
+        <option value="480">480p</option>
+        <option value="720" selected>720p</option>
+        <option value="1080">1080p</option>
+    </select>
+</div>
+
+<video id="movie" controls>
+    <source src="0Bwxz16-T04.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<div class="comments">
+<h3>Комментарии</h3>
+
+<input type="text" id="commentInput" placeholder="Написать комментарий">
+<button onclick="addComment()">Отправить</button>
+
+<div id="commentList"></div>
+</div>
+
+</div>
+
+<script>
+let video = document.getElementById("movie");
+
+function toggleVideo(){
+    if(video.style.display === "none"){
+        video.style.display = "block";
+    }else{
+        video.style.display = "none";
+    }
+}
+
+function pauseVideo(){
+    video.pause();
+}
+
+function setVolume(value){
+    video.volume = value;
+}
+
+function changeQuality(q){
+    alert("Для смены качества нужны отдельные видео-файлы 360/480/720/1080");
+}
+
+function addComment(){
+    let input = document.getElementById("commentInput");
+    if(input.value.trim() === "") return;
+
+    let div = document.createElement("div");
+    div.className = "comment";
+    div.textContent = input.value;
+
+    document.getElementById("commentList").appendChild(div);
+    input.value = "";
+}
+</script>
+
+</body>
+</html>
