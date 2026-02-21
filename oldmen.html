@@ -276,32 +276,95 @@ input[type="range"]{
 </div>
 
 <script>
-/ ===== Слайдер ===== /
+/* ===== Слайдер ===== /
 let index=0;
 function moveSlide(step){
-let slides=document.getElementById("slides");
-let total=slides.children.length;
-index+=step;
-if(index<0) index=total-1;
-if(index>=total) index=0;
-slides.style.transform="translateX(-"+index*100+"%)";
+  let slides=document.getElementById("slides");
+  let total=slides.children.length;
+  index+=step;
+  if(index<0) index=total-1;
+  if(index>=total) index=0;
+  slides.style.transform="translateX(-"+index*100+"%)";
 }
 
 / ===== Lightbox ===== /
 function openLightbox(src){
-document.getElementById("lightboxImg").src=src;
-document.getElementById("lightbox").style.display="flex";
+  document.getElementById("lightboxImg").src=src;
+  document.getElementById("lightbox").style.display="flex";
 }
 function closeLightbox(){
-document.getElementById("lightbox").style.display="none";
+  document.getElementById("lightbox").style.display="none";
 }
 
-/ ===== Голосование ===== */
-let rated=false;
-function rate(star){
-if(rated) return;
-rated=true;
-let votes=localStorage.getItem("votes")||0;
-votes=parseInt(votes)+1;
-document.getElementById("votes").innerText="("+votes+" голосов)";
-localSto
+/ ===== Голосование 5★ с сохранением ===== /
+let stars = document.querySelectorAll('.star');
+
+function loadRating(){
+  let rating = localStorage.getItem('movieRating');
+  if(rating){
+    stars.forEach((star,i)=>{
+      star.classList.toggle('selected', i < parseInt(rating));
+    });
+    document.getElementById('votes').innerText = `(${rating} звезд)`;
+  }
+}
+
+stars.forEach((star,i)=>{
+  star.addEventListener('click', ()=>{
+    localStorage.setItem('movieRating', i+1);
+    loadRating();
+  });
+});
+
+loadRating();
+
+/ ===== Просмотры ===== /
+let views=localStorage.getItem("views")||0;
+views=parseInt(views)+1;
+document.getElementById("views").innerText=views;
+localStorage.setItem("views",views);
+
+/ ===== Комментарии ===== /
+let comments = JSON.parse(localStorage.getItem("cinemaComments")) || [];
+
+function renderComments(){
+  const container = document.getElementById('commentList');
+  container.innerHTML = '';
+  comments.forEach((c,index)=>{
+    let div = document.createElement('div');
+    div.className = "comment";
+    div.innerHTML = `
+      <img class="avatar" src="https://i.imgur.com/7y9E9Hl.png">
+      <b>${c.name}</b>: ${c.text}<br>
+      <button onclick="like(${index})">👍 ${c.likes}</button>
+      <button onclick="dislike(${index})">👎 ${c.dislikes}</button>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function addComment(){
+  let name = document.getElementById("username").value.trim();
+  let text = document.getElementById("commentInput").value.trim();
+  if(!name||!text) return;
+  comments.push({name,text,likes:0,dislikes:0});
+  localStorage.setItem("cinemaComments", JSON.stringify(comments));
+  renderComments();
+  document.getElementById("commentInput").value='';
+}
+
+function like(index){
+  comments[index].likes++;
+  localStorage.setItem("cinemaComments", JSON.stringify(comments));
+  renderComments();
+}
+
+function dislike(index){
+  comments[index].dislikes++;
+  localStorage.setItem("cinemaComments", JSON.stringify(comments));
+  renderComments();
+}
+
+/ ===== Загрузка при старте ===== */
+renderComments();
+</script>
