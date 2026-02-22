@@ -1,0 +1,42 @@
+body {
+    background: black;
+    color: white;
+    font-family: Arial;
+}
+
+/* Постер /
+.poster {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 200px;
+}
+
+/ Видео /
+.player {
+    display: block;
+    margin: 100px auto;
+    width: 70%;
+}
+
+/ Звёзды /
+#stars span {
+    font-size: 40px;
+    cursor: pointer;
+    color: gray;
+}
+
+#stars span.active {
+    color: gold;
+}
+
+/ Комментарии */
+.comments {
+    width: 60%;
+    margin: auto;
+}
+
+textarea {
+    width: 100%;
+    height: 80px;
+}
