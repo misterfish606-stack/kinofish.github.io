@@ -10,15 +10,43 @@ body{
   font-family:Georgia, serif;
   background:#1a1208;
   color:#f5e6c4;
+  display:flex;
 }
 
-/* ===== ВЕРХНЕЕ МЕНЮ ===== */
-.topbar{
+/* ===== ЛЕВАЯ ПАНЕЛЬ ===== */
+.sidebar{
+  width:300px; /* +20% */
   background:#2c1c0e;
-  padding:15px;
+  padding:20px;
+  overflow-y:auto;
+  height:100vh;
+  border-right:3px solid #d4af37;
+}
+
+.sidebar h3{
+  color:#ffd700;
+  margin-top:20px;
+}
+
+.sidebar div{
+  cursor:pointer;
+  margin:4px 0;
+}
+
+.sidebar div:hover{
+  color:white;
+}
+
+/* ===== ОСНОВНАЯ ЧАСТЬ ===== */
+.main{
+  flex:1;
+  padding:20px;
+}
+
+.topbar{
   display:flex;
   gap:20px;
-  border-bottom:3px solid #d4af37;
+  margin-bottom:20px;
 }
 
 .topbar button{
@@ -31,11 +59,6 @@ body{
 
 .topbar button:hover{
   color:white;
-}
-
-/* ===== ОСНОВНОЙ КОНТЕНТ ===== */
-.main{
-  padding:20px;
 }
 
 .movie-grid{
@@ -68,113 +91,176 @@ body{
 .movie-info{
   max-width:600px;
 }
-
-iframe{
-  margin-top:20px;
-  width:100%;
-  height:315px;
-}
 </style>
 </head>
 <body>
 
+<!-- ===== ЛЕВОЕ МЕНЮ ===== -->
+<div class="sidebar">
+
+<h3>Категории</h3>
+<div onclick="showAll()">Все фильмы</div>
+
+<h3>Жанры</h3>
+<div onclick="filter('genre','Боевик')">Боевик</div>
+<div onclick="filter('genre','Вестерн')">Вестерн</div>
+<div onclick="filter('genre','Драма')">Драма</div>
+<div onclick="filter('genre','Триллер')">Триллер</div>
+<div onclick="filter('genre','Криминал')">Криминал</div>
+<div onclick="filter('genre','Комедия')">Комедия</div>
+<div onclick="filter('genre','Фантастика')">Фантастика</div>
+<div onclick="filter('genre','Фэнтези')">Фэнтези</div>
+
+<h3>Года</h3>
+<div onclick="filter('year',1976)">1976</div>
+<div onclick="filter('year',1964)">1964</div>
+<div onclick="filter('year',1966)">1966</div>
+<div onclick="filter('year',2007)">2007</div>
+
+<h3>Страны</h3>
+<div onclick="filter('country','США')">США</div>
+<div onclick="filter('country','Италия')">Италия</div>
+<div onclick="filter('country','Испания')">Испания</div>
+
+</div>
+
+<!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
+<div class="main">
+
 <div class="topbar">
 <button onclick="showAll()">Фильмы</button>
 <button onclick="showSearch()">Поиск</button>
-<button onclick="showNew()">Новинки</button>
-<button onclick="showCollections()">Подборки</button>
+<button>Новинки</button>
+<button>Подборки</button>
 </div>
 
-<div class="main" id="content"></div>
+<div id="content"></div>
+
+</div>
 
 <script>
 
 const movies = [
-{
-id:"fistful",
-title:"За пригоршню долларов",
-year:1964,
-video:"https://www.youtube.com/embed/TgG4V33bB9U",
-poster:"https://m.media-amazon.com/images/I/71C1g9gF9ZL._AC_SY679_.jpg",
-description:"Одинокий стрелок играет на конфликте двух банд."
-},
-{
-id:"goodbad",
-title:"Хороший, плохой, злой",
-year:1966,
-video:"https://www.youtube.com/embed/WCN5JJY_wiA",
-poster:"https://m.media-amazon.com/images/I/81XnYB1KkDL._AC_SY679_.jpg",
-description:"Три стрелка ищут золото во времена войны."
-},
+
 {
 id:"taxi",
 title:"Taxi Driver",
 year:1976,
-video:"https://www.youtube.com/embed/TgG4V33bB9U",
+genre:"Драма",
+country:"США",
 poster:"https://m.media-amazon.com/images/I/71ZxE3WQpFL._AC_SY679_.jpg",
-description:"Таксист постепенно сходит с ума."
+description:"Одинокий таксист постепенно теряет связь с реальностью."
 },
+
+{
+id:"fistful",
+title:"За пригоршню долларов",
+year:1964,
+genre:"Вестерн",
+country:"Италия",
+poster:"https://m.media-amazon.com/images/I/71C1g9gF9ZL._AC_SY679_.jpg",
+description:"Стрелок сталкивает две банды ради выгоды."
+},
+
+{
+id:"goodbad",
+title:"Хороший, плохой, злой",
+year:1966,
+genre:"Вестерн",
+country:"Италия",
+poster:"https://m.media-amazon.com/images/I/81XnYB1KkDL._AC_SY679_.jpg",
+description:"Трое охотятся за золотом во время войны."
+},
+
 {
 id:"nocountry",
 title:"Старикам тут не место",
 year:2007,
-video:"https://www.youtube.com/embed/38A__WT3-o0",
+genre:"Триллер",
+country:"США",
 poster:"https://m.media-amazon.com/images/I/81WCNkLQ6-L._AC_SY679_.jpg",
 description:"Человек находит деньги и становится мишенью."
 }
+
 ];
 
-function showAll(){
-  const content = document.getElementById("content");
-  content.innerHTML = '<h2>Все фильмы</h2><div class="movie-grid"></div>';
-  const grid = document.querySelector(".movie-grid");
-
-  movies.forEach(movie=>{
-    const card = document.createElement("div");
-    card.className="movie-card";
-    card.innerHTML=`<img src="${movie.poster}" onclick="openMovie('${movie.id}')">`;
-    grid.appendChild(card);
-  });
+/* ===== ОТКРЫТИЕ СТРАНИЦЫ ФИЛЬМА ===== */
+function openMovie(id){
+  window.location.href = "?movie=" + id;
 }
 
-function openMovie(id){
-  const movie = movies.find(m=>m.id===id);
-  const content = document.getElementById("content");
+/* ===== ПОКАЗ СТРАНИЦЫ ФИЛЬМА ===== */
+function loadMoviePage(){
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("movie");
+  if(!id) return;
 
-  content.innerHTML = `
-  <button onclick="showAll()">← Назад</button>
+  const movie = movies.find(m=>m.id===id);
+  if(!movie) return;
+
+  document.getElementById("content").innerHTML = `
   <div class="movie-page">
     <img src="${movie.poster}">
     <div class="movie-info">
       <h2>${movie.title}</h2>
       <p><b>Год:</b> ${movie.year}</p>
+      <p><b>Жанр:</b> ${movie.genre}</p>
+      <p><b>Страна:</b> ${movie.country}</p>
       <p>${movie.description}</p>
-      <iframe src="${movie.video}" allowfullscreen></iframe>
     </div>
   </div>
   `;
 }
 
+/* ===== ПОКАЗ ВСЕХ ===== */
+function showAll(){
+  const content = document.getElementById("content");
+  content.innerHTML = '<div class="movie-grid"></div>';
+  const grid = document.querySelector(".movie-grid");
+
+  movies.forEach(movie=>{
+    grid.innerHTML += `
+      <div class="movie-card">
+        <img src="${movie.poster}" onclick="openMovie('${movie.id}')">
+      </div>
+    `;
+  });
+}
+
+/* ===== ФИЛЬТР ===== */
+function filter(type,value){
+  const filtered = movies.filter(m=>m[type]==value);
+  const content = document.getElementById("content");
+  content.innerHTML = '<div class="movie-grid"></div>';
+  const grid = document.querySelector(".movie-grid");
+
+  filtered.forEach(movie=>{
+    grid.innerHTML += `
+      <div class="movie-card">
+        <img src="${movie.poster}" onclick="openMovie('${movie.id}')">
+      </div>
+    `;
+  });
+}
+
 /* ===== ПОИСК ===== */
 function showSearch(){
-  const content = document.getElementById("content");
-  content.innerHTML = `
-    <h2>Поиск</h2>
+  document.getElementById("content").innerHTML = `
     <input type="text" id="searchInput" placeholder="Введите название">
-    <div id="searchResults"></div>
+    <div id="results"></div>
   `;
 
   document.getElementById("searchInput").addEventListener("input", function(){
     const value = this.value.toLowerCase();
     const results = movies.filter(m=>m.title.toLowerCase().includes(value));
 
-    const container = document.getElementById("searchResults");
+    const container = document.getElementById("results");
     container.innerHTML="";
 
     results.forEach(movie=>{
       container.innerHTML += `
         <div>
-          <img src="${movie.poster}" width="120" 
+          <img src="${movie.poster}" width="120"
           onclick="openMovie('${movie.id}')">
           ${movie.title}
         </div>
@@ -183,16 +269,11 @@ function showSearch(){
   });
 }
 
-/* ===== ПУСТЫЕ РАЗДЕЛЫ ===== */
-function showNew(){
-  document.getElementById("content").innerHTML="<h2>Новинки (пока пусто)</h2>";
+/* ===== ПРИ ЗАГРУЗКЕ ===== */
+loadMoviePage();
+if(!window.location.search){
+  showAll();
 }
-
-function showCollections(){
-  document.getElementById("content").innerHTML="<h2>Подборки (пока пусто)</h2>";
-}
-
-showAll();
 
 </script>
 
