@@ -10,46 +10,34 @@ body{
   font-family:Georgia, serif;
   background:#1a1208;
   color:#f5e6c4;
-  display:flex;
 }
 
-/* ===== ЛЕВАЯ ПАНЕЛЬ ===== */
-.sidebar{
-  width:260px;
+/* ===== ВЕРХНЕЕ МЕНЮ ===== */
+.topbar{
   background:#2c1c0e;
-  padding:20px;
-  height:100vh;
-  overflow-y:auto;
-  border-right:3px solid #d4af37;
+  padding:15px;
+  display:flex;
+  gap:20px;
+  border-bottom:3px solid #d4af37;
 }
 
-.sidebar h3{
-  color:#d4af37;
-  margin-top:20px;
-}
-
-.sidebar button{
-  display:block;
-  width:100%;
-  margin:5px 0;
+.topbar button{
   background:none;
   border:none;
   color:#ffd700;
-  text-align:left;
   cursor:pointer;
+  font-size:16px;
 }
 
-.sidebar button:hover{
+.topbar button:hover{
   color:white;
 }
 
-/* ===== ПРАВАЯ ЧАСТЬ ===== */
+/* ===== ОСНОВНОЙ КОНТЕНТ ===== */
 .main{
-  flex:1;
   padding:20px;
 }
 
-/* ===== СПИСОК ФИЛЬМОВ ===== */
 .movie-grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,200px);
@@ -81,144 +69,132 @@ body{
   max-width:600px;
 }
 
-.description{
+iframe{
   margin-top:20px;
-  max-height:450px;      /* не выходит ниже картинки */
-  overflow:auto;         /* если текст длинный — появится прокрутка */
+  width:100%;
+  height:315px;
 }
 </style>
 </head>
 <body>
 
-<div class="sidebar">
-
-<h2>🎬 Категории</h2>
-
-<h3>Жанры</h3>
-<button onclick="filterGenre('all')">Все фильмы</button>
-<button onclick="filterGenre('Вестерн')">Вестерн</button>
-<button onclick="filterGenre('Драма')">Драма</button>
-<button onclick="filterGenre('Криминал')">Криминал</button>
-<button onclick="filterGenre('Триллер')">Триллер</button>
-
-<h3>Годы</h3>
-<button onclick="filterYear(1964)">1964</button>
-<button onclick="filterYear(1966)">1966</button>
-<button onclick="filterYear(1976)">1976</button>
-<button onclick="filterYear(2007)">2007</button>
-
-<h3>По странам</h3>
-<button onclick="filterCountry('Италия')">Италия</button>
-<button onclick="filterCountry('США')">США</button>
-
+<div class="topbar">
+<button onclick="showAll()">Фильмы</button>
+<button onclick="showSearch()">Поиск</button>
+<button onclick="showNew()">Новинки</button>
+<button onclick="showCollections()">Подборки</button>
 </div>
 
-<div class="main">
-<div id="content"></div>
-</div>
+<div class="main" id="content"></div>
 
 <script>
 
 const movies = [
 {
+id:"fistful",
 title:"За пригоршню долларов",
-original:"A Fistful of Dollars",
 year:1964,
-genre:["Вестерн"],
-country:"Италия",
-director:"Серджио Леоне",
-actors:"Клинт Иствуд",
+video:"https://www.youtube.com/embed/TgG4V33bB9U",
 poster:"https://m.media-amazon.com/images/I/71C1g9gF9ZL._AC_SY679_.jpg",
-description:"Одинокий стрелок приезжает в маленький городок и играет на конфликте двух банд."
+description:"Одинокий стрелок играет на конфликте двух банд."
 },
 {
+id:"goodbad",
 title:"Хороший, плохой, злой",
-original:"The Good, the Bad and the Ugly",
 year:1966,
-genre:["Вестерн"],
-country:"Италия",
-director:"Серджио Леоне",
-actors:"Клинт Иствуд, Илай Уоллак",
+video:"https://www.youtube.com/embed/WCN5JJY_wiA",
 poster:"https://m.media-amazon.com/images/I/81XnYB1KkDL._AC_SY679_.jpg",
-description:"Три охотника за сокровищами ищут золото во время гражданской войны."
+description:"Три стрелка ищут золото во времена войны."
 },
 {
+id:"taxi",
 title:"Taxi Driver",
-original:"Taxi Driver",
 year:1976,
-genre:["Драма","Криминал"],
-country:"США",
-director:"Мартин Скорсезе",
-actors:"Роберт Де Ниро",
+video:"https://www.youtube.com/embed/TgG4V33bB9U",
 poster:"https://m.media-amazon.com/images/I/71ZxE3WQpFL._AC_SY679_.jpg",
-description:"Таксист-ветеран Вьетнама постепенно теряет связь с реальностью."
+description:"Таксист постепенно сходит с ума."
 },
 {
+id:"nocountry",
 title:"Старикам тут не место",
-original:"No Country for Old Men",
 year:2007,
-genre:["Триллер","Криминал"],
-country:"США",
-director:"Братья Коэн",
-actors:"Хавьер Бардем",
+video:"https://www.youtube.com/embed/38A__WT3-o0",
 poster:"https://m.media-amazon.com/images/I/81WCNkLQ6-L._AC_SY679_.jpg",
-description:"Обычный человек находит чемодан с деньгами и становится мишенью убийцы."
+description:"Человек находит деньги и становится мишенью."
 }
 ];
 
-function showMovies(list){
+function showAll(){
   const content = document.getElementById("content");
-  content.innerHTML = '<div class="movie-grid"></div>';
+  content.innerHTML = '<h2>Все фильмы</h2><div class="movie-grid"></div>';
   const grid = document.querySelector(".movie-grid");
 
-  list.forEach(movie=>{
+  movies.forEach(movie=>{
     const card = document.createElement("div");
     card.className="movie-card";
-    card.innerHTML=`<img src="${movie.poster}" onclick='openMovie(${JSON.stringify(movie)})'>`;
+    card.innerHTML=`<img src="${movie.poster}" onclick="openMovie('${movie.id}')">`;
     grid.appendChild(card);
   });
 }
 
-function openMovie(movie){
+function openMovie(id){
+  const movie = movies.find(m=>m.id===id);
   const content = document.getElementById("content");
+
   content.innerHTML = `
+  <button onclick="showAll()">← Назад</button>
   <div class="movie-page">
     <img src="${movie.poster}">
     <div class="movie-info">
       <h2>${movie.title}</h2>
-      <p><b>Оригинальное название:</b> ${movie.original}</p>
       <p><b>Год:</b> ${movie.year}</p>
-      <p><b>Жанр:</b> ${movie.genre.join(", ")}</p>
-      <p><b>Страна:</b> ${movie.country}</p>
-      <p><b>Режиссер:</b> ${movie.director}</p>
-      <p><b>Актеры:</b> ${movie.actors}</p>
-
-      <div class="description">
-        <h3>Описание</h3>
-        <p>${movie.description}</p>
-      </div>
+      <p>${movie.description}</p>
+      <iframe src="${movie.video}" allowfullscreen></iframe>
     </div>
   </div>
   `;
 }
 
-function filterGenre(genre){
-  if(genre==="all") showMovies(movies);
-  else showMovies(movies.filter(m=>m.genre.includes(genre)));
+/* ===== ПОИСК ===== */
+function showSearch(){
+  const content = document.getElementById("content");
+  content.innerHTML = `
+    <h2>Поиск</h2>
+    <input type="text" id="searchInput" placeholder="Введите название">
+    <div id="searchResults"></div>
+  `;
+
+  document.getElementById("searchInput").addEventListener("input", function(){
+    const value = this.value.toLowerCase();
+    const results = movies.filter(m=>m.title.toLowerCase().includes(value));
+
+    const container = document.getElementById("searchResults");
+    container.innerHTML="";
+
+    results.forEach(movie=>{
+      container.innerHTML += `
+        <div>
+          <img src="${movie.poster}" width="120" 
+          onclick="openMovie('${movie.id}')">
+          ${movie.title}
+        </div>
+      `;
+    });
+  });
 }
 
-function filterYear(year){
-  showMovies(movies.filter(m=>m.year===year));
+/* ===== ПУСТЫЕ РАЗДЕЛЫ ===== */
+function showNew(){
+  document.getElementById("content").innerHTML="<h2>Новинки (пока пусто)</h2>";
 }
 
-function filterCountry(country){
-  showMovies(movies.filter(m=>m.country===country));
+function showCollections(){
+  document.getElementById("content").innerHTML="<h2>Подборки (пока пусто)</h2>";
 }
 
-showMovies(movies);
+showAll();
 
 </script>
 
 </body>
 </html>
-
