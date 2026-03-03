@@ -12,36 +12,37 @@ body{
     color:#f5e6c4;
 }
 
-/* Верхнее меню */
+/* ===== Верхнее меню ===== */
 .top-menu{
     background:#2c1c0e;
     padding:15px;
     display:flex;
     gap:30px;
     justify-content:center;
-    font-size:18px;
 }
 
 .top-menu a{
     color:#ffd700;
     text-decoration:none;
+    font-size:18px;
 }
 
 .top-menu a:hover{
     text-decoration:underline;
 }
 
-/* Основной контейнер */
+/* ===== Основной блок ===== */
 .main{
     display:flex;
 }
 
-/* Левая панель */
+/* ===== Левая панель ===== */
 .sidebar{
-    width:20%;
+    width:22%;
     background:#2c1c0e;
     padding:20px;
-    font-size:18px;
+    overflow-y:auto;
+    height:100vh;
 }
 
 .sidebar h3{
@@ -52,125 +53,226 @@ body{
     display:block;
     color:#f5e6c4;
     text-decoration:none;
-    margin:5px 0;
+    margin:4px 0;
 }
 
 .sidebar a:hover{
     color:#ffd700;
 }
 
-/* Каталог */
+/* ===== Каталог ===== */
 .catalog{
-    width:80%;
+    width:78%;
     padding:30px;
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-    gap:30px;
 }
 
-/* Карточка фильма */
-.movie-card{
-    text-align:center;
-    cursor:pointer;
+/* ===== Карточка фильма ===== */
+.movie-item{
+    display:flex;
+    gap:20px;
+    margin-bottom:40px;
+    border-bottom:1px solid #444;
+    padding-bottom:20px;
 }
 
-.movie-card img{
-    width:100%;
+/* Картинка */
+.movie-item img{
+    width:220px;
+    height:320px;
+    object-fit:cover;
     border:4px solid #d4af37;
     box-shadow:0 0 15px black;
-    transition:0.3s;
 }
 
-.movie-card img:hover{
-    transform:scale(1.05);
+/* Текстовый блок */
+.movie-info{
+    width:220px; /* равен ширине картинки */
+    overflow:hidden;
 }
 
-.movie-title{
-    margin-top:10px;
-    font-size:16px;
+/* Название */
+.movie-info p{
+    margin:0;
     color:#ffd700;
+    text-decoration:underline;
+    font-size:18px;
 }
 
-/* чтобы ссылка не ломала стиль */
-.movie-link{
+/* Метаданные */
+.meta{
+    font-size:14px;
+    margin-top:8px;
+    line-height:1.4em;
+    max-height:260px;
+    overflow:hidden;
+}
+
+/* Описание */
+.description{
+    font-size:13px;
+    margin-top:8px;
+    max-height:120px;
+    overflow:hidden;
+}
+
+/* Ссылка */
+.movie-item a{
     text-decoration:none;
     color:inherit;
+    display:flex;
+    gap:20px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- Верхнее меню -->
+<!-- ===== Верх ===== -->
 <div class="top-menu">
-    <a href="#">Фильмы</a>
+    <a href="#" onclick="showAll()">Фильмы</a>
     <a href="#">Поиск</a>
-    <a href="#">Новинки</a>
+    <a href="#" onclick="showNew()">Новинки</a>
     <a href="#">Подборки</a>
 </div>
 
 <div class="main">
 
-<!-- Левая панель -->
+<!-- ===== Левая панель ===== -->
 <div class="sidebar">
-    <h3>Категории</h3>
-    <a href="#">Все фильмы</a>
-    <a href="#">Боевики</a>
-    <a href="#">Драма</a>
-    <a href="#">Криминал</a>
-    <a href="#">Вестерн</a>
-    <a href="#">Триллер</a>
 
-    <h3>Года</h3>
-    <a href="#">2005</a>
-    <a href="#">1976</a>
-    <a href="#">1966</a>
-    <a href="#">1994</a>
+<h3>Года</h3>
+<div id="years"></div>
 
-    <h3>Страны</h3>
-    <a href="#">США</a>
-    <a href="#">Великобритания</a>
-    <a href="#">Италия</a>
-</div>
-
-<!-- Каталог фильмов -->
-<div class="catalog">
-
-
-
-  <!-- Фильм 1 -->
-  <div class="movie-item">
-    <a href="good-bad-ugly.html">
-      <img src="https://kinogo.online/uploads/mini/shortstory-mob/ed1/1614517323-1826304193.jpg" alt="Хороший, Плохой, Злой">
-      <p>Хороший, Плохой, Злой</p>
-    </a>
-  </div>
-    <!-- 2 -->
-    <a href="good_bad_ugly.html" class="movie-link">
-        <div class="movie-card">
-            <img src="https://upload.wikimedia.org/wikipedia/en/4/45/Good_the_bad_and_the_ugly_poster.jpg">
-            <div class="movie-title">Хороший, плохой, злой</div>
-        </div>
-    </a>
-
-    <!-- 3 -->
-    <a href="taxi_driver.html" class="movie-link">
-        <div class="movie-card">
-            <img src="https://upload.wikimedia.org/wikipedia/en/8/8e/Taxi_Driver_poster.jpg">
-            <div class="movie-title">Таксист</div>
-        </div>
-    </a>
-
-    <!-- 4 -->
-    <a href="pulp_fiction.html" class="movie-link">
-        <div class="movie-card">
-            <img src="https://upload.wikimedia.org/wikipedia/en/8/82/Pulp_Fiction_cover.jpg">
-            <div class="movie-title">Криминальное чтиво</div>
-        </div>
-    </a>
+<h3>Страны</h3>
+<a href="#" onclick="filterCountry('США')">США</a>
+<a href="#" onclick="filterCountry('Испания')">Испания</a>
+<a href="#" onclick="filterCountry('Великобритания')">Великобритания</a>
+<a href="#" onclick="filterCountry('Италия')">Италия</a>
+<a href="#" onclick="filterCountry('Германия')">Германия</a>
+<a href="#" onclick="filterCountry('Франция')">Франция</a>
+<a href="#" onclick="filterCountry('Канада')">Канада</a>
+<a href="#" onclick="filterCountry('Мексика')">Мексика</a>
 
 </div>
+
+<!-- ===== Каталог ===== -->
+<div class="catalog" id="catalog"></div>
+
 </div>
+
+<script>
+
+/* ===== Автогенерация годов ===== */
+const yearContainer = document.getElementById("years");
+for(let y=1964;y<=2026;y++){
+    yearContainer.innerHTML += 
+    `<a href="#" onclick="filterYear(${y})">${y}</a>`;
+}
+
+/* ===== База фильмов ===== */
+const movies = [
+
+{
+title:"Хороший, Плохой, Злой",
+file:"good-bad-ugly.html",
+year:1966,
+country:"Испания",
+desc:"История трёх стрелков, охотящихся за золотом во времена гражданской войны.",
+img:"https://kinogo.online/uploads/mini/shortstory-mob/ed1/1614517323-1826304193.jpg"
+},
+
+{
+title:"Бойцовский клуб",
+file:"fight_club.html",
+year:1999,
+country:"США",
+desc:"Подпольный клуб меняет жизнь офисного клерка.",
+img:"https://upload.wikimedia.org/wikipedia/en/f/fc/Fight_Club_poster.jpg"
+},
+
+{
+title:"Таксист",
+file:"taxi_driver_1976.html",
+year:1976,
+country:"США",
+desc:"Одинокий ветеран становится свидетелем упадка Нью-Йорка.",
+img:"https://upload.wikimedia.org/wikipedia/en/8/8e/Taxi_Driver_poster.jpg"
+},
+
+{
+title:"За пригоршню долларов",
+file:"per_un_pugno_di_dollari.html",
+year:1964,
+country:"Италия",
+desc:"Таинственный стрелок сталкивает две банды.",
+img:"https://upload.wikimedia.org/wikipedia/en/4/45/Per_un_pugno_di_dollari_poster.jpg"
+},
+
+{
+title:"За несколько долларов больше",
+file:"for-a-few-dollars-more.html",
+year:1965,
+country:"Испания",
+desc:"Два охотника за головами преследуют преступника.",
+img:"https://upload.wikimedia.org/wikipedia/en/5/5e/For_a_Few_Dollars_More.jpg"
+},
+
+{
+title:"Хулиганы Зеленой улицы",
+file:"Green_Street_hooligans.html",
+year:2005,
+country:"Великобритания",
+desc:"История студента, оказавшегося среди футбольных фанатов.",
+img:"https://static.hdrezka.ac/i/2014/1/28/nec0c4b76dd99cm66u83v.jpg"
+}
+
+];
+
+/* ===== Вывод ===== */
+function render(list){
+const catalog=document.getElementById("catalog");
+catalog.innerHTML="";
+list.forEach(m=>{
+catalog.innerHTML+=`
+<div class="movie-item">
+<a href="${m.file}">
+<img src="${m.img}">
+<div class="movie-info">
+<p>${m.title}</p>
+<div class="meta">
+Год: ${m.year}<br>
+Страна: ${m.country}
+</div>
+<div class="description">
+${m.desc}
+</div>
+</div>
+</a>
+</div>
+`;
+});
+}
+
+render(movies);
+
+/* ===== Фильтры ===== */
+function filterYear(y){
+render(movies.filter(m=>m.year==y));
+}
+
+function filterCountry(c){
+render(movies.filter(m=>m.country==c));
+}
+
+function showAll(){
+render(movies);
+}
+
+function showNew(){
+render(movies.filter(m=>m.file=="fight_club.html"));
+}
+
+</script>
 
 </body>
 </html>
