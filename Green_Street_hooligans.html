@@ -193,18 +193,44 @@ let currentUser = null;
 let replyTo = null;
 
 /* ===== ВХОД ===== */
+
+const usersRef = db.collection("users");
+
 async function login(){
   const nick = document.getElementById("nickname").value.trim();
-  if(!nick) return;
+  if(!nick) return alert("Введите ник!");
 
-  currentUser = nick;
+  const savedNick = localStorage.getItem("nickname");
+
+  // Если уже зарегистрирован
+  if(savedNick){
+    if(savedNick !== nick){
+      return alert("Ваш ник уже: " + savedNick + ". Его нельзя изменить!");
+    }
+    currentUser = savedNick;
+    alert("Вы вошли как " + currentUser);
+    return;
+  }
+
+  // Проверяем, занят ли ник
+  const doc = await usersRef.doc(nick).get();
+
+  if(doc.exists){
+    return alert("Ник '" + nick + "' уже занят!");
+  }
+
+  // Регистрируем новый ник
+  await usersRef.doc(nick).set({
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    uid: Date.now() + "_" + Math.random()
+  });
+
   localStorage.setItem("nickname", nick);
+  currentUser = nick;
 
-  alert("Вы вошли как " + nick);
-  loadRating();
-  initViews();
-
+  alert("Ник успешно зарегистрирован: " + nick);
 }
+
 
 /* ===== ПРОСМОТРЫ ===== */
 
@@ -444,14 +470,16 @@ async function saveReply(){
 /* ===== АВТОВХОД ===== */
 window.onload = async ()=>{
   const savedNick = localStorage.getItem("nickname");
+
   if(savedNick){
     currentUser = savedNick;
-    console.log("Вошли как "+currentUser);
+    console.log("Вы вошли как " + currentUser);
   }
+
   loadRating();
   initViews();
+};
 
-}
 </script>
 
 </body>
