@@ -191,43 +191,30 @@ async function login(){
 
   alert("Вы вошли как " + nick);
   loadRating();
-  countView();
+ initViews();
+
 }
 
 /* ===== ПРОСМОТРЫ ===== */
-async function countView(){
-async function countView(){
+
+function initViews(){
   const ref = statsRef.doc("views");
 
+  // Реальное время
+  ref.onSnapshot(doc=>{
+    if(doc.exists){
+      document.getElementById("views").innerText = doc.data().count || 0;
+    }
+  });
+
+  // Увеличиваем только если ещё не смотрели
   if(!localStorage.getItem("viewed_"+movieKey)){
-    await ref.set({
+    ref.set({
       count: firebase.firestore.FieldValue.increment(1)
     }, {merge:true});
 
     localStorage.setItem("viewed_"+movieKey,"yes");
   }
-statsRef.doc("views").onSnapshot(doc=>{
-  if(doc.exists){
-    document.getElementById("views").innerText = doc.data().count || 0;
-  }
-});
-
-  const snap = await ref.get();
-  document.getElementById("views").innerText = snap.data()?.count || 0;
-}
-
-}
-statsRef.doc("views").onSnapshot(doc=>{
-  if(doc.exists){
-    document.getElementById("views").innerText = doc.data().count || 0;
-  }
-});
-
-
-  localStorage.setItem("viewed_"+movieKey,"yes");
-
-  const snap = await ref.get();
-  document.getElementById("views").innerText = snap.data().count || 0;
 }
 
 /* ===== РЕЙТИНГ ===== */
@@ -450,7 +437,8 @@ window.onload = async ()=>{
     console.log("Вошли как "+currentUser);
   }
   loadRating();
-  countView();
+  initViews();
+
 }
 </script>
 
