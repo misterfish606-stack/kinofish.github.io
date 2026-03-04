@@ -201,23 +201,21 @@ async function login(){
   const doc = await usersRef.doc(nick).get();
 
   if(doc.exists){
-    // Просто входим, если ник уже есть
+    // Просто вход
     currentUser = nick;
     localStorage.setItem("nickname", nick);
     alert("Вы вошли как " + nick);
-    return;
+  } else {
+    // Создание нового
+    await usersRef.doc(nick).set({
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    currentUser = nick;
+    localStorage.setItem("nickname", nick);
+    alert("Ник создан: " + nick);
   }
-
-  // Если нет — создаём
-  await usersRef.doc(nick).set({
-    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-  });
-
-  currentUser = nick;
-  localStorage.setItem("nickname", nick);
-  alert("Ник зарегистрирован: " + nick);
 }
-
 
 /* ===== ПРОСМОТРЫ ===== */
 
