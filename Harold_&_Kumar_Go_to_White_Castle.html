@@ -108,7 +108,10 @@ button:hover{background:#8b5a2b}
 </p>
   
 <p><b>IMDb:</b><span class="movie-description"> 7.0 </span> / <b>Кинопоиск:</b><span class="movie-description"> 6.7 </span> </p>
-<p><b>Просмотры:</b> <span id="views"><span class="movie-description">0</span> </span></p>
+<p><b>Просмотры:</b> 
+<span id="views">0</span>
+</p>
+
   
 <h3>Описание фильма</h3>
 <p class="movie-description">
@@ -196,11 +199,26 @@ async function countView(){
   if(localStorage.getItem("viewed_"+movieKey)) return;
 
   const ref = statsRef.doc("views");
+async function countView(){
+  if(localStorage.getItem("viewed_"+movieKey)) return;
 
-  await ref.set({count:0}, {merge:true});
-  await ref.update({
+  const ref = statsRef.doc("views");
+
+  await ref.set({
     count: firebase.firestore.FieldValue.increment(1)
-  });
+  }, {merge:true});
+
+  localStorage.setItem("viewed_"+movieKey,"yes");
+
+  const snap = await ref.get();
+  document.getElementById("views").innerText = snap.data()?.count || 0;
+}
+statsRef.doc("views").onSnapshot(doc=>{
+  if(doc.exists){
+    document.getElementById("views").innerText = doc.data().count || 0;
+  }
+});
+
 
   localStorage.setItem("viewed_"+movieKey,"yes");
 
