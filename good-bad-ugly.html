@@ -125,18 +125,30 @@ async function login(){
   document.getElementById("loginError").innerText="";
   alert("Вы вошли как "+nick);
   loadRating();
-  countView();
+  initViews();
+
 }
 
-// ===== ПРОСМОТРЫ =====
-async function countView(){
-  if(localStorage.getItem("viewed")) return;
-  const ref = db.collection("stats").doc("views");
-  await ref.set({}, {merge:true});
-  await ref.update({count: firebase.firestore.FieldValue.increment(1)});
-  localStorage.setItem("viewed","yes");
-  const snap = await ref.get();
-  document.getElementById("views").innerText = snap.data().count || 0;
+/* ===== ПРОСМОТРЫ ===== */
+
+function initViews(){
+  const ref = statsRef.doc("views");
+
+  // Реальное время
+  ref.onSnapshot(doc=>{
+    if(doc.exists){
+      document.getElementById("views").innerText = doc.data().count || 0;
+    }
+  });
+
+  // Увеличиваем только если ещё не смотрели
+  if(!localStorage.getItem("viewed_"+movieKey)){
+    ref.set({
+      count: firebase.firestore.FieldValue.increment(1)
+    }, {merge:true});
+
+    localStorage.setItem("viewed_"+movieKey,"yes");
+  }
 }
 
 // ===== РЕЙТИНГ =====
@@ -266,7 +278,8 @@ window.onload = async () => {
       currentUser = savedNick;
       console.log("Вошли как " + currentUser);
       loadRating();
-      countView();
+      initViews();
+
     }
   }
 };
