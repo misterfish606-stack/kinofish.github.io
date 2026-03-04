@@ -185,25 +185,32 @@ async function login(){
 
   alert("Вы вошли как " + nick);
   loadRating();
-  countView();
+  initViews();
+
 }
 
 /* ===== ПРОСМОТРЫ ===== */
-async function countView(){
-  if(localStorage.getItem("viewed_"+movieKey)) return;
 
+function initViews(){
   const ref = statsRef.doc("views");
 
-  await ref.set({count:0}, {merge:true});
-  await ref.update({
-    count: firebase.firestore.FieldValue.increment(1)
+  // Реальное время
+  ref.onSnapshot(doc=>{
+    if(doc.exists){
+      document.getElementById("views").innerText = doc.data().count || 0;
+    }
   });
 
-  localStorage.setItem("viewed_"+movieKey,"yes");
+  // Увеличиваем только если ещё не смотрели
+  if(!localStorage.getItem("viewed_"+movieKey)){
+    ref.set({
+      count: firebase.firestore.FieldValue.increment(1)
+    }, {merge:true});
 
-  const snap = await ref.get();
-  document.getElementById("views").innerText = snap.data().count || 0;
+    localStorage.setItem("viewed_"+movieKey,"yes");
+  }
 }
+
 
 /* ===== РЕЙТИНГ ===== */
 const ratingRef = statsRef.doc("rating");
@@ -425,7 +432,8 @@ window.onload = async ()=>{
     console.log("Вошли как "+currentUser);
   }
   loadRating();
-  countView();
+ initViews();
+
 }
 </script>
 
