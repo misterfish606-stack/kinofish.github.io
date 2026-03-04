@@ -194,41 +194,28 @@ let replyTo = null;
 
 /* ===== ВХОД ===== */
 
-const usersRef = db.collection("users");
-
 async function login(){
   const nick = document.getElementById("nickname").value.trim();
   if(!nick) return alert("Введите ник!");
 
-  const savedNick = localStorage.getItem("nickname");
-
-  // Если уже зарегистрирован
-  if(savedNick){
-    if(savedNick !== nick){
-      return alert("Ваш ник уже: " + savedNick + ". Его нельзя изменить!");
-    }
-    currentUser = savedNick;
-    alert("Вы вошли как " + currentUser);
-    return;
-  }
-
-  // Проверяем, занят ли ник
   const doc = await usersRef.doc(nick).get();
 
   if(doc.exists){
-    return alert("Ник '" + nick + "' уже занят!");
+    // Просто входим, если ник уже есть
+    currentUser = nick;
+    localStorage.setItem("nickname", nick);
+    alert("Вы вошли как " + nick);
+    return;
   }
 
-  // Регистрируем новый ник
+  // Если нет — создаём
   await usersRef.doc(nick).set({
-    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    uid: Date.now() + "_" + Math.random()
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
   });
 
-  localStorage.setItem("nickname", nick);
   currentUser = nick;
-
-  alert("Ник успешно зарегистрирован: " + nick);
+  localStorage.setItem("nickname", nick);
+  alert("Ник зарегистрирован: " + nick);
 }
 
 
