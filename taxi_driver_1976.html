@@ -186,7 +186,7 @@ body {
   to  {opacity:1;transform:translateY(0) rotate(0deg)}
 }
 .poster-wrap img {
-  width:200px;
+  width:260px;
   border:4px solid var(--gold-dim);
   box-shadow:0 0 0 1px rgba(212,175,55,0.2), -8px 8px 40px rgba(0,0,0,0.8);
   display:block;
@@ -281,22 +281,61 @@ body {
   background:rgba(212,175,55,0.08);
   border:1px solid var(--gold-dim);
   padding:8px 16px; border-radius:2px;
+  position:relative; overflow:hidden;
+  transition:border-color 0.25s, background 0.25s, box-shadow 0.25s;
+  cursor:default;
 }
+.rating-badge::after {
+  content:"";
+  position:absolute;
+  bottom:0; left:10%; right:10%;
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform:scaleX(0);
+  transition:transform 0.3s ease;
+}
+.rating-badge:hover {
+  border-color:var(--gold);
+  background:rgba(212,175,55,0.14);
+  box-shadow:0 0 18px rgba(201,168,76,0.18);
+}
+.rating-badge:hover::after { transform:scaleX(1); }
 .rating-badge .label {
   font-family:'Bebas Neue', sans-serif;
   font-size:0.65rem; letter-spacing:0.2em; color:var(--gold-dim); display:block;
+  transition:color 0.2s;
 }
+.rating-badge:hover .label { color:var(--gold); }
 .rating-badge .value {
   font-family:'Playfair Display', serif;
   font-size:1.5rem; font-weight:700; color:var(--gold); display:block;
+  transition:color 0.2s, text-shadow 0.2s;
+}
+.rating-badge:hover .value {
+  color:var(--gold-light);
+  text-shadow:0 0 18px rgba(201,168,76,0.5);
 }
 
 /* STARS */
 .user-rating-wrap { margin-bottom:8px; }
 .user-rating-wrap label {
   font-family:'Bebas Neue', sans-serif;
-  font-size:0.72rem; letter-spacing:0.2em; color:var(--gold-dim); display:block; margin-bottom:6px;
+  font-size:0.72rem; letter-spacing:0.2em; color:var(--gold); display:block; margin-bottom:6px;
+  position:relative; display:inline-block; cursor:default;
+  transition:color 0.2s;
 }
+.user-rating-wrap label::after {
+  content:"";
+  position:absolute;
+  bottom:-2px; left:0; right:0;
+  height:1px;
+  background:var(--gold);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.25s ease;
+}
+.user-rating-wrap label:hover { color:var(--gold-light); }
+.user-rating-wrap label:hover::after { transform:scaleX(1); }
 .stars { display:flex; gap:4px; }
 .star {
   font-size:1.6rem; cursor:pointer; color:#3a2c14;
@@ -435,7 +474,7 @@ body {
 }
 .login-block input:focus { border-color:var(--gold); }
 .login-block input[type="password"] { width:160px; }
-.login-block input[type="text"] { width:200px; }
+.login-block input[type="text"] { width:260px; }
 #adminPassLoginField { display:none; }
 .btn-gold {
   font-family:'Bebas Neue', sans-serif; letter-spacing:0.14em;
