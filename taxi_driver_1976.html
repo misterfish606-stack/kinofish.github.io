@@ -367,20 +367,38 @@ body {
   font-style:italic;
 }
 
-/* GOLD UNDERLINE LINKS for detail values */
+/* GOLD UNDERLINE for ALL detail values */
 .detail-value {
   font-family:'Crimson Text', serif; font-size:1.05rem;
   color:var(--gold); line-height:1.5;
+  display:inline-block;
+  position:relative;
+  cursor:default;
+  transition:color 0.2s;
 }
-.detail-value a,
-.gold-link {
+.detail-item:hover .detail-value {
+  color:var(--gold-light);
+}
+.detail-value::after {
+  content:"";
+  position:absolute;
+  bottom:-2px; left:0; right:0;
+  height:1px;
+  background:linear-gradient(90deg, var(--gold-dim), var(--gold), var(--gold-dim));
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.3s ease;
+}
+.detail-item:hover .detail-value::after {
+  transform:scaleX(1);
+}
+.detail-value a {
   color:var(--gold);
   text-decoration:none;
   position:relative;
   transition:color 0.2s;
 }
-.detail-value a::after,
-.gold-link::after {
+.detail-value a::after {
   content:"";
   position:absolute;
   bottom:-1px; left:0; right:0;
@@ -390,14 +408,8 @@ body {
   transform-origin:left;
   transition:transform 0.25s ease;
 }
-.detail-value a:hover,
-.gold-link:hover {
-  color:var(--gold-light);
-}
-.detail-value a:hover::after,
-.gold-link:hover::after {
-  transform:scaleX(1);
-}
+.detail-value a:hover { color:var(--gold-light); }
+.detail-value a:hover::after { transform:scaleX(1); }
 
 /* TRAILER */
 .trailer-wrap {
@@ -739,6 +751,8 @@ body {
 </div>
 
 <!-- FIREBASE -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init("xQFu4rTTN_OUgE6zH");</script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 <script>
@@ -965,21 +979,28 @@ function closeReport(){
   document.getElementById("reportName").value="";
 }
 
-function sendReport(){
+async function sendReport(){
   const name = document.getElementById("reportName").value.trim() || "Аноним";
   const text = document.getElementById("reportText").value.trim();
   if(!text) return alert("Опиши проблему!");
 
-  // Отправка через mailto
-  const subject = encodeURIComponent("Fish Cinema — Проблема с сайтом");
-  const body = encodeURIComponent(
-    "От: " + name + "\n" +
-    "Страница: Таксист (taxi_driver_1976.html)\n\n" +
-    "Проблема:\n" + text
-  );
-  window.location.href = "mailto:Mister.fish606@gmail.com?subject=" + subject + "&body=" + body;
+  const sendBtn = document.querySelector("#reportModal .btn-red");
+  sendBtn.innerText = "Отправка...";
+  sendBtn.disabled = true;
 
-  document.getElementById("reportSentMsg").style.display="block";
+  try {
+    await emailjs.send("service_m2itd3q", "template_jvqfkhr", {
+      from_name: name,
+      message: text,
+      page: "Таксист (taxi_driver_1976.html)"
+    });
+    document.getElementById("reportSentMsg").style.display = "block";
+    sendBtn.innerText = "✅ Отправлено!";
+  } catch(err) {
+    alert("Ошибка: " + JSON.stringify(err));
+    sendBtn.innerText = "📨 Отправить сообщение";
+    sendBtn.disabled = false;
+  }
 }
 
 /* INIT */
