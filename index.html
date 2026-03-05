@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -598,6 +598,7 @@ body {
     <div class="add-form">
       <div><label>Название</label><input id="af-title" placeholder="Название"></div>
       <div><label>Файл (.html)</label><input id="af-file" placeholder="film.html"></div>
+      <div class="full"><label>Movie Key (оригинальное название из файла фильма)</label><input id="af-moviekey" placeholder="Fight Club"></div>
       <div><label>Год</label><input id="af-year" type="number" placeholder="2024"></div>
       <div><label>Страна</label><input id="af-country" placeholder="США"></div>
       <div class="full"><label>URL постера</label><input id="af-img" placeholder="https://..."></div>
@@ -652,6 +653,8 @@ body {
   <div class="filmstrip-holes" id="filmstripBottom"></div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 <script>
 /* FILMSTRIP */
 function buildStrip(id){
@@ -662,6 +665,14 @@ function buildStrip(id){
 }
 buildStrip("filmstripTop");
 buildStrip("filmstripBottom");
+
+/* FIREBASE */
+firebase.initializeApp({
+  apiKey:"AIzaSyCTr1vgcuSEn_2Ebh2vC3k7sNYzvMoYlBo",
+  authDomain:"kino-project-bf21c.firebaseapp.com",
+  projectId:"kino-project-bf21c"
+});
+const db = firebase.firestore();
 
 /* ADMIN */
 const ADMIN_NICKS=["Mister_fish","Mister_fish606","fish606"];
@@ -705,20 +716,20 @@ function switchAdminTab(name,btn){
   if(name==="stats") loadStats();
 }
 
-/* MOVIES */
+/* MOVIES — movieKey совпадает с тем что в каждом html файле фильма */
 let movies=[
-  {title:"Хороший, Плохой, Злой",        file:"good-bad-ugly.html",           year:1966,country:"Испания",        hot:true, isNew:false,desc:"История трёх стрелков, охотящихся за золотом во времена Гражданской войны.",img:"https://kinogo.online/uploads/mini/shortstory-mob/ed1/1614517323-1826304193.jpg"},
-  {title:"Бойцовский клуб",               file:"fight_club.html",              year:1999,country:"США",            hot:true, isNew:true, desc:"Офисный работник создаёт альтер эго и начинает разрушать систему.",img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHFS7WEw3dSnvD-pu6GKh0CDhf5g6uXC6vow&s"},
-  {title:"Таксист",                       file:"taxi_driver_1976.html",        year:1976,country:"США",            hot:false,isNew:false,desc:"Одинокий ветеран становится свидетелем упадка Нью-Йорка.",img:"https://preview.redd.it/taxi-driver-1976-v0-2vafsern2tnf1.jpg?width=640&crop=smart&auto=webp&s=c0319ef604e7680dd8c420851d775d7fe9d2f549"},
-  {title:"За пригоршню долларов",         file:"per_un_pugno_di_dollari.html", year:1964,country:"Италия",         hot:false,isNew:false,desc:"Таинственный стрелок сталкивает две банды.",img:"https://ru-images.kinorium.com/movie/1080/54934.jpg?1754296715"},
-  {title:"На несколько долларов больше",  file:"for-a-few-dollars-more.html",  year:1965,country:"Испания",        hot:false,isNew:false,desc:"Два охотника за головами преследуют преступника.",img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCxtEljwymUbifbP48s0ryFIgLy1OYI-j4mQ&s"},
-  {title:"Хулиганы Зеленой улицы",       file:"Green_Street_hooligans.html",  year:2005,country:"Великобритания", hot:false,isNew:false,desc:"История студента среди футбольных фанатов.",img:"https://static.hdrezka.ac/i/2014/1/28/nec0c4b76dd99cm66u83v.jpg"},
-  {title:"Великий уравнитель",            file:"The_Equalizer.html",           year:2014,country:"США",            hot:false,isNew:false,desc:"Маккол становится защитником всех нуждающихся.",img:"https://static.hdrezka.ac/i/2021/4/5/c3105cc122987ij39b83l.jpeg"},
-  {title:"Старикам тут не место",         file:"No_Country_for_Old_Men.html",  year:2007,country:"США",            hot:true, isNew:false,desc:"Ветеран находит деньги и становится мишенью безжалостного убийцы.",img:"https://kinogo.online/uploads/posts/2021-02/1614528496-1821078516.jpg"},
-  {title:"Гарольд и Кумар уходят в отрыв",file:"Harold_&_Kumar_Go_to_White_Castle.html",year:2004,country:"США",  hot:false,isNew:false,desc:"Два друга в безумном ночном приключении ради бургеров.",img:"https://upload.wikimedia.org/wikipedia/ru/9/9f/Harold_%26_Kumar_Go_to_White_Castle.jpg"},
-  {title:"Скауты против зомби",           file:"Scouts_Guide_to_the_Zombie_Apocalypse.html",year:2015,country:"США",hot:false,isNew:false,desc:"Три бойскаута против армии живых мертвецов.",img:"https://ukrface.fra1.cdn.digitaloceanspaces.com/jarvis/thumbnail/mobile-poster/posters/173/5d66296abe26f8e54f88.jpg"},
-  {title:"Поезд в Пусан",                 file:"Busanhaeng.html",              year:2016,country:"Южная Корея",    hot:true, isNew:false,desc:"Отец и дочь застряли в поезде посреди зомби-апокалипсиса.",img:"https://thumbs.dfs.ivi.ru/storage0/contents/7/8/4b95783a0147f383c9f0b0bb1bc691.jpg"},
-  {title:"Добро пожаловать в Зомбилэнд",  file:"Zombieland.html",              year:2009,country:"США",            hot:false,isNew:false,desc:"Выжившие ищут безопасное место в мире зомби.",img:"https://kinogo.online/uploads/posts/2021-02/1614519780-1944811101.jpg"},
+  {title:"Хороший, Плохой, Злой",         file:"good-bad-ugly.html",                        movieKey:"The Good, the Bad and the Ugly",        year:1966,country:"Испания",        hot:true, isNew:false,desc:"История трёх стрелков, охотящихся за золотом во времена Гражданской войны.",            img:"https://kinogo.online/uploads/mini/shortstory-mob/ed1/1614517323-1826304193.jpg"},
+  {title:"Бойцовский клуб",                file:"fight_club.html",                           movieKey:"Fight Club",                            year:1999,country:"США",            hot:true, isNew:true, desc:"Офисный работник создаёт альтер эго и начинает разрушать систему.",                        img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHFS7WEw3dSnvD-pu6GKh0CDhf5g6uXC6vow&s"},
+  {title:"Таксист",                        file:"taxi_driver_1976.html",                     movieKey:"taxi_driver_1976",                      year:1976,country:"США",            hot:false,isNew:false,desc:"Одинокий ветеран становится свидетелем упадка Нью-Йорка.",                                  img:"https://preview.redd.it/taxi-driver-1976-v0-2vafsern2tnf1.jpg?width=640&crop=smart&auto=webp&s=c0319ef604e7680dd8c420851d775d7fe9d2f549"},
+  {title:"За пригоршню долларов",          file:"per_un_pugno_di_dollari.html",              movieKey:"Per un pugno di dollari",               year:1964,country:"Италия",         hot:false,isNew:false,desc:"Таинственный стрелок сталкивает две банды.",                                                img:"https://ru-images.kinorium.com/movie/1080/54934.jpg?1754296715"},
+  {title:"На несколько долларов больше",   file:"for-a-few-dollars-more.html",               movieKey:"For a Few Dollars More",                year:1965,country:"Испания",        hot:false,isNew:false,desc:"Два охотника за головами преследуют преступника.",                                          img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCxtEljwymUbifbP48s0ryFIgLy1OYI-j4mQ&s"},
+  {title:"Хулиганы Зеленой улицы",        file:"Green_Street_hooligans.html",               movieKey:"Green Street Hooligans",                year:2005,country:"Великобритания", hot:false,isNew:false,desc:"История студента среди футбольных фанатов.",                                                img:"https://static.hdrezka.ac/i/2014/1/28/nec0c4b76dd99cm66u83v.jpg"},
+  {title:"Великий уравнитель",             file:"The_Equalizer.html",                        movieKey:"The Equalizer",                         year:2014,country:"США",            hot:false,isNew:false,desc:"Маккол становится защитником всех нуждающихся.",                                            img:"https://static.hdrezka.ac/i/2021/4/5/c3105cc122987ij39b83l.jpeg"},
+  {title:"Старикам тут не место",          file:"No_Country_for_Old_Men.html",               movieKey:"No Country for Old Men",                year:2007,country:"США",            hot:true, isNew:false,desc:"Ветеран находит деньги и становится мишенью безжалостного убийцы.",                       img:"https://kinogo.online/uploads/posts/2021-02/1614528496-1821078516.jpg"},
+  {title:"Гарольд и Кумар уходят в отрыв", file:"Harold_&_Kumar_Go_to_White_Castle.html",   movieKey:"Harold & Kumar Go to White Castle",     year:2004,country:"США",            hot:false,isNew:false,desc:"Два друга в безумном ночном приключении ради бургеров.",                                   img:"https://upload.wikimedia.org/wikipedia/ru/9/9f/Harold_%26_Kumar_Go_to_White_Castle.jpg"},
+  {title:"Скауты против зомби",            file:"Scouts_Guide_to_the_Zombie_Apocalypse.html",movieKey:"Scouts Guide to the Zombie Apocalypse", year:2015,country:"США",            hot:false,isNew:false,desc:"Три бойскаута против армии живых мертвецов.",                                               img:"https://ukrface.fra1.cdn.digitaloceanspaces.com/jarvis/thumbnail/mobile-poster/posters/173/5d66296abe26f8e54f88.jpg"},
+  {title:"Поезд в Пусан",                  file:"Busanhaeng.html",                           movieKey:"Busanhaeng",                            year:2016,country:"Южная Корея",    hot:true, isNew:false,desc:"Отец и дочь застряли в поезде посреди зомби-апокалипсиса.",                               img:"https://thumbs.dfs.ivi.ru/storage0/contents/7/8/4b95783a0147f383c9f0b0bb1bc691.jpg"},
+  {title:"Добро пожаловать в Зомбилэнд",   file:"Zombieland.html",                           movieKey:"Zombieland",                            year:2009,country:"США",            hot:false,isNew:false,desc:"Выжившие ищут безопасное место в мире зомби.",                                              img:"https://kinogo.online/uploads/posts/2021-02/1614519780-1944811101.jpg"},
 ];
 
 /* RENDER */
@@ -769,6 +780,7 @@ function addFilm(){
   if(!t||!f){alert("Заполни название и файл!");return;}
   movies.unshift({
     title:t, file:f,
+    movieKey:document.getElementById("af-moviekey").value.trim()||t,
     year:parseInt(document.getElementById("af-year").value)||0,
     country:document.getElementById("af-country").value.trim(),
     img:document.getElementById("af-img").value.trim(),
@@ -777,7 +789,7 @@ function addFilm(){
     isNew:document.getElementById("af-new").value==="1"
   });
   render(movies);
-  ["af-title","af-file","af-year","af-country","af-img","af-desc"].forEach(id=>document.getElementById(id).value="");
+  ["af-title","af-file","af-moviekey","af-year","af-country","af-img","af-desc"].forEach(id=>document.getElementById(id).value="");
   document.getElementById("af-hot").value="0";
   document.getElementById("af-new").value="0";
   const msg=document.getElementById("addSuccessMsg");
@@ -785,21 +797,37 @@ function addFilm(){
   setTimeout(()=>msg.style.display="none",3000);
 }
 
-/* STATS */
-function loadStats(){
-  const sorted=[...movies].sort((a,b)=>(parseInt(localStorage.getItem("views_"+b.file)||0))-(parseInt(localStorage.getItem("views_"+a.file)||0)));
-  const max=Math.max(1,...sorted.map(m=>parseInt(localStorage.getItem("views_"+m.file)||0)));
-  document.getElementById("statsBody").innerHTML=sorted.map((m,i)=>{
-    const v=parseInt(localStorage.getItem("views_"+m.file)||0);
-    return `<tr>
+/* STATS — читаем просмотры из Firebase */
+async function loadStats(){
+  const body=document.getElementById("statsBody");
+  body.innerHTML=`<tr><td colspan="6" style="color:var(--gold-dim);text-align:center;padding:20px;font-style:italic">Загрузка...</td></tr>`;
+
+  // Загружаем просмотры всех фильмов параллельно
+  const viewsData = await Promise.all(movies.map(async m=>{
+    try {
+      const snap = await db.collection("movies").doc(m.movieKey)
+        .collection("stats").doc("views").get();
+      return { ...m, views: snap.exists ? (snap.data().count||0) : 0 };
+    } catch(e) {
+      return { ...m, views: 0 };
+    }
+  }));
+
+  const sorted = viewsData.sort((a,b)=>b.views-a.views);
+  const max = Math.max(1,...sorted.map(m=>m.views));
+
+  body.innerHTML = sorted.map((m,i)=>`
+    <tr>
       <td class="stats-rank">${i+1}</td>
-      <td><a href="${m.file}" style="color:var(--gold);text-decoration:none">${m.title}</a>
-          <div class="stats-bar"><div class="stats-bar-fill" style="width:${Math.round(v/max*100)}%"></div></div></td>
-      <td>${m.year}</td><td>${m.country}</td>
-      <td style="color:var(--gold)">👁 ${v}</td>
+      <td>
+        <a href="${m.file}" style="color:var(--gold);text-decoration:none">${m.title}</a>
+        <div class="stats-bar"><div class="stats-bar-fill" style="width:${Math.round(m.views/max*100)}%"></div></div>
+      </td>
+      <td>${m.year}</td>
+      <td>${m.country}</td>
+      <td style="color:var(--gold)">👁 ${m.views}</td>
       <td>${m.hot?"🔥":""} ${m.isNew?"🆕":""}</td>
-    </tr>`;
-  }).join("");
+    </tr>`).join("");
 }
 
 /* FILTERS */
