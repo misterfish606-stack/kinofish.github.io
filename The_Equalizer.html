@@ -84,7 +84,8 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 .rec-title-stars{display:block;font-size:0.6rem;letter-spacing:0.3em;color:var(--gold-dim);margin-top:4px;}
 .rec-category-label{font-family:'Bebas Neue',sans-serif;font-size:0.72rem;letter-spacing:0.28em;color:var(--gold-dim);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
 .rec-category-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(138,112,64,0.4),transparent);}
-.rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:18px;margin-bottom:36px;}
+.rec-grid{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:36px;}
+.rec-card{width:160px;flex-shrink:0;}
 .rec-card{position:relative;cursor:pointer;text-decoration:none;color:inherit;display:block;animation:rec-card-in 0.5s ease both;}
 @keyframes rec-card-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .rec-card:nth-child(1){animation-delay:0.05s}.rec-card:nth-child(2){animation-delay:0.12s}.rec-card:nth-child(3){animation-delay:0.19s}.rec-card:nth-child(4){animation-delay:0.26s}
