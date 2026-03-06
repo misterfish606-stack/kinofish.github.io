@@ -84,8 +84,8 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 .rec-title-stars{display:block;font-size:0.6rem;letter-spacing:0.3em;color:var(--gold-dim);margin-top:4px;}
 .rec-category-label{font-family:'Bebas Neue',sans-serif;font-size:0.72rem;letter-spacing:0.28em;color:var(--gold-dim);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
 .rec-category-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(138,112,64,0.4),transparent);}
-.rec-grid{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:36px;}
-.rec-card{width:160px;flex-shrink:0;position:relative;cursor:pointer;text-decoration:none;color:inherit;display:block;animation:rec-card-in 0.5s ease both;}
+.rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,200px));gap:18px;margin-bottom:36px;}
+.rec-card{position:relative;cursor:pointer;text-decoration:none;color:inherit;display:block;animation:rec-card-in 0.5s ease both;}
 @keyframes rec-card-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .rec-card:nth-child(1){animation-delay:0.05s}.rec-card:nth-child(2){animation-delay:0.12s}.rec-card:nth-child(3){animation-delay:0.19s}.rec-card:nth-child(4){animation-delay:0.26s}
 .rec-card-inner{position:relative;overflow:hidden;border:2px solid var(--gold-dim);transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;width:100%;max-width:100%;}
@@ -227,7 +227,12 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
       <span class="rec-title-stars">★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★</span>
     </div>
   </div>
-  <div class="rec-card-overlay-meta">Великобритания · 2005</div></div>
+  <div class="rec-category-label">◆ &nbsp; Один против всех · Криминал</div>
+  <div class="rec-grid">
+  <a href="Green_Street_hooligans.html" class="rec-card">
+      <div class="rec-card-inner">
+        <img src="https://upload.wikimedia.org/wikipedia/ru/3/3d/Green_Street_Hooligans.jpg" alt="Хулиганы Зелёной улицы">
+        <div class="rec-card-overlay"><div class="rec-card-overlay-title">Хулиганы Зелёной улицы</div><div class="rec-card-overlay-meta">Великобритания · 2005</div></div>
         <span class="rec-badge similar">Похожее</span>
       </div>
       <div class="rec-card-title">Хулиганы Зелёной улицы</div>
