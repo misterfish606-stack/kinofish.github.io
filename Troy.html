@@ -24,7 +24,7 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 .report-btn{font-family:'Bebas Neue',sans-serif;font-size:0.78rem;letter-spacing:0.14em;color:var(--cream-dim);background:rgba(122,32,32,0.18);border:1px solid rgba(122,32,32,0.5);border-radius:2px;padding:8px 16px;margin-right:16px;cursor:pointer;transition:0.25s;display:flex;align-items:center;gap:7px;}
 .report-btn:hover{background:rgba(122,32,32,0.38);border-color:var(--red);color:var(--gold-light);}
 .hero{position:relative;min-height:520px;display:flex;align-items:flex-end;overflow:hidden;z-index:1;}
-.hero-bg{position:absolute;inset:0;background-image:url('https://upload.wikimedia.org/wikipedia/ru/thumb/6/6c/Troy_movie_poster.jpg/220px-Troy_movie_poster.jpg');background-size:cover;background-position:center top;filter:sepia(40%) brightness(0.35) contrast(1.1);transform:scale(1.04);animation:hero-zoom 20s ease-in-out infinite alternate;}
+.hero-bg{position:absolute;inset:0;background-image:url('https://kinogo.media/uploads/posts/2021-10/1634924372_iphone360_3908.jpg');background-size:cover;background-position:center top;filter:sepia(40%) brightness(0.35) contrast(1.1);transform:scale(1.04);animation:hero-zoom 20s ease-in-out infinite alternate;}
 @keyframes hero-zoom{from{transform:scale(1.04)}to{transform:scale(1.1)}}
 .hero-gradient{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,7,5,0.2) 0%,rgba(10,7,5,0.1) 30%,rgba(10,7,5,0.7) 65%,rgba(10,7,5,0.98) 100%);}
 .hero-gradient-left{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,7,5,0.85) 0%,transparent 50%);}
@@ -67,9 +67,7 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 .detail-item:hover{border-color:rgba(180,150,80,0.25);}
 .detail-label{font-family:'Crimson Text',serif;font-size:0.8rem;color:var(--gold-dim);display:block;margin-bottom:5px;font-style:italic;}
 .detail-value{font-family:'Crimson Text',serif;font-size:1.05rem;color:var(--gold);line-height:1.5;display:inline-block;position:relative;transition:color 0.2s;}
-.detail-value::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--gold-light);transition:width 0.35s ease;}
 .detail-value:hover{color:var(--gold-light);}
-.detail-value:hover::after{width:100%;}
 .detail-value a{color:var(--gold);text-decoration:none;transition:color 0.2s;}
 .detail-value a:hover{color:var(--gold-light);}
 .trailer-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border:2px solid var(--gold-dim);}
@@ -86,7 +84,7 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 .rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,200px));gap:18px;margin-bottom:36px;}
 .rec-card{position:relative;cursor:pointer;text-decoration:none;color:inherit;display:block;animation:rec-card-in 0.5s ease both;}
 @keyframes rec-card-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.rec-card:nth-child(1){animation-delay:0.05s}.rec-card:nth-child(2){animation-delay:0.12s}.rec-card:nth-child(3){animation-delay:0.19s}.rec-card:nth-child(4){animation-delay:0.26s}
+.rec-card:nth-child(1){animation-delay:0.05s}.rec-card:nth-child(2){animation-delay:0.12s}
 .rec-card-inner{position:relative;overflow:hidden;border:2px solid var(--gold-dim);transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;}
 .rec-card:hover .rec-card-inner{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 8px 30px rgba(0,0,0,0.85);transform:translateY(-6px) scale(1.02);}
 .rec-card-inner img{width:100%;aspect-ratio:2/3;object-fit:cover;object-position:center top;display:block;filter:sepia(12%) brightness(0.92);transition:filter 0.3s;}
@@ -96,8 +94,8 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 .rec-card:hover .rec-card-inner::before,.rec-card:hover .rec-card-inner::after{opacity:1;}
 .rec-card-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(8,5,2,0.96) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:8px;opacity:0;transition:opacity 0.3s;}
 .rec-card:hover .rec-card-overlay{opacity:1;}
-.rec-card-overlay-title{font-family:'Playfair Display',serif;font-size:0.8rem;color:var(--gold-light);font-weight:700;line-height:1.2;}
-.rec-card-overlay-meta{font-size:0.68rem;color:var(--cream-dim);font-style:italic;margin-top:2px;}
+.rec-card-overlay-title{font-family:'Playfair Display',serif;font-size:0.8rem;color:var(--gold-light);font-weight:700;}
+.rec-card-overlay-meta{font-size:0.68rem;color:var(--cream-dim);font-style:italic;}
 .rec-badge{position:absolute;top:5px;left:5px;z-index:4;font-family:'Bebas Neue',sans-serif;font-size:0.65rem;letter-spacing:0.1em;padding:2px 7px;border-radius:2px;pointer-events:none;}
 .rec-badge.sequel{background:linear-gradient(135deg,#7a3a00,#c06010);color:#fff;animation:pulse-sequel 2.2s infinite alternate;}
 @keyframes pulse-sequel{from{box-shadow:0 0 5px rgba(200,90,0,0.35)}to{box-shadow:0 0 14px rgba(200,90,0,0.85)}}
@@ -114,9 +112,8 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 .btn-gold:hover{box-shadow:0 0 16px rgba(212,175,55,0.4);}
 .login-status{font-style:italic;color:var(--cream-dim);font-size:0.9rem;}
 .login-error{color:#c0392b;font-size:0.88rem;}
-.comment{background:rgba(20,14,6,0.7);border:1px solid rgba(212,175,55,0.1);border-left:3px solid var(--gold-dim);padding:16px 18px;margin-bottom:14px;border-radius:2px;animation:comment-in 0.4s ease both;}
-@keyframes comment-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.comment.reply{margin-left:30px;border-left-color:#3a3028;background:rgba(14,10,4,0.6);}
+.comment{background:rgba(20,14,6,0.7);border:1px solid rgba(212,175,55,0.1);border-left:3px solid var(--gold-dim);padding:16px 18px;margin-bottom:14px;border-radius:2px;}
+.comment.reply{margin-left:30px;border-left-color:#3a3028;}
 .comment-header{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
 .comment-user{font-family:'Bebas Neue',sans-serif;letter-spacing:0.1em;color:var(--gold);font-size:0.9rem;}
 .comment-time{font-size:0.78rem;color:var(--cream-dim);font-style:italic;}
@@ -154,7 +151,7 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
   <span class="nav-title">Fish Cinema</span>
   <span class="nav-spacer"></span>
   <button class="report-btn" onclick="openReport()"><span>⚠</span> Проблемы с сайтом? Пиши сюда</button>
-  <span class="nav-meta">◆ &nbsp; Исторический · Боевик · 2004 &nbsp; ◆</span>
+  <span class="nav-meta">◆ &nbsp; Боевик · Драма · 2004 &nbsp; ◆</span>
 </nav>
 <section class="hero">
   <div class="hero-bg"></div>
@@ -162,23 +159,23 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
   <div class="hero-gradient-left"></div>
   <div class="hero-content">
     <div class="poster-wrap">
-      <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/6/6c/Troy_movie_poster.jpg/220px-Troy_movie_poster.jpg" alt="Троя">
+      <img src="https://kinogo.media/uploads/posts/2021-10/1634924372_iphone360_3908.jpg" alt="Троя">
       <div class="poster-corner tl"></div><div class="poster-corner tr"></div>
       <div class="poster-corner bl"></div><div class="poster-corner br"></div>
     </div>
     <div class="hero-info">
-      <div class="hero-genre">◆ &nbsp; ИСТОРИЧЕСКИЙ · БОЕВИК &nbsp; ◆</div>
+      <div class="hero-genre">◆ &nbsp; БОЕВИК · ДРАМА &nbsp; ◆</div>
       <h1 class="hero-title">Троя</h1>
-      <div class="hero-orig">Troy &nbsp;·&nbsp; 2004</div>
+      <div class="hero-orig">Troy · 2004</div>
       <div class="hero-meta">
         <span class="meta-tag">2004</span>
-        <span class="meta-tag">США / Великобритания / Мальта</span>
+        <span class="meta-tag">США</span>
         <span class="meta-tag">Вольфганг Петерсен</span>
         <span class="meta-tag">👁 <span id="views">0</span> просмотров</span>
       </div>
       <div class="ratings">
         <div class="rating-badge"><span class="label">IMDb</span><span class="value">7.3</span></div>
-        <div class="rating-badge"><span class="label">Кинопоиск</span><span class="value">7.3</span></div>
+        <div class="rating-badge"><span class="label">Кинопоиск</span><span class="value">7.6</span></div>
         <div class="rating-badge"><span class="label">Fish Cinema</span><span class="value" id="avgRating">—</span><span class="label"><span id="votesCount">0</span> голосов</span></div>
       </div>
       <div class="user-rating-wrap">
@@ -195,20 +192,21 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 </section>
 <div class="page-content">
   <div class="section-divider"><span class="section-label">✦ Описание фильма ✦</span></div>
-  <div class="description-block">Троянский принц Парис похищает Елену — жену царя Спарты Менелая. Оскорблённый царь поднимает объединённые войска Греции и осаждает неприступную Трою. В центре эпической войны — бессмертный герой Ахилл, ищущий не победы, а вечной славы. Основано на «Илиаде» Гомера.</div>
+  <div class="description-block">Троянский принц Парис похищает прекрасную Елену, жену спартанского царя Менелая. Оскорблённый Менелай объединяет армии Греции и отправляется к берегам Трои. Начинается легендарная война, в которой боги играют людьми, а герои ищут бессмертия.</div>
   <div class="section-divider"><span class="section-label">✦ О фильме ✦</span></div>
   <div class="details-grid">
     <div class="detail-item"><span class="detail-label">Оригинальное название</span><span class="detail-value">Troy</span></div>
     <div class="detail-item"><span class="detail-label">Режиссёр</span><span class="detail-value">Вольфганг Петерсен</span></div>
     <div class="detail-item"><span class="detail-label">В главных ролях</span><span class="detail-value">Брэд Питт, Эрик Бана, Орландо Блум</span></div>
-    <div class="detail-item"><span class="detail-label">Страна</span><span class="detail-value">США / Великобритания / Мальта</span></div>
+    <div class="detail-item"><span class="detail-label">Страна</span><span class="detail-value">США</span></div>
     <div class="detail-item"><span class="detail-label">Год выпуска</span><span class="detail-value">2004</span></div>
-    <div class="detail-item"><span class="detail-label">Жанр</span><span class="detail-value">Исторический / Боевик / Драма</span></div>
+    <div class="detail-item"><span class="detail-label">Жанр</span><span class="detail-value">Боевик / Драма / Приключения</span></div>
     <div class="detail-item"><span class="detail-label">Длительность</span><span class="detail-value">163 минуты</span></div>
-    <div class="detail-item"><span class="detail-label">Бюджет</span><span class="detail-value">$185 миллионов</span></div>
   </div>
-  <div class="section-divider"><span class="section-label">✦ Трейлер ✦</span></div>
-  <div class="trailer-wrap"><iframe src="https://www.youtube.com/embed/VacH18HTOQE" allowfullscreen></iframe></div>
+  <div class="section-divider"><span class="section-label">✦ Смотреть фильм ✦</span></div>
+  <div class="trailer-wrap">
+    <iframe src="https://drive.google.com/file/d/1pOZouVaFbkYXF2YUQ3-tkLglaVZodfgD/preview" allow="autoplay" allowfullscreen></iframe>
+  </div>
   <div class="section-divider"><span class="section-label">✦ Смотрите также ✦</span></div>
   <div class="rec-header">
     <div class="rec-title-wrap">
@@ -217,28 +215,27 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
       <span class="rec-title-stars">★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★</span>
     </div>
   </div>
-    <div class="rec-category-label">◆ &nbsp; Эпические битвы · Древний мир</div>
+  <div class="rec-category-label">◆ &nbsp; Эпос · Древний мир</div>
   <div class="rec-grid">
-    <a href="hercules.html" class="rec-card">
+    <a href="Hercules.html" class="rec-card">
       <div class="rec-card-inner">
-        <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/a/a9/Hercules_2014_film_poster.jpg/220px-Hercules_2014_film_poster.jpg" alt="Геркулес">
+        <img src="https://www.film.ru/sites/default/files/styles/thumb_260x400/public/movies/posters/Hercules_Payoff_1_Sheet.jpg" alt="Геркулес">
         <div class="rec-card-overlay"><div class="rec-card-overlay-title">Геркулес</div><div class="rec-card-overlay-meta">США · 2014 · Боевик</div></div>
         <span class="rec-badge similar">Похожее</span>
       </div>
       <div class="rec-card-title">Геркулес</div>
       <div class="rec-card-year">2014</div>
     </a>
-    <a href="solo_star_wars.html" class="rec-card">
+    <a href="good-bad-ugly.html" class="rec-card">
       <div class="rec-card-inner">
-        <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/8/8f/Solo_A_Star_Wars_Story_poster.jpg/220px-Solo_A_Star_Wars_Story_poster.jpg" alt="Хан Соло">
-        <div class="rec-card-overlay"><div class="rec-card-overlay-title">Хан Соло</div><div class="rec-card-overlay-meta">США · 2018 · Фантастика</div></div>
+        <img src="https://www.film.ru/sites/default/files/imce/2013/November/the-good-the-bad-and-the-ugly.jpg" alt="Хороший, Плохой, Злой">
+        <div class="rec-card-overlay"><div class="rec-card-overlay-title">Хороший, Плохой, Злой</div><div class="rec-card-overlay-meta">Испания · 1966</div></div>
         <span class="rec-badge similar">Похожее</span>
       </div>
-      <div class="rec-card-title">Хан Соло</div>
-      <div class="rec-card-year">2018</div>
+      <div class="rec-card-title">Хороший, Плохой, Злой</div>
+      <div class="rec-card-year">1966</div>
     </a>
   </div>
-
   <div class="section-divider"><span class="section-label">✦ Вход ✦</span></div>
   <div class="login-block">
     <input type="text" id="nickname" placeholder="Ваш ник" oninput="checkNick()">
