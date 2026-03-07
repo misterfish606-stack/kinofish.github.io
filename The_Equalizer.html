@@ -74,7 +74,6 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 .detail-value a:hover{color:var(--gold-light);}
 .trailer-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border:2px solid var(--gold-dim);}
 .trailer-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
-/* RECOMMENDATIONS */
 .rec-header{display:flex;align-items:center;gap:20px;margin-bottom:28px;}
 .rec-header::before,.rec-header::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
 .rec-title-wrap{text-align:center;flex-shrink:0;}
@@ -87,8 +86,8 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 .rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,200px));gap:18px;margin-bottom:36px;}
 .rec-card{position:relative;cursor:pointer;text-decoration:none;color:inherit;display:block;animation:rec-card-in 0.5s ease both;}
 @keyframes rec-card-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.rec-card:nth-child(1){animation-delay:0.05s}.rec-card:nth-child(2){animation-delay:0.12s}.rec-card:nth-child(3){animation-delay:0.19s}.rec-card:nth-child(4){animation-delay:0.26s}
-.rec-card-inner{position:relative;overflow:hidden;border:2px solid var(--gold-dim);transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;width:100%;max-width:100%;}
+.rec-card:nth-child(1){animation-delay:0.05s}.rec-card:nth-child(2){animation-delay:0.12s}
+.rec-card-inner{position:relative;overflow:hidden;border:2px solid var(--gold-dim);transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;}
 .rec-card:hover .rec-card-inner{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 8px 30px rgba(0,0,0,0.85);transform:translateY(-6px) scale(1.02);}
 .rec-card-inner img{width:100%;aspect-ratio:2/3;object-fit:cover;object-position:center top;display:block;filter:sepia(12%) brightness(0.92);transition:filter 0.3s;}
 .rec-card:hover .rec-card-inner img{filter:sepia(0%) brightness(1.05);}
@@ -100,13 +99,10 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 .rec-card-overlay-title{font-family:'Playfair Display',serif;font-size:0.8rem;color:var(--gold-light);font-weight:700;}
 .rec-card-overlay-meta{font-size:0.68rem;color:var(--cream-dim);font-style:italic;}
 .rec-badge{position:absolute;top:5px;left:5px;z-index:4;font-family:'Bebas Neue',sans-serif;font-size:0.65rem;letter-spacing:0.1em;padding:2px 7px;border-radius:2px;pointer-events:none;}
-.rec-badge.sequel{background:linear-gradient(135deg,#7a3a00,#c06010);color:#fff;animation:pulse-sequel 2.2s infinite alternate;}
-@keyframes pulse-sequel{from{box-shadow:0 0 5px rgba(200,90,0,0.35)}to{box-shadow:0 0 14px rgba(200,90,0,0.85)}}
 .rec-badge.similar{background:rgba(30,24,14,0.88);border:1px solid var(--gold-dim);color:var(--gold);}
-.rec-card-title{font-family:'Playfair Display',serif;font-size:0.82rem;color:var(--cream);margin-top:7px;text-align:center;line-height:1.3;transition:color 0.2s;word-break:break-word;overflow-wrap:break-word;width:100%;}
+.rec-card-title{font-family:'Playfair Display',serif;font-size:0.82rem;color:var(--cream);margin-top:7px;text-align:center;line-height:1.3;transition:color 0.2s;word-break:break-word;}
 .rec-card:hover .rec-card-title{color:var(--gold);}
 .rec-card-year{font-family:'Bebas Neue',sans-serif;font-size:0.68rem;letter-spacing:0.15em;color:var(--gold-dim);text-align:center;margin-top:2px;}
-/* LOGIN & COMMENTS */
 .login-block{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
 .login-block input{background:var(--bg3);border:1px solid var(--gold-dim);border-radius:2px;color:var(--cream);font-family:'Crimson Text',serif;font-size:1rem;padding:9px 14px;outline:none;transition:0.2s;}
 .login-block input:focus{border-color:var(--gold);}
@@ -194,17 +190,13 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
     </div>
   </div>
 </section>
-
 <div class="page-content">
   <div class="section-divider"><span class="section-label">✦ Описание фильма ✦</span></div>
-  <div class="description-block">
-    Роберт Маккол — бывший оперативник ЦРУ, ведущий тихую жизнь. Но когда он видит молодую девушку в руках русской мафии, он возвращается к тому, в чём был мастером — восстанавливать справедливость любой ценой.
-  </div>
-
+  <div class="description-block">Роберт Маккол — бывший оперативник ЦРУ, ведущий тихую жизнь. Но когда он видит молодую девушку в руках русской мафии, он возвращается к тому, в чём был мастером — восстанавливать справедливость любой ценой.</div>
   <div class="section-divider"><span class="section-label">✦ О фильме ✦</span></div>
   <div class="details-grid">
     <div class="detail-item"><span class="detail-label">Оригинальное название</span><span class="detail-value">The Equalizer</span></div>
-    <div class="detail-item"><span class="detail-label">Режиссёр</span><span class="detail-value"><a href="https://ru.wikipedia.org/wiki/Антуан_Фукуа" target="_blank">Антуан Фукуа</a></span></div>
+    <div class="detail-item"><span class="detail-label">Режиссёр</span><span class="detail-value">Антуан Фукуа</span></div>
     <div class="detail-item"><span class="detail-label">В главных ролях</span><span class="detail-value">Дензел Вашингтон, Хлоя Грейс Морец</span></div>
     <div class="detail-item"><span class="detail-label">Страна</span><span class="detail-value">США</span></div>
     <div class="detail-item"><span class="detail-label">Год выпуска</span><span class="detail-value">2014</span></div>
@@ -212,13 +204,10 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
     <div class="detail-item"><span class="detail-label">Длительность</span><span class="detail-value">132 минуты</span></div>
     <div class="detail-item"><span class="detail-label">Продолжение</span><span class="detail-value">Великий уравнитель 2 (2018)</span></div>
   </div>
-
-  <div class="section-divider"><span class="section-label">✦ Трейлер ✦</span></div>
+  <div class="section-divider"><span class="section-label">✦ Смотреть фильм ✦</span></div>
   <div class="trailer-wrap">
-    <iframe src="https://www.youtube.com/embed/TgG4V33bB9U" allowfullscreen></iframe>
+    <iframe src="https://drive.google.com/file/d/1u6a5Zb1fpYKXILfRAssSPLZzlpWWmgWw/preview" allow="autoplay" allowfullscreen></iframe>
   </div>
-
-  <!-- РЕКОМЕНДАЦИИ -->
   <div class="section-divider"><span class="section-label">✦ Смотрите также ✦</span></div>
   <div class="rec-header">
     <div class="rec-title-wrap">
@@ -229,7 +218,7 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
   </div>
   <div class="rec-category-label">◆ &nbsp; Один против всех · Криминал</div>
   <div class="rec-grid">
-  <a href="Green_Street_hooligans.html" class="rec-card">
+    <a href="Green_Street_hooligans.html" class="rec-card">
       <div class="rec-card-inner">
         <img src="https://kinogo.media/uploads/posts/2021-10/1634802437_iphone360_77444.jpg" alt="Хулиганы Зелёной улицы">
         <div class="rec-card-overlay"><div class="rec-card-overlay-title">Хулиганы Зелёной улицы</div><div class="rec-card-overlay-meta">Великобритания · 2005</div></div>
@@ -248,7 +237,6 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
       <div class="rec-card-year">1999</div>
     </a>
   </div>
-
   <div class="section-divider"><span class="section-label">✦ Вход ✦</span></div>
   <div class="login-block">
     <input type="text" id="nickname" placeholder="Ваш ник" oninput="checkNick()">
@@ -264,9 +252,7 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
     <div style="margin-top:10px"><button class="btn-gold" onclick="addComment()">Оставить комментарий</button></div>
   </div>
 </div>
-
 <div class="filmstrip filmstrip-bottom"><div class="filmstrip-holes" id="filmstripBottom"></div></div>
-
 <div class="modal-overlay" id="replyModal">
   <div class="modal-box"><button class="modal-close" onclick="closeModal()">✖</button>
   <h3>Ответить на комментарий</h3>
@@ -282,7 +268,6 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
   <button class="btn-red" onclick="sendReport()">📨 Отправить сообщение</button>
   <div id="reportSentMsg">✅ Сообщение отправлено! Спасибо.</div></div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>emailjs.init("xQFu4rTTN_OUgE6zH");</script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -309,9 +294,7 @@ async function loadRating(){const snap=await ratingRef.get();if(!snap.exists)awa
 const starsRow=document.getElementById("starsRow");
 starsRow.querySelectorAll(".star").forEach(star=>{star.addEventListener("mouseover",()=>{const v=parseInt(star.dataset.value);starsRow.querySelectorAll(".star").forEach(s=>{s.style.color=parseInt(s.dataset.value)<=v?"var(--gold)":"#3a2c14";});});star.addEventListener("mouseleave",()=>{starsRow.querySelectorAll(".star").forEach(s=>s.style.color="#3a2c14");});star.onclick=async()=>{if(!currentUser)return alert("Войдите чтобы оценить!");const voteKey="rated_"+movieKey+"_"+currentUser;if(localStorage.getItem(voteKey))return alert("Вы уже оценили!");const value=parseInt(star.dataset.value);await ratingRef.update({totalScore:firebase.firestore.FieldValue.increment(value),totalVotes:firebase.firestore.FieldValue.increment(1)});localStorage.setItem(voteKey,"yes");document.getElementById("ratingResult").innerText="Вы поставили "+value+" ★";starsRow.querySelectorAll(".star").forEach((s,i)=>{s.style.color=i<value?"var(--gold)":"#3a2c14";});loadRating();};});
 commentsRef.orderBy("created").onSnapshot(snapshot=>{const all={};snapshot.forEach(doc=>{all[doc.id]={id:doc.id,...doc.data()}});document.getElementById("comments").innerHTML="";Object.values(all).filter(c=>!c.parent).forEach(c=>renderComment(c,all));});
-function renderComment(comment,all,parentEl=null){const div=document.createElement("div");div.className="comment"+(comment.parent?" reply":"");const time=comment.created?new Date(comment.created).toLocaleDateString("ru-RU",{day:"2-digit",month:"short",year:"numeric"}):"";const isAdmin = ["Mister_fish","Mister_fish606","fish606"].includes(comment.user);
-  const adminBadge = isAdmin ? `<span style="color:#c0392b;font-family:'Bebas Neue',sans-serif;font-size:0.72rem;letter-spacing:0.12em;margin-left:6px;border:1px solid rgba(192,57,43,0.4);padding:1px 7px;border-radius:2px;background:rgba(192,57,43,0.1);">Администратор</span>` : "";
-  div.innerHTML=`<div class="comment-header"><span class="comment-user">${comment.user}</span>${adminBadge}<span class="comment-time">${time}</span></div><div class="comment-text">${comment.text}</div><div class="comment-actions"><button class="btn-action" onclick="likeComment('${comment.id}')">👍 ${comment.likes||0}</button><button class="btn-action" onclick="dislikeComment('${comment.id}')">👎 ${comment.dislikes||0}</button><button class="btn-action" onclick="openReply('${comment.id}')">↩ Ответить</button>${currentUser===comment.user?`<button class="btn-action delete" onclick="deleteComment('${comment.id}')">✕ Удалить</button>`:""}</div>`;(parentEl||document.getElementById("comments")).appendChild(div);Object.values(all).filter(c=>c.parent===comment.id).forEach(child=>renderComment(child,all,div));}
+function renderComment(comment,all,parentEl=null){const div=document.createElement("div");div.className="comment"+(comment.parent?" reply":"");const time=comment.created?new Date(comment.created).toLocaleDateString("ru-RU",{day:"2-digit",month:"short",year:"numeric"}):"";const isAdmin=["Mister_fish","Mister_fish606","fish606"].includes(comment.user);const adminBadge=isAdmin?`<span style="color:#c0392b;font-family:'Bebas Neue',sans-serif;font-size:0.72rem;letter-spacing:0.12em;margin-left:6px;border:1px solid rgba(192,57,43,0.4);padding:1px 7px;border-radius:2px;background:rgba(192,57,43,0.1);">Администратор</span>`:"";div.innerHTML=`<div class="comment-header"><span class="comment-user">${comment.user}</span>${adminBadge}<span class="comment-time">${time}</span></div><div class="comment-text">${comment.text}</div><div class="comment-actions"><button class="btn-action" onclick="likeComment('${comment.id}')">👍 ${comment.likes||0}</button><button class="btn-action" onclick="dislikeComment('${comment.id}')">👎 ${comment.dislikes||0}</button><button class="btn-action" onclick="openReply('${comment.id}')">↩ Ответить</button>${currentUser===comment.user?`<button class="btn-action delete" onclick="deleteComment('${comment.id}')">✕ Удалить</button>`:""}</div>`;(parentEl||document.getElementById("comments")).appendChild(div);Object.values(all).filter(c=>c.parent===comment.id).forEach(child=>renderComment(child,all,div));}
 async function addComment(parent=null,text=null){if(!currentUser)return alert("Войдите!");const val=text||document.getElementById("commentInput").value.trim();if(!val)return;await commentsRef.add({user:currentUser,text:val,parent:parent||null,likes:0,dislikes:0,created:Date.now()});if(!parent)document.getElementById("commentInput").value="";}
 async function likeComment(id){if(!currentUser)return alert("Войдите!");if(votingInProgress[id])return;votingInProgress[id]=true;const vd=votesRef.doc(currentUser+"_"+id);const vs=await vd.get();if(vs.exists){const t=vs.data().type;if(t==="like"){await commentsRef.doc(id).update({likes:firebase.firestore.FieldValue.increment(-1)});await vd.delete();}else if(t==="dislike"){await commentsRef.doc(id).update({dislikes:firebase.firestore.FieldValue.increment(-1),likes:firebase.firestore.FieldValue.increment(1)});await vd.update({type:"like"});}}else{await commentsRef.doc(id).update({likes:firebase.firestore.FieldValue.increment(1)});await vd.set({type:"like"});}votingInProgress[id]=false;}
 async function dislikeComment(id){if(!currentUser)return alert("Войдите!");if(votingInProgress[id])return;votingInProgress[id]=true;const vd=votesRef.doc(currentUser+"_"+id);const vs=await vd.get();if(vs.exists){const t=vs.data().type;if(t==="dislike"){await commentsRef.doc(id).update({dislikes:firebase.firestore.FieldValue.increment(-1)});await vd.delete();}else if(t==="like"){await commentsRef.doc(id).update({likes:firebase.firestore.FieldValue.increment(-1),dislikes:firebase.firestore.FieldValue.increment(1)});await vd.update({type:"dislike"});}}else{await commentsRef.doc(id).update({dislikes:firebase.firestore.FieldValue.increment(1)});await vd.set({type:"dislike"});}votingInProgress[id]=false;}
