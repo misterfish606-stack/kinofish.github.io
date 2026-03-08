@@ -646,6 +646,39 @@ firebase.initializeApp({
 const db = firebase.firestore();
 
 const ADMIN_NICKS=["Mister_fish","Mister_fish606","fish606"];
+const ADMIN_PASS="xhidid";
+let isAdmin=false;
+
+function adminLogin(){
+  const nick=document.getElementById("adminNick")?document.getElementById("adminNick").value.trim():"";
+  const pass=document.getElementById("adminPass")?document.getElementById("adminPass").value.trim():"";
+  const err=document.getElementById("adminLoginError");
+  if(!ADMIN_NICKS.includes(nick)){if(err)err.innerText="Неверный ник!";return;}
+  if(pass!==ADMIN_PASS){if(err)err.innerText="Неверный пароль!";return;}
+  isAdmin=true;
+  localStorage.setItem("adminNick",nick);
+  const modal=document.getElementById("adminLoginModal");
+  if(modal)modal.classList.remove("open");
+  const panel=document.getElementById("adminPanel");
+  if(panel)panel.style.display="block";
+  render(movies);
+}
+function adminLogout(){
+  isAdmin=false;
+  localStorage.removeItem("adminNick");
+  const panel=document.getElementById("adminPanel");
+  if(panel)panel.style.display="none";
+  render(movies);
+}
+window.addEventListener("load",()=>{
+  const saved=localStorage.getItem("adminNick");
+  if(saved&&ADMIN_NICKS.includes(saved)){
+    isAdmin=true;
+    const panel=document.getElementById("adminPanel");
+    if(panel)panel.style.display="block";
+  }
+});
+
 const movies=[
 
   {title:"Зелёная книга",                   file:"Green_book.html",                            movieKey:"Green Book",                            year:2018,country:"США",            hot:false,isNew:true, desc:"Белый водитель и чернокожий пианист — путешествие через расистский Юг США.",   img:"https://new.kinogo.fi/poster/100/1108577.jpg"},
