@@ -646,52 +646,14 @@ firebase.initializeApp({
 const db = firebase.firestore();
 
 const ADMIN_NICKS=["Mister_fish","Mister_fish606","fish606"];
-const ADMIN_PASS="xhidid";
-let isAdmin=false;
+const movies=[
 
-function openAdminLogin(){
-  if(isAdmin){const p=document.getElementById("adminPanel");p.style.display=p.style.display==="none"?"block":"none";return;}
-  document.getElementById("adminLoginModal").classList.add("open");
-}
-function closeAdminLogin(){
-  document.getElementById("adminLoginModal").classList.remove("open");
-  document.getElementById("adminLoginError").innerText="";
-}
-function doAdminLogin(){
-  const nick=document.getElementById("adminNickInput").value.trim();
-  const pass=document.getElementById("adminPassInput").value;
-  if(ADMIN_NICKS.includes(nick)&&pass===ADMIN_PASS){
-    isAdmin=true; closeAdminLogin();
-    document.getElementById("adminPanel").style.display="block";
-    document.getElementById("adminOpenBtn").innerText="⚙ Панель";
-    render(movies); loadStats();
-  } else {
-    document.getElementById("adminLoginError").innerText="❌ Неверный ник или пароль";
-  }
-}
-function adminLogout(){
-  isAdmin=false;
-  document.getElementById("adminPanel").style.display="none";
-  document.getElementById("adminOpenBtn").innerText="🎬 Админ";
-  render(movies);
-}
-function switchAdminTab(name,btn){
-  document.querySelectorAll(".admin-tab").forEach(t=>t.classList.remove("active"));
-  document.querySelectorAll(".admin-section").forEach(s=>s.classList.remove("active"));
-  document.getElementById("adminTab-"+name).classList.add("active");
-  btn.classList.add("active");
-  if(name==="stats") loadStats();
-}
-
-let movies=[
-
-  {title:"Тупой и ещё тупее",               file:"Dumb_and_dumber.html",                       movieKey:"Dumb and Dumber To",                    year:2014,country:"США",            hot:false,isNew:true, desc:"Лойд и Гарри снова вместе — в поисках дочери, которую Гарри никогда не знал.", img:"https://ikinogo.biz/uploads/mini/fullsm/2d/7a4245fcc4d7bacc66bb7ff25f32f1.jpg"},
-  {title:"Звёздный путь",                   file:"Star_trek.html",                             movieKey:"Star Trek 2009",                        year:2009,country:"США",            hot:false,isNew:true, desc:"Молодой Кирк и Спок объединяются чтобы остановить мстительного ромуланца.",    img:"https://kinogo.online/uploads/posts/2021-02/1614496303-1604412785.jpg"},
   {title:"Зелёная книга",                   file:"Green_book.html",                            movieKey:"Green Book",                            year:2018,country:"США",            hot:false,isNew:true, desc:"Белый водитель и чернокожий пианист — путешествие через расистский Юг США.",   img:"https://new.kinogo.fi/poster/100/1108577.jpg"},
   {title:"Первый мститель",                 file:"Captain_america.html",                       movieKey:"Captain America The First Avenger",     year:2011,country:"США",            hot:false,isNew:true, desc:"Слабый парень становится Капитаном Америкой и противостоит ГИДРЕ.",           img:"https://kinogo.online/uploads/posts/2021-02/1614451243-2137657427.jpg"},
   {title:"Элизиум: Рай не на Земле",        file:"Elysium.html",                               movieKey:"Elysium",                               year:2013,country:"США",            hot:false,isNew:true, desc:"В будущем богачи живут на орбите, а бедные гниют на умирающей Земле.",        img:"https://svit.tartugi.net/uploads/posts/2024-02/1707064518-elizium-ray-ne-na-zemle.jpg"},
   {title:"Я, снова я и Ирэн",               file:"Me_myself_and_irene.html",                   movieKey:"Me Myself and Irene",                   year:2000,country:"США",            hot:false,isNew:true, desc:"Джим Керри в роли копа с раздвоением личности, влюблённого в одну женщину.",  img:"https://kinogo.li/uploads/mini/220x305/f3/c0bd05757047c2cc6bff946fc58baf.jpg"},
-
+  {title:"Тупой и ещё тупее",               file:"Dumb_and_dumber.html",                       movieKey:"Dumb and Dumber To",                    year:2014,country:"США",            hot:false,isNew:true, desc:"Лойд и Гарри снова вместе — в поисках дочери, которую Гарри никогда не знал.", img:"https://ikinogo.biz/uploads/mini/fullsm/2d/7a4245fcc4d7bacc66bb7ff25f32f1.jpg"},
+  {title:"Звёздный путь",                   file:"Star_trek.html",                             movieKey:"Star Trek 2009",                        year:2009,country:"США",            hot:false,isNew:true, desc:"Молодой Кирк и Спок объединяются чтобы остановить мстительного ромуланца.",    img:"https://kinogo.online/uploads/posts/2021-02/1614496303-1604412785.jpg"},
   {title:"Хороший, Плохой, Злой",          file:"good-bad-ugly.html",                         movieKey:"good-bad-ugly",                         year:1966,country:"Испания",        hot:true, isNew:false,desc:"История трёх стрелков, охотящихся за золотом во времена Гражданской войны.",  img:"https://kinogo.online/uploads/mini/shortstory-mob/ed1/1614517323-1826304193.jpg"},
   {title:"Бойцовский клуб",                 file:"fight_club.html",                            movieKey:"Fight Club",                            year:1999,country:"США",            hot:true, isNew:true, desc:"Офисный работник создаёт альтер эго и начинает разрушать систему.",            img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHFS7WEw3dSnvD-pu6GKh0CDhf5g6uXC6vow&s"},
   {title:"Таксист",                         file:"taxi_driver_1976.html",                      movieKey:"taxi_driver_1976",                      year:1976,country:"США",            hot:false,isNew:false,desc:"Одинокий ветеран становится свидетелем упадка Нью-Йорка.",                   img:"https://preview.redd.it/taxi-driver-1976-v0-2vafsern2tnf1.jpg?width=640&crop=smart&auto=webp&s=c0319ef604e7680dd8c420851d775d7fe9d2f549"},
@@ -711,7 +673,12 @@ let movies=[
   {title:"Блэйд",                           file:"Blade.html",                                 movieKey:"Blade",                                 year:1998,country:"США",            hot:false,isNew:false,desc:"Охотник на вампиров, сам наполовину вампир.",                                    img:"https://kinogo.my/uploads/posts/2017-04/1493391470-1836629722-troya.jpg"},
   {title:"Голодные игры",                   file:"Hunger_games.html",                          movieKey:"The Hunger Games",                      year:2012,country:"США",            hot:false,isNew:false,desc:"Девушка-доброволец на смертельном телешоу становится символом восстания.",      img:"https://kinogo.online/uploads/mini/shortstory-mob/84f/1614468212-1246767137.jpg"},
   {title:"Пункт назначения",                file:"Final_destination.html",                     movieKey:"Final Destination",                     year:2000,country:"США",            hot:false,isNew:false,desc:"Смерть преследует тех, кто сбежал от неё.",                                     img:"https://kinogo.online/uploads/posts/2021-02/1614472317-1321259434.jpg"},
-];
+  {title:"Полтора шпиона",               file:"Spies.html",                                 movieKey:"Spies 2015",                            year:2015,country:"США",            hot:false,isNew:true, desc:"Аналитик ЦРУ впервые выходит в поле и оказывается самым опасным шпионом в мире.",  img:"https://www.palladium-cinema.com.ua/storage/upload/film/poltora-shpiona/spp-1.jpg"},
+  {title:"Полицейская академия",           file:"Police_academy.html",                        movieKey:"Police Academy 1984",                   year:1984,country:"США",            hot:false,isNew:true, desc:"Самая нелепая команда курсантов в истории полицейской академии.",                   img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvEIwhv3Ckww8VTUJpnjBaYVSC6YcVJl0Lhg&s"},
+  {title:"Очень страшное кино",            file:"Scary_movie.html",                           movieKey:"Scary Movie 2000",                      year:2000,country:"США",            hot:false,isNew:true, desc:"Безумная пародия на хоррор-хиты 90-х — один из самых смешных фильмов своего времени.", img:"https://kinogo.online/uploads/posts/2021-02/1614431711-60734677.jpg"},
+  {title:"Майор Пейн",                     file:"Major_payne.html",                           movieKey:"Major Payne 1995",                      year:1995,country:"США",            hot:false,isNew:true, desc:"Жёсткий военный становится командиром школьного отряда и получает урок человечности.", img:"https://kinogo.online/uploads/mini/shortstory-mob/81e/1614363946-1621052681.jpg"},
+  {title:"Без чувств",                     file:"Bez_chuvstv_1998.html",                      movieKey:"Bez chuvstv 1998",                      year:1998,country:"Украина",        hot:false,isNew:true, desc:"История о людях, которые разучились чувствовать, и о важности оставаться живым внутри.", img:"https://mobb.kinovasek.men/uploads/posts/2025-03/67dafbd41d177.webp"}
+]
 
 function render(list,title="Все фильмы"){
   const catalog=document.getElementById("catalog");
@@ -825,7 +792,8 @@ function showCollections(){
 function showCowboys(){render(movies.filter(m=>["good-bad-ugly.html","per_un_pugno_di_dollari.html","for-a-few-dollars-more.html"].includes(m.file)),"Ковбои и вестерны");}
 
 function levenshtein(a,b){
-  const m=[];
+  const m=[
+]
   for(let i=0;i<=b.length;i++)m[i]=[i];
   for(let j=0;j<=a.length;j++)m[0][j]=j;
   for(let i=1;i<=b.length;i++)
