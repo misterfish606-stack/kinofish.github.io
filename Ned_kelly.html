@@ -95,7 +95,6 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 .rec-card-overlay-title{font-family:'Playfair Display',serif;font-size:0.8rem;color:var(--gold-light);font-weight:700;}
 .rec-card-overlay-meta{font-size:0.68rem;color:var(--cream-dim);font-style:italic;}
 .rec-badge{position:absolute;top:5px;left:5px;z-index:4;font-family:'Bebas Neue',sans-serif;font-size:0.65rem;letter-spacing:0.1em;padding:2px 7px;border-radius:2px;pointer-events:none;}
-.rec-badge.sequel{background:linear-gradient(135deg,#7a3a00,#c06010);color:#fff;}
 .rec-badge.similar{background:rgba(30,24,14,0.88);border:1px solid var(--gold-dim);color:var(--gold);}
 .rec-card-title{font-family:'Playfair Display',serif;font-size:0.82rem;color:var(--cream);margin-top:7px;text-align:center;line-height:1.3;transition:color 0.2s;word-break:break-word;}
 .rec-card:hover .rec-card-title{color:var(--gold);}
@@ -189,7 +188,7 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 </section>
 <div class="page-content">
   <div class="section-divider"><span class="section-label">✦ Описание фильма ✦</span></div>
-  <div class="description-block">История легендарного австралийского бандита Неда Келли — бунтаря, который стал народным героем. Преследуемый полицией и предавший всеми, Нед собирает банду и бросает вызов британской власти. Хит Леджер в одной из лучших своих ролей. Основано на реальных событиях.</div>
+  <div class="description-block">История легендарного австралийского бандита Неда Келли — бунтаря, ставшего народным героем. Сын ирландского иммигранта, преследуемый несправедливой властью, он поднимается против системы вместе со своей бандой. Хит Леджер в одной из лучших своих ролей. Основано на реальных событиях.</div>
   <div class="section-divider"><span class="section-label">✦ О фильме ✦</span></div>
   <div class="details-grid">
     <div class="detail-item"><span class="detail-label">Оригинальное название</span><span class="detail-value">Ned Kelly</span></div>
@@ -236,7 +235,7 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
   <div class="section-divider"><span class="section-label">✦ Вход ✦</span></div>
   <div class="login-block">
     <input type="text" id="nickname" placeholder="Ваш ник" oninput="checkNick()">
-    <input type="password" id="adminPassLoginField" placeholder="Пароль">
+    <input type="password" id="adminPass" placeholder="Пароль" id="adminPassLoginField">
     <button class="btn-gold" onclick="login()">Войти</button>
     <span class="login-status" id="loginStatus"></span>
     <span class="login-error" id="loginError"></span>
@@ -282,7 +281,7 @@ let currentUser=null,replyTo=null,votingInProgress={};
 const PROTECTED_NICKS=["Mister_fish","Mister_fish606","fish606"];
 const ADMIN_PASS="xhidid";
 function checkNick(){const nick=document.getElementById("nickname").value.trim();const pf=document.getElementById("adminPassLoginField");if(PROTECTED_NICKS.includes(nick)){pf.style.display="inline-block";document.getElementById("loginError").innerText="⚠ Ник администратора";}else{pf.style.display="none";document.getElementById("loginError").innerText="";}}
-async function login(){const nick=document.getElementById("nickname").value.trim();if(!nick)return alert("Введите ник!");if(PROTECTED_NICKS.includes(nick)){const pass=document.getElementById("adminPassLoginField").value;if(pass!==ADMIN_PASS)return document.getElementById("loginError").innerText="❌ Неверный пароль!";localStorage.setItem("nickname",nick);currentUser=nick;document.getElementById("loginStatus").innerText="👑 Добро пожаловать, "+nick+"!";return;}const saved=localStorage.getItem("nickname");if(saved){if(saved!==nick)return alert("Ваш ник уже: "+saved);currentUser=saved;document.getElementById("loginStatus").innerText="✓ Вы вошли как "+currentUser;return;}const doc=await usersRef.doc(nick).get();if(doc.exists)return alert("Ник '"+nick+"' уже занят!");await usersRef.doc(nick).set({createdAt:firebase.firestore.FieldValue.serverTimestamp(),uid:Date.now()+"_"+Math.random()});localStorage.setItem("nickname",nick);currentUser=nick;document.getElementById("loginStatus").innerText="✓ Зарегистрирован как "+currentUser;}
+async function login(){const nick=document.getElementById("nickname").value.trim();if(!nick)return alert("Введите ник!");if(PROTECTED_NICKS.includes(nick)){const pass=document.getElementById("adminPass").value;if(pass!==ADMIN_PASS)return document.getElementById("loginError").innerText="❌ Неверный пароль!";localStorage.setItem("nickname",nick);currentUser=nick;document.getElementById("loginStatus").innerText="👑 Добро пожаловать, "+nick+"!";return;}const saved=localStorage.getItem("nickname");if(saved){if(saved!==nick)return alert("Ваш ник уже: "+saved);currentUser=saved;document.getElementById("loginStatus").innerText="✓ Вы вошли как "+currentUser;return;}const doc=await usersRef.doc(nick).get();if(doc.exists)return alert("Ник '"+nick+"' уже занят!");await usersRef.doc(nick).set({createdAt:firebase.firestore.FieldValue.serverTimestamp(),uid:Date.now()+"_"+Math.random()});localStorage.setItem("nickname",nick);currentUser=nick;document.getElementById("loginStatus").innerText="✓ Зарегистрирован как "+currentUser;}
 function initViews(){const ref=statsRef.doc("views");ref.onSnapshot(doc=>{if(doc.exists)document.getElementById("views").innerText=doc.data().count||0;});if(!localStorage.getItem("viewed_"+movieKey)){ref.set({count:firebase.firestore.FieldValue.increment(1)},{merge:true});localStorage.setItem("viewed_"+movieKey,"yes");}}
 const ratingRef=statsRef.doc("rating");
 async function loadRating(){const snap=await ratingRef.get();if(!snap.exists)await ratingRef.set({totalScore:0,totalVotes:0});const data=(await ratingRef.get()).data();document.getElementById("avgRating").innerText=data.totalVotes?(data.totalScore/data.totalVotes).toFixed(1):"—";document.getElementById("votesCount").innerText=data.totalVotes;}
