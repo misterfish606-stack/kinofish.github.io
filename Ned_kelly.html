@@ -138,13 +138,6 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 .btn-red{font-family:'Bebas Neue',sans-serif;letter-spacing:0.14em;background:linear-gradient(135deg,#5a1010,var(--red));color:var(--gold-light);border:none;padding:10px 22px;border-radius:2px;cursor:pointer;font-size:0.9rem;transition:0.3s;margin-top:4px;}
 ::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px;}
 .filmstrip-bottom{border-top:2px solid #1a1208;margin-top:60px;}
-
-.drive-player-box{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:320px;background:rgba(10,7,5,0.7);border:2px solid var(--gold-dim);}
-.drive-play-btn{display:flex;flex-direction:column;align-items:center;gap:16px;text-decoration:none;padding:40px 60px;border:2px solid var(--gold-dim);border-radius:4px;background:rgba(201,168,76,0.07);transition:0.3s;cursor:pointer;}
-.drive-play-btn:hover{background:rgba(201,168,76,0.18);border-color:var(--gold);box-shadow:0 0 30px rgba(201,168,76,0.3);}
-.play-icon{font-size:4rem;color:var(--gold);line-height:1;}
-.play-text{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.25em;color:var(--gold);}
-.drive-hint{font-family:'Crimson Text',serif;font-style:italic;color:var(--cream-dim);font-size:0.9rem;margin-top:16px;}
 </style>
 </head>
 <body>
@@ -196,7 +189,7 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 </section>
 <div class="page-content">
   <div class="section-divider"><span class="section-label">✦ Описание фильма ✦</span></div>
-  <div class="description-block">2154 год. Богатые живут на роскошной орбитальной станции Элизиум, бедные — на умирающей Земле. Простой рабочий Макс получает смертельную дозу радиации и решается на отчаянный шаг — прорваться на Элизиум, где медицина способна вылечить любую болезнь.</div>
+  <div class="description-block">История легендарного австралийского бандита Неда Келли — бунтаря, который стал народным героем. Преследуемый полицией и предавший всеми, Нед собирает банду и бросает вызов британской власти. Хит Леджер в одной из лучших своих ролей. Основано на реальных событиях.</div>
   <div class="section-divider"><span class="section-label">✦ О фильме ✦</span></div>
   <div class="details-grid">
     <div class="detail-item"><span class="detail-label">Оригинальное название</span><span class="detail-value">Ned Kelly</span></div>
@@ -220,26 +213,30 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
     </div>
   </div>
   <div class="rec-category-label">◆ &nbsp; Вестерн · Основано на реальных событиях</div>
-  <div class="rec-grid"><a href="good-bad-ugly.html" class="rec-card"><div class="rec-card-inner"><img src="https://kinogo.online/uploads/mini/shortstory-mob/ed1/1614517323-1826304193.jpg" alt="Хороший, Плохой, Злой"><div class="rec-card-overlay"><div class="rec-card-overlay-title">Хороший, Плохой, Злой</div><div class="rec-card-overlay-meta">Испания · 1966 · Вестерн</div></div><span class="rec-badge similar">Похожее</span></div><div class="rec-card-title">Хороший, Плохой, Злой</div><div class="rec-card-year">1966</div></a>
-<a href="Rambo.html" class="rec-card"><div class="rec-card-inner"><img src="https://kinogo.ec/uploads/posts/2020-03/1585442933-1829798561.jpg" alt="Рэмбо"><div class="rec-card-overlay"><div class="rec-card-overlay-title">Рэмбо</div><div class="rec-card-overlay-meta">США · 1982 · Боевик</div></div><span class="rec-badge similar">Похожее</span></div><div class="rec-card-title">Рэмбо</div><div class="rec-card-year">1982</div></a></div><div class="rec-card-overlay-meta">США · 2012 · Фантастика</div></div>
-        <span class="rec-badge similar">Похожее</span>
-      </div>
-      <div class="rec-card-title">Голодные игры</div>
-      <div class="rec-card-year">2012</div>
-    </a>
-    <a href="Star_trek.html" class="rec-card">
+  <div class="rec-grid">
+    <a href="good-bad-ugly.html" class="rec-card">
       <div class="rec-card-inner">
-        <img src="https://kinogo.online/uploads/posts/2021-02/1614496303-1604412785.jpg" alt="Звёздный путь">
-        <div class="rec-card-overlay"><div class="rec-card-overlay-title">Звёздный путь</div><div class="rec-card-overlay-meta">США · 2009 · Фантастика</div></div>
+        <img src="https://kinogo.online/uploads/mini/shortstory-mob/ed1/1614517323-1826304193.jpg" alt="Хороший, Плохой, Злой">
+        <div class="rec-card-overlay"><div class="rec-card-overlay-title">Хороший, Плохой, Злой</div><div class="rec-card-overlay-meta">Испания · 1966 · Вестерн</div></div>
         <span class="rec-badge similar">Похожее</span>
       </div>
-      <div class="rec-card-title">Звёздный путь</div>
-      <div class="rec-card-year">2009</div>
-    </a></div>
+      <div class="rec-card-title">Хороший, Плохой, Злой</div>
+      <div class="rec-card-year">1966</div>
+    </a>
+    <a href="Rambo.html" class="rec-card">
+      <div class="rec-card-inner">
+        <img src="https://kinogo.ec/uploads/posts/2020-03/1585442933-1829798561.jpg" alt="Рэмбо">
+        <div class="rec-card-overlay"><div class="rec-card-overlay-title">Рэмбо</div><div class="rec-card-overlay-meta">США · 1982 · Боевик</div></div>
+        <span class="rec-badge similar">Похожее</span>
+      </div>
+      <div class="rec-card-title">Рэмбо</div>
+      <div class="rec-card-year">1982</div>
+    </a>
+  </div>
   <div class="section-divider"><span class="section-label">✦ Вход ✦</span></div>
   <div class="login-block">
     <input type="text" id="nickname" placeholder="Ваш ник" oninput="checkNick()">
-    <input type="password" id="adminPass" placeholder="Пароль" id="adminPassLoginField">
+    <input type="password" id="adminPassLoginField" placeholder="Пароль">
     <button class="btn-gold" onclick="login()">Войти</button>
     <span class="login-status" id="loginStatus"></span>
     <span class="login-error" id="loginError"></span>
@@ -285,7 +282,7 @@ let currentUser=null,replyTo=null,votingInProgress={};
 const PROTECTED_NICKS=["Mister_fish","Mister_fish606","fish606"];
 const ADMIN_PASS="xhidid";
 function checkNick(){const nick=document.getElementById("nickname").value.trim();const pf=document.getElementById("adminPassLoginField");if(PROTECTED_NICKS.includes(nick)){pf.style.display="inline-block";document.getElementById("loginError").innerText="⚠ Ник администратора";}else{pf.style.display="none";document.getElementById("loginError").innerText="";}}
-async function login(){const nick=document.getElementById("nickname").value.trim();if(!nick)return alert("Введите ник!");if(PROTECTED_NICKS.includes(nick)){const pass=document.getElementById("adminPass").value;if(pass!==ADMIN_PASS)return document.getElementById("loginError").innerText="❌ Неверный пароль!";localStorage.setItem("nickname",nick);currentUser=nick;document.getElementById("loginStatus").innerText="👑 Добро пожаловать, "+nick+"!";return;}const saved=localStorage.getItem("nickname");if(saved){if(saved!==nick)return alert("Ваш ник уже: "+saved);currentUser=saved;document.getElementById("loginStatus").innerText="✓ Вы вошли как "+currentUser;return;}const doc=await usersRef.doc(nick).get();if(doc.exists)return alert("Ник '"+nick+"' уже занят!");await usersRef.doc(nick).set({createdAt:firebase.firestore.FieldValue.serverTimestamp(),uid:Date.now()+"_"+Math.random()});localStorage.setItem("nickname",nick);currentUser=nick;document.getElementById("loginStatus").innerText="✓ Зарегистрирован как "+currentUser;}
+async function login(){const nick=document.getElementById("nickname").value.trim();if(!nick)return alert("Введите ник!");if(PROTECTED_NICKS.includes(nick)){const pass=document.getElementById("adminPassLoginField").value;if(pass!==ADMIN_PASS)return document.getElementById("loginError").innerText="❌ Неверный пароль!";localStorage.setItem("nickname",nick);currentUser=nick;document.getElementById("loginStatus").innerText="👑 Добро пожаловать, "+nick+"!";return;}const saved=localStorage.getItem("nickname");if(saved){if(saved!==nick)return alert("Ваш ник уже: "+saved);currentUser=saved;document.getElementById("loginStatus").innerText="✓ Вы вошли как "+currentUser;return;}const doc=await usersRef.doc(nick).get();if(doc.exists)return alert("Ник '"+nick+"' уже занят!");await usersRef.doc(nick).set({createdAt:firebase.firestore.FieldValue.serverTimestamp(),uid:Date.now()+"_"+Math.random()});localStorage.setItem("nickname",nick);currentUser=nick;document.getElementById("loginStatus").innerText="✓ Зарегистрирован как "+currentUser;}
 function initViews(){const ref=statsRef.doc("views");ref.onSnapshot(doc=>{if(doc.exists)document.getElementById("views").innerText=doc.data().count||0;});if(!localStorage.getItem("viewed_"+movieKey)){ref.set({count:firebase.firestore.FieldValue.increment(1)},{merge:true});localStorage.setItem("viewed_"+movieKey,"yes");}}
 const ratingRef=statsRef.doc("rating");
 async function loadRating(){const snap=await ratingRef.get();if(!snap.exists)await ratingRef.set({totalScore:0,totalVotes:0});const data=(await ratingRef.get()).data();document.getElementById("avgRating").innerText=data.totalVotes?(data.totalScore/data.totalVotes).toFixed(1):"—";document.getElementById("votesCount").innerText=data.totalVotes;}
@@ -302,7 +299,7 @@ function closeModal(){document.getElementById("replyModal").classList.remove("op
 async function saveReply(){const t=document.getElementById("modalText").value.trim();if(t)await addComment(replyTo,t);document.getElementById("modalText").value="";closeModal();}
 function openReport(){document.getElementById("reportModal").classList.add("open");}
 function closeReport(){document.getElementById("reportModal").classList.remove("open");document.getElementById("reportSentMsg").style.display="none";document.getElementById("reportText").value="";document.getElementById("reportName").value="";}
-async function sendReport(){const name=document.getElementById("reportName").value.trim()||"Аноним";const text=document.getElementById("reportText").value.trim();if(!text)return alert("Опиши проблему!");const sendBtn=document.querySelector("#reportModal .btn-red");sendBtn.innerText="Отправка...";sendBtn.disabled=true;try{await emailjs.send("service_m2itd3q","template_jvqfkhr",{from_name:name,message:text,page:"Элизиум: Рай не на Земле"});document.getElementById("reportSentMsg").style.display="block";sendBtn.innerText="✅ Отправлено!";}catch(err){alert("Ошибка: "+JSON.stringify(err));sendBtn.innerText="📨 Отправить сообщение";sendBtn.disabled=false;}}
+async function sendReport(){const name=document.getElementById("reportName").value.trim()||"Аноним";const text=document.getElementById("reportText").value.trim();if(!text)return alert("Опиши проблему!");const sendBtn=document.querySelector("#reportModal .btn-red");sendBtn.innerText="Отправка...";sendBtn.disabled=true;try{await emailjs.send("service_m2itd3q","template_jvqfkhr",{from_name:name,message:text,page:"Банда Келли"});document.getElementById("reportSentMsg").style.display="block";sendBtn.innerText="✅ Отправлено!";}catch(err){alert("Ошибка: "+JSON.stringify(err));sendBtn.innerText="📨 Отправить сообщение";sendBtn.disabled=false;}}
 window.onload=async()=>{const saved=localStorage.getItem("nickname");if(saved){currentUser=saved;document.getElementById("loginStatus").innerText="✓ Вы вошли как "+currentUser;}loadRating();initViews();};
 </script>
 </body>
