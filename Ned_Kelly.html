@@ -189,23 +189,51 @@ body {
   font-family:'Bebas Neue', sans-serif; font-size:0.78rem; letter-spacing:0.12em;
   padding:4px 12px; border-radius:2px; border:1px solid var(--gold-dim);
   color:var(--gold); background:rgba(201,168,76,0.08);
+  position:relative; cursor:default;
+  transition:color 0.2s, background 0.2s, border-color 0.2s;
+  display:inline-block;
 }
+.meta-tag::after {
+  content:""; position:absolute;
+  bottom:0; left:10%; right:10%; height:1px;
+  background:var(--gold); transform:scaleX(0); transition:transform 0.25s ease;
+}
+.meta-tag:hover { color:var(--gold-light); background:rgba(201,168,76,0.16); border-color:var(--gold); }
+.meta-tag:hover::after { transform:scaleX(1); }
 
 .ratings { display:flex; gap:16px; align-items:center; margin-bottom:20px; }
 .rating-badge {
   text-align:center; background:rgba(212,175,55,0.08);
   border:1px solid var(--gold-dim); padding:8px 16px; border-radius:2px;
-  transition:border-color 0.25s, background 0.25s; cursor:default;
+  transition:border-color 0.25s, background 0.25s, box-shadow 0.25s; cursor:default;
+  position:relative; overflow:hidden;
 }
-.rating-badge:hover { border-color:var(--gold); background:rgba(212,175,55,0.14); }
+.rating-badge::after {
+  content:""; position:absolute;
+  bottom:0; left:10%; right:10%; height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform:scaleX(0); transition:transform 0.3s ease;
+}
+.rating-badge:hover { border-color:var(--gold); background:rgba(212,175,55,0.14); box-shadow:0 0 18px rgba(201,168,76,0.18); }
+.rating-badge:hover::after { transform:scaleX(1); }
+.rating-badge:hover .label { color:var(--gold); }
+.rating-badge:hover .value { color:var(--gold-light); text-shadow:0 0 18px rgba(201,168,76,0.5); }
 .rating-badge .label { font-family:'Bebas Neue', sans-serif; font-size:0.65rem; letter-spacing:0.2em; color:var(--gold-dim); display:block; }
 .rating-badge .value { font-family:'Playfair Display', serif; font-size:1.5rem; font-weight:700; color:var(--gold); display:block; }
 
 .user-rating-wrap { margin-bottom:8px; }
 .user-rating-wrap label {
   font-family:'Bebas Neue', sans-serif; font-size:0.72rem;
-  letter-spacing:0.2em; color:var(--gold); display:block; margin-bottom:6px;
+  letter-spacing:0.2em; color:var(--gold); display:inline-block; margin-bottom:6px;
+  position:relative; cursor:default; transition:color 0.2s;
 }
+.user-rating-wrap label::after {
+  content:""; position:absolute;
+  bottom:-2px; left:0; right:0; height:1px;
+  background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.25s ease;
+}
+.user-rating-wrap label:hover { color:var(--gold-light); }
+.user-rating-wrap label:hover::after { transform:scaleX(1); }
 .stars { display:flex; gap:4px; }
 .star { font-size:1.6rem; cursor:pointer; color:#3a2c14; transition:color 0.15s, transform 0.15s; line-height:1; }
 .star:hover, .star.active { color:var(--gold); transform:scale(1.2); }
@@ -246,7 +274,18 @@ body {
 }
 .detail-item:hover { border-color:rgba(180,150,80,0.25); }
 .detail-label { font-family:'Crimson Text', serif; font-size:0.8rem; letter-spacing:0.06em; color:var(--gold-dim); display:block; margin-bottom:5px; font-style:italic; }
-.detail-value { font-family:'Crimson Text', serif; font-size:1.05rem; color:var(--gold); }
+.detail-value {
+  font-family:'Crimson Text', serif; font-size:1.05rem; color:var(--gold);
+  display:inline-block; position:relative; cursor:default; transition:color 0.2s;
+}
+.detail-item:hover .detail-value { color:var(--gold-light); }
+.detail-value::after {
+  content:""; position:absolute;
+  bottom:-2px; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, var(--gold-dim), var(--gold), var(--gold-dim));
+  transform:scaleX(0); transform-origin:left; transition:transform 0.3s ease;
+}
+.detail-item:hover .detail-value::after { transform:scaleX(1); }
 .detail-value a { color:var(--gold); text-decoration:none; }
 .detail-value a:hover { color:var(--gold-light); text-decoration:underline; }
 
@@ -462,7 +501,7 @@ body {
 
   <div class="section-divider"><span class="section-label">✦ Смотреть фильм ✦</span></div>
   <div class="trailer-wrap">
-    <iframe src="https://www.youtube.com/embed/_2GZzT1T4fE" allowfullscreen></iframe>
+    <iframe src="https://drive.google.com/file/d/1D3eEHy9TJ--INqSWZqpwP-LvrwPNe5ij/preview" allowfullscreen allow="autoplay"></iframe>
   </div>
 
   <!-- RECOMMENDATIONS -->
