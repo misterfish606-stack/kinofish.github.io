@@ -351,10 +351,10 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
           const txt = await r.text();
           // ищем dlink или urls в ответе API
           const patterns = [
-            /"dlink"\s*:\s*"(https?:\\/\\/[^"]+)"/,
-            /"url"\s*:\s*"(https?:\\/\\/[^"]+\.mp4[^"]*)"/,
-            /"play_url"\s*:\s*"(https?:\\/\\/[^"]+)"/,
-            /"src"\s*:\s*"(https?:\\/\\/[^"]+\.mp4[^"]*)"/,
+            /"dlink"\s*:\s*"(https?:\/\/[^"]+)"/,
+            /"url"\s*:\s*"(https?:\/\/[^"]+\.mp4[^"]*)"/,
+            /"play_url"\s*:\s*"(https?:\/\/[^"]+)"/,
+            /"src"\s*:\s*"(https?:\/\/[^"]+\.mp4[^"]*)"/,
           ];
           for(const pat of patterns){
             const m = txt.match(pat);
