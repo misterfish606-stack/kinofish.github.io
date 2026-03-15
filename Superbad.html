@@ -333,19 +333,66 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
     // === ЗАПУСК ===
     // Попытка 1 отключена — возвращала меню вместо видео
 
-    // 2. Iframe через прокси
-    setStatus("Попытка 2: iframe через прокси...");
-    setProgress(33);
+    // 2. Попытка вытащить стриминговый URL через внутренний API TeraBox
+    setStatus("Попытка 2: ищем стриминговый URL через API...");
+    setProgress(25);
+
+    const API_URLS = [
+      "https://www.terabox.com/api/shorturlinfo?app_id=250528&web=1&channel=dubox&clienttype=0&path=%2Fmovie.mp4",
+      "https://www.terabox.com/api/filemetas?app_id=250528&web=1&path=%2Fmovie.mp4&dlink=1",
+    ];
+
+    let streamUrl = null;
+    for(const api of API_URLS){
+      for(const proxy of PROXIES){
+        try{
+          const r = await fetch(proxy + encodeURIComponent(api), {signal: AbortSignal.timeout(6000)});
+          if(!r.ok) continue;
+          const txt = await r.text();
+          // ищем dlink или urls в ответе API
+          const patterns = [
+            /"dlink"\s*:\s*"(https?:\\/\\/[^"]+)"/,
+            /"url"\s*:\s*"(https?:\\/\\/[^"]+\.mp4[^"]*)"/,
+            /"play_url"\s*:\s*"(https?:\\/\\/[^"]+)"/,
+            /"src"\s*:\s*"(https?:\\/\\/[^"]+\.mp4[^"]*)"/,
+          ];
+          for(const pat of patterns){
+            const m = txt.match(pat);
+            if(m && m[1]){
+              streamUrl = m[1].replace(/\\/g,"");
+              break;
+            }
+          }
+          if(streamUrl) break;
+        }catch(e){ continue; }
+      }
+      if(streamUrl) break;
+    }
+
+    if(streamUrl){
+      setProgress(90);
+      setStatus("Нашли стрим! Загружаем...");
+      video.src = streamUrl;
+      video.style.display = "block";
+      status.style.display = "none";
+      wrap.style.minHeight = "auto";
+      setProgress(100);
+      return;
+    }
+
+    // 3. Iframe через allorigins прокси
+    setStatus("Попытка 3: iframe через прокси...");
+    setProgress(50);
     const proxyOk = await tryIframeProxy();
     if(proxyOk){ setProgress(100); return; }
 
-    // 3. Прямой iframe
-    setStatus("Попытка 3: прямой iframe...");
-    setProgress(66);
+    // 4. Прямой iframe
+    setStatus("Попытка 4: прямой iframe...");
+    setProgress(75);
     const directOk = await tryDirectIframe();
     if(directOk){ setProgress(100); return; }
 
-    // 4. Всё провалилось — показываем кнопку
+    // 5. Всё провалилось — показываем кнопку
     setProgress(100);
     status.style.display = "none";
     iframe.style.display = "none";
