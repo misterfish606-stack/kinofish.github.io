@@ -282,8 +282,7 @@ async function saveReply(){const t=document.getElementById("modalText").value.tr
 function openReport(){document.getElementById("reportModal").classList.add("open")}
 function closeReport(){document.getElementById("reportModal").classList.remove("open");document.getElementById("reportSentMsg").style.display="none";document.getElementById("reportText").value="";document.getElementById("reportName").value=""}
 async function sendReport(){const name=document.getElementById("reportName").value.trim()||"Аноним";const text=document.getElementById("reportText").value.trim();if(!text)return alert("Опиши проблему!");const btn=document.querySelector("#reportModal .btn-red");btn.innerText="Отправка...";btn.disabled=true;try{await emailjs.send("service_m2itd3q","template_jvqfkhr",{from_name:name,message:text,page:"Я снова я и Ирэн (Me_myself_irene_2.html)"});document.getElementById("reportSentMsg").style.display="block";btn.innerText="Отправлено!"}catch(e){alert("Ошибка: "+JSON.stringify(e));btn.innerText="Отправить сообщение";btn.disabled=false}}
-window.onload=async()=>{const s=localStorage.getItem("nickname");if(s){currentUser=s;document.getElementById("loginStatus").innerText="Вы вошли как "+currentUser  renderSmartRecs("Me Myself and Irene","smartRecs");
-};loadRating();initViews()};
+window.onload=async()=>{const s=localStorage.getItem("nickname");if(s){currentUser=s;document.getElementById("loginStatus").innerText="Вы вошли как "+currentUser};loadRating();initViews();renderSmartRecs("Me Myself and Irene","smartRecs")};
 </script>
 </body>
 </html>
