@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Мачо и Ботан — Fish Cinema</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#c9a84c;--gold-light:#e8cc80;--gold-dim:#8a7040;--cream:#e8dcc8;--cream-dim:#c4aa88;--bg:#16120c;--bg2:#1e1810;--bg3:#262014;--red:#7a2020;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body::before{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.4;}
+body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--cream);min-height:100vh;overflow-x:hidden;}
+.projector-beam{position:fixed;top:0;left:50%;transform:translateX(-50%);width:0;border-left:180px solid transparent;border-right:180px solid transparent;border-top:100vh solid rgba(255,240,180,0.018);pointer-events:none;z-index:0;animation:beam-flicker 9s infinite;}
+@keyframes beam-flicker{0%,100%{opacity:1}91%{opacity:1}92%{opacity:0.4}93%{opacity:1}96%{opacity:0.7}97%{opacity:1}}
+.filmstrip{width:100%;height:34px;background:var(--bg2);display:flex;align-items:center;overflow:hidden;border-bottom:2px solid #1a1208;position:relative;z-index:2;}
+.filmstrip-holes{display:flex;align-items:center;animation:strip-scroll 14s linear infinite;white-space:nowrap;}
+.filmstrip-hole{width:19px;height:13px;border:2px solid #2a2010;border-radius:3px;margin:0 15px;flex-shrink:0;background:#060402;}
+@keyframes strip-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.top-nav{background:var(--bg2);border-bottom:2px solid var(--gold-dim);display:flex;align-items:center;padding:0;position:sticky;top:0;z-index:200;box-shadow:0 4px 20px rgba(0,0,0,0.7);}
+.back-btn{font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:0.18em;color:var(--cream-dim);background:none;border:none;border-right:1px solid var(--gold-dim);padding:14px 24px;text-decoration:none;transition:0.2s;display:flex;align-items:center;gap:8px;}
+.back-btn:hover{color:var(--gold);background:rgba(212,175,55,0.05);}
+.nav-title{font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);font-size:1rem;padding:14px 24px;}
+.nav-spacer{flex:1;}
+.nav-meta{font-family:'Bebas Neue',sans-serif;font-size:0.75rem;letter-spacing:0.2em;color:var(--gold-dim);padding:14px 24px;border-left:1px solid rgba(212,175,55,0.15);}
+.report-btn{font-family:'Bebas Neue',sans-serif;font-size:0.78rem;letter-spacing:0.14em;color:var(--cream-dim);background:rgba(122,32,32,0.18);border:1px solid rgba(122,32,32,0.5);border-radius:2px;padding:8px 16px;margin-right:16px;cursor:pointer;transition:0.25s;display:flex;align-items:center;gap:7px;}
+.report-btn:hover{background:rgba(122,32,32,0.38);border-color:var(--red);color:var(--gold-light);}
+.hero{position:relative;min-height:520px;display:flex;align-items:flex-end;overflow:hidden;z-index:1;}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center top;filter:sepia(40%) brightness(0.35) contrast(1.1);transform:scale(1.04);animation:hero-zoom 20s ease-in-out infinite alternate;}
+@keyframes hero-zoom{from{transform:scale(1.04)}to{transform:scale(1.1)}}
+.hero-gradient{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,7,5,0.2) 0%,rgba(10,7,5,0.1) 30%,rgba(10,7,5,0.7) 65%,rgba(10,7,5,0.98) 100%);}
+.hero-gradient-left{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,7,5,0.85) 0%,transparent 50%);}
+.hero-content{position:relative;z-index:2;padding:40px 50px;display:flex;gap:40px;align-items:flex-end;width:100%;}
+.poster-wrap{flex-shrink:0;position:relative;animation:poster-in 0.8s ease both;}
+@keyframes poster-in{from{opacity:0;transform:translateY(30px) rotate(-2deg)}to{opacity:1;transform:translateY(0)}}
+.poster-wrap img{width:260px;border:4px solid var(--gold-dim);box-shadow:0 0 0 1px rgba(212,175,55,0.2),-8px 8px 40px rgba(0,0,0,0.8);display:block;filter:sepia(8%) contrast(1.05);transition:0.4s;}
+.poster-wrap img:hover{border-color:var(--gold);filter:sepia(0%);}
+.poster-corner{position:absolute;width:16px;height:16px;border-color:var(--gold);border-style:solid;}
+.poster-corner.tl{top:-4px;left:-4px;border-width:2px 0 0 2px;}.poster-corner.tr{top:-4px;right:-4px;border-width:2px 2px 0 0;}
+.poster-corner.bl{bottom:-4px;left:-4px;border-width:0 0 2px 2px;}.poster-corner.br{bottom:-4px;right:-4px;border-width:0 2px 2px 0;}
+.hero-info{flex:1;animation:info-in 0.8s ease 0.2s both;}
+@keyframes info-in{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+.hero-genre{font-family:'Crimson Text',serif;font-size:0.9rem;letter-spacing:0.2em;font-style:italic;color:var(--cream-dim);margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.8rem);font-weight:900;font-style:italic;color:var(--gold);text-shadow:0 0 40px rgba(212,175,55,0.4),3px 4px 0 rgba(0,0,0,0.6);line-height:1.05;margin-bottom:6px;animation:title-glow 4s ease-in-out infinite alternate;}
+@keyframes title-glow{from{text-shadow:0 0 25px rgba(212,175,55,0.3),3px 4px 0 rgba(0,0,0,0.6)}to{text-shadow:0 0 55px rgba(212,175,55,0.6),3px 4px 0 rgba(0,0,0,0.6)}}
+.hero-orig{font-family:'Crimson Text',serif;font-style:italic;color:var(--cream-dim);font-size:1.1rem;margin-bottom:18px;}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;}
+.meta-tag{font-family:'Bebas Neue',sans-serif;font-size:0.78rem;letter-spacing:0.12em;padding:4px 12px;border-radius:2px;border:1px solid var(--gold-dim);color:var(--gold);background:rgba(201,168,76,0.08);display:inline-block;transition:0.2s;}
+.meta-tag:hover{color:var(--gold-light);background:rgba(201,168,76,0.16);}
+.ratings{display:flex;gap:16px;align-items:center;margin-bottom:20px;}
+.rating-badge{text-align:center;background:rgba(212,175,55,0.08);border:1px solid var(--gold-dim);padding:8px 16px;border-radius:2px;}
+.rating-badge .label{font-family:'Bebas Neue',sans-serif;font-size:0.65rem;letter-spacing:0.2em;color:var(--gold-dim);display:block;}
+.rating-badge .value{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--gold);display:block;}
+.user-rating-wrap{margin-bottom:8px;}
+.user-rating-wrap label{font-family:'Bebas Neue',sans-serif;font-size:0.72rem;letter-spacing:0.2em;color:var(--gold);display:inline-block;margin-bottom:6px;}
+.stars{display:flex;gap:4px;}
+.star{font-size:1.6rem;cursor:pointer;color:#3a2c14;transition:color 0.15s,transform 0.15s;line-height:1;}
+.star:hover{color:var(--gold);transform:scale(1.2);}
+.rating-result{font-family:'Crimson Text',serif;font-style:italic;color:var(--cream-dim);font-size:0.9rem;margin-top:6px;}
+.page-content{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:50px 50px 60px;}
+.section-divider{display:flex;align-items:center;gap:16px;margin:40px 0 24px;}
+.section-divider::before,.section-divider::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
+.section-label{font-family:'Bebas Neue',sans-serif;font-size:0.78rem;letter-spacing:0.3em;color:var(--gold);white-space:nowrap;}
+.description-block{background:rgba(28,22,14,0.45);border:1px solid rgba(180,150,80,0.1);border-left:3px solid rgba(180,150,80,0.3);padding:26px 30px;border-radius:3px;font-size:1.12rem;line-height:1.9;color:var(--cream);position:relative;}
+.description-block::before{content:"\201C";font-family:'Playfair Display',serif;font-size:5rem;color:var(--gold-dim);position:absolute;top:-10px;left:16px;line-height:1;opacity:0.4;}
+.details-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+.detail-item{background:rgba(30,24,16,0.5);border:1px solid rgba(180,150,80,0.1);padding:16px 20px;border-radius:3px;}
+.detail-label{font-family:'Crimson Text',serif;font-size:0.8rem;color:var(--gold-dim);display:block;margin-bottom:5px;font-style:italic;}
+.detail-value{font-family:'Crimson Text',serif;font-size:1.05rem;color:var(--gold);}
+.trailer-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border:2px solid var(--gold-dim);}
+.trailer-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+.rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,200px));gap:18px;margin-bottom:36px;}
+.rec-card{position:relative;cursor:pointer;text-decoration:none;color:inherit;display:block;}
+.rec-card-inner{position:relative;overflow:hidden;border:2px solid var(--gold-dim);transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;}
+.rec-card:hover .rec-card-inner{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 8px 30px rgba(0,0,0,0.85);transform:translateY(-6px) scale(1.02);}
+.rec-card-inner img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;filter:sepia(12%) brightness(0.92);transition:filter 0.3s;}
+.rec-card:hover .rec-card-inner img{filter:sepia(0%) brightness(1.05);}
+.rec-card-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(10,7,5,0.95) 100%);opacity:0;transition:opacity 0.3s;display:flex;flex-direction:column;justify-content:flex-end;padding:12px;}
+.rec-card:hover .rec-card-overlay{opacity:1;}
+.rec-card-overlay-title{font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);font-size:0.9rem;line-height:1.2;}
+.rec-card-overlay-meta{font-family:'Bebas Neue',sans-serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--cream-dim);margin-top:4px;}
+.rec-card-title{font-family:'Crimson Text',serif;font-size:0.95rem;color:var(--cream-dim);margin-top:8px;text-align:center;padding:0 4px;}
+.rec-card-year{font-family:'Bebas Neue',sans-serif;font-size:0.68rem;letter-spacing:0.15em;color:var(--gold-dim);text-align:center;margin-top:2px;}
+.rec-category-label{font-family:'Bebas Neue',sans-serif;font-size:0.72rem;letter-spacing:0.28em;color:var(--gold-dim);margin-bottom:16px;}
+.login-block{display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
+.login-block input{background:rgba(255,255,255,0.04);border:1px solid var(--gold-dim);border-radius:2px;color:var(--cream);font-family:'Crimson Text',serif;font-size:0.95rem;padding:8px 14px;outline:none;}
+.login-block input:focus{border-color:var(--gold);}
+.btn-gold{font-family:'Bebas Neue',sans-serif;letter-spacing:0.15em;background:linear-gradient(135deg,var(--gold-dim),var(--gold));color:var(--bg);border:none;padding:9px 24px;border-radius:2px;cursor:pointer;font-size:0.9rem;transition:0.2s;}
+.btn-gold:hover{box-shadow:0 0 14px rgba(212,175,55,0.4);}
+.login-status{font-family:'Crimson Text',serif;font-style:italic;color:var(--gold);font-size:0.9rem;}
+.login-error{font-family:'Crimson Text',serif;font-style:italic;color:#c0392b;font-size:0.9rem;}
+#comments{margin-bottom:20px;}
+.comment{background:rgba(30,24,16,0.5);border:1px solid rgba(180,150,80,0.1);border-radius:3px;padding:16px 20px;margin-bottom:12px;}
+.comment.reply{margin-left:30px;border-left:2px solid var(--gold-dim);}
+.comment-header{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.comment-user{font-family:'Bebas Neue',sans-serif;letter-spacing:0.1em;color:var(--gold);font-size:0.9rem;}
+.comment-time{font-family:'Crimson Text',serif;font-style:italic;color:var(--gold-dim);font-size:0.8rem;}
+.comment-text{font-family:'Crimson Text',serif;font-size:1rem;color:var(--cream);line-height:1.6;}
+.comment-actions{display:flex;gap:10px;margin-top:10px;}
+.btn-action{font-family:'Bebas Neue',sans-serif;font-size:0.72rem;letter-spacing:0.1em;background:none;border:1px solid rgba(180,150,80,0.15);color:var(--cream-dim);padding:3px 10px;border-radius:2px;cursor:pointer;transition:0.2s;}
+.btn-action:hover{border-color:var(--gold);color:var(--gold);}
+.btn-action.delete:hover{border-color:#c0392b;color:#c0392b;}
+.comment-input-wrap textarea{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--gold-dim);border-radius:2px;color:var(--cream);font-family:'Crimson Text',serif;font-size:1rem;padding:12px 16px;outline:none;resize:vertical;min-height:90px;}
+.comment-input-wrap textarea:focus{border-color:var(--gold);}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;display:none;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:var(--bg2);border:1px solid var(--gold-dim);border-radius:4px;padding:30px;width:90%;max-width:480px;position:relative;}
+.modal-box h3{font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);margin-bottom:16px;}
+.modal-box textarea,.modal-box input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--gold-dim);border-radius:2px;color:var(--cream);font-family:'Crimson Text',serif;font-size:1rem;padding:10px 14px;outline:none;margin-bottom:12px;resize:vertical;}
+.modal-close{position:absolute;top:12px;right:14px;background:none;border:none;color:var(--gold-dim);font-size:1.2rem;cursor:pointer;}
+.modal-close:hover{color:var(--gold);}
+.btn-red{font-family:'Bebas Neue',sans-serif;letter-spacing:0.15em;background:linear-gradient(135deg,#6b1010,var(--red));color:var(--gold-light);border:none;padding:9px 24px;border-radius:2px;cursor:pointer;font-size:0.9rem;}
+.report-subtitle{font-family:'Crimson Text',serif;font-style:italic;color:var(--cream-dim);font-size:0.9rem;margin-bottom:14px;}
+#reportSentMsg{display:none;color:var(--gold);font-family:'Crimson Text',serif;font-style:italic;margin-top:10px;}
+.filmstrip-bottom{border-top:2px solid #1a1208;border-bottom:none;margin-top:60px;}
+@media(max-width:700px){.hero-content{flex-direction:column;padding:20px;gap:20px;}.poster-wrap img{width:160px;}.page-content{padding:24px 16px 40px;}}
+</style>
+</head>
+<body>
+<div class="projector-beam"></div>
+<div class="filmstrip"><div class="filmstrip-holes" id="filmstripTop"></div></div>
+<nav class="top-nav">
+  <a href="index.html" class="back-btn">⬅ В меню</a>
+  <span class="nav-title">Fish Cinema</span>
+  <span class="nav-spacer"></span>
+  <button class="report-btn" onclick="openReport()"><span>⚠</span> Проблемы с сайтом? Пиши сюда</button>
+  <span class="nav-meta">◆ &nbsp; Боевик / Комедия · 2012 &nbsp; ◆</span>
+</nav>
+<section class="hero">
+  <div class="hero-bg" style="background-image:url('https://kinogo.online/uploads/posts/2021-02/1614406804-1614406804.jpg')"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-gradient-left"></div>
+  <div class="hero-content">
+    <div class="poster-wrap">
+      <img src="https://kinogo.online/uploads/posts/2021-02/1614406804-1614406804.jpg" alt="Мачо и Ботан">
+      <div class="poster-corner tl"></div><div class="poster-corner tr"></div>
+      <div class="poster-corner bl"></div><div class="poster-corner br"></div>
+    </div>
+    <div class="hero-info">
+      <div class="hero-genre">◆ &nbsp; БОЕВИК · КОМЕДИЯ &nbsp; ◆</div>
+      <h1 class="hero-title">Мачо и Ботан</h1>
+      <div class="hero-orig">21 Jump Street &nbsp;·&nbsp; 2012</div>
+      <div class="hero-meta">
+        <span class="meta-tag">2012</span>
+        <span class="meta-tag">США</span>
+        <span class="meta-tag">Фил Лорд, Кристофер Миллер</span>
+        <span class="meta-tag">👁 <span id="views">0</span> просмотров</span>
+      </div>
+      <div class="ratings">
+        <div class="rating-badge"><span class="label">IMDb</span><span class="value">7.2</span></div>
+        <div class="rating-badge"><span class="label">Кинопоиск</span><span class="value">7.5</span></div>
+        <div class="rating-badge"><span class="label">Fish Cinema</span><span class="value" id="avgRating">—</span><span class="label"><span id="votesCount">0</span> голосов</span></div>
+      </div>
+      <div class="user-rating-wrap">
+        <label>ВАША ОЦЕНКА</label>
+        <div class="stars" id="starsRow">
+          <span class="star" data-value="1">★</span><span class="star" data-value="2">★</span>
+          <span class="star" data-value="3">★</span><span class="star" data-value="4">★</span>
+          <span class="star" data-value="5">★</span>
+        </div>
+        <div class="rating-result" id="ratingResult"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="page-content">
+  <div class="section-divider"><span class="section-label">✦ Описание фильма ✦</span></div>
+  <div class="description-block">Два неудачливых полицейских внедряются в старшую школу под прикрытием, чтобы раскрыть наркоторговлю. Оказывается, за 10 лет школа сильно изменилась.</div>
+  <div class="section-divider"><span class="section-label">✦ О фильме ✦</span></div>
+  <div class="details-grid">
+    <div class="detail-item"><span class="detail-label">Оригинальное название</span><span class="detail-value">21 Jump Street</span></div>
+    <div class="detail-item"><span class="detail-label">Режиссёр</span><span class="detail-value">Фил Лорд, Кристофер Миллер</span></div>
+    <div class="detail-item"><span class="detail-label">В главных ролях</span><span class="detail-value">Джона Хилл, Ченнинг Татум</span></div>
+    <div class="detail-item"><span class="detail-label">Страна</span><span class="detail-value">США</span></div>
+    <div class="detail-item"><span class="detail-label">Год выпуска</span><span class="detail-value">2012</span></div>
+    <div class="detail-item"><span class="detail-label">Жанр</span><span class="detail-value">Боевик / Комедия</span></div>
+    <div class="detail-item"><span class="detail-label">Длительность</span><span class="detail-value">109 минут</span></div>
+    <div class="detail-item"><span class="detail-label">Награды</span><span class="detail-value">—</span></div>
+  </div>
+  <div class="section-divider"><span class="section-label">✦ Смотреть фильм ✦</span></div>
+  <div class="trailer-wrap">
+    <iframe src="https://drive.google.com/file/d/1-5NzSMNzDGbMtQ7fGl11Z9WgJD61JKP2/preview" allow="autoplay" allowfullscreen></iframe>
+  </div>
+  <div class="section-divider"><span class="section-label">✦ Смотрите также ✦</span></div>
+  <div class="rec-category-label">◆ &nbsp; Похожие фильмы</div>
+  <div class="rec-grid" id="smartRecs"></div>
+  <div class="section-divider"><span class="section-label">✦ Вход ✦</span></div>
+  <div class="login-block">
+    <input type="text" id="nickname" placeholder="Ваш ник" oninput="checkNick()">
+    <input type="password" id="adminPassLoginField" placeholder="Пароль" style="display:none">
+    <button class="btn-gold" onclick="login()">Войти</button>
+    <span class="login-status" id="loginStatus"></span>
+    <span class="login-error" id="loginError"></span>
+  </div>
+  <div class="section-divider"><span class="section-label">✦ Комментарии ✦</span></div>
+  <div id="comments"></div>
+  <div class="comment-input-wrap">
+    <textarea id="commentInput" placeholder="Поделитесь впечатлениями о фильме..."></textarea>
+    <div style="margin-top:10px"><button class="btn-gold" onclick="addComment()">Оставить комментарий</button></div>
+  </div>
+</div>
+<div class="filmstrip filmstrip-bottom"><div class="filmstrip-holes" id="filmstripBottom"></div></div>
+<div class="modal-overlay" id="replyModal">
+  <div class="modal-box"><button class="modal-close" onclick="closeModal()">✖</button>
+  <h3>Ответить на комментарий</h3>
+  <textarea id="modalText" placeholder="Ваш ответ..."></textarea>
+  <div style="margin-top:12px"><button class="btn-gold" onclick="saveReply()">Отправить ответ</button></div></div>
+</div>
+<div class="modal-overlay" id="reportModal">
+  <div class="modal-box"><button class="modal-close" onclick="closeReport()">✖</button>
+  <h3>⚠ Проблема с сайтом?</h3><p class="report-subtitle">Опиши проблему — мы разберёмся как можно скорее.</p>
+  <input type="text" id="reportName" placeholder="Ваш ник (необязательно)">
+  <textarea id="reportText" placeholder="Опиши проблему подробно..."></textarea>
+  <button class="btn-red" onclick="sendReport()">📨 Отправить сообщение</button>
+  <div id="reportSentMsg">✅ Сообщение отправлено! Спасибо.</div></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init("xQFu4rTTN_OUgE6zH");</script>
+<script src="movies_data.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script>
+function buildStrip(id){const el=document.getElementById(id);let h="";for(let i=0;i<80;i++)h+='<div class="filmstrip-hole"></div>';el.innerHTML=h+h;}
+buildStrip("filmstripTop");buildStrip("filmstripBottom");
+firebase.initializeApp({apiKey:"AIzaSyCTr1vgcuSEn_2Ebh2vC3k7sNYzvMoYlBo",authDomain:"kino-project-bf21c.firebaseapp.com",projectId:"kino-project-bf21c"});
+const db=firebase.firestore();
+const movieKey="21 Jump Street 2012";
+const movieRef=db.collection("movies").doc(movieKey);
+const commentsRef=movieRef.collection("comments");
+const votesRef=movieRef.collection("votes");
+const statsRef=movieRef.collection("stats");
+const usersRef=db.collection("users");
+let currentUser=null,replyTo=null,votingInProgress={};
+const PROTECTED_NICKS=["Mister_fish","Mister_fish606","fish606"];
+const ADMIN_PASS="xhidid";
+function checkNick(){const nick=document.getElementById("nickname").value.trim();const pf=document.getElementById("adminPassLoginField");if(PROTECTED_NICKS.includes(nick)){pf.style.display="inline-block";document.getElementById("loginError").innerText="⚠ Ник администратора";}else{pf.style.display="none";document.getElementById("loginError").innerText="";}}
+async function login(){const nick=document.getElementById("nickname").value.trim();if(!nick)return alert("Введите ник!");if(PROTECTED_NICKS.includes(nick)){const pass=document.getElementById("adminPassLoginField").value;if(pass!==ADMIN_PASS)return document.getElementById("loginError").innerText="❌ Неверный пароль!";localStorage.setItem("nickname",nick);currentUser=nick;document.getElementById("loginStatus").innerText="👑 Добро пожаловать, "+nick+"!";return;}const saved=localStorage.getItem("nickname");if(saved){if(saved!==nick)return alert("Ваш ник уже: "+saved);currentUser=saved;document.getElementById("loginStatus").innerText="✓ Вы вошли как "+currentUser;return;}const doc=await usersRef.doc(nick).get();if(doc.exists)return alert("Ник '"+nick+"' уже занят!");await usersRef.doc(nick).set({createdAt:firebase.firestore.FieldValue.serverTimestamp(),uid:Date.now()+"_"+Math.random()});localStorage.setItem("nickname",nick);currentUser=nick;document.getElementById("loginStatus").innerText="✓ Зарегистрирован как "+currentUser;}
+function initViews(){const ref=statsRef.doc("views");ref.onSnapshot(doc=>{if(doc.exists)document.getElementById("views").innerText=doc.data().count||0;});if(!localStorage.getItem("viewed_"+movieKey)){ref.set({count:firebase.firestore.FieldValue.increment(1)},{merge:true});localStorage.setItem("viewed_"+movieKey,"yes");}}
+const ratingRef=statsRef.doc("rating");
+async function loadRating(){const snap=await ratingRef.get();if(!snap.exists)await ratingRef.set({totalScore:0,totalVotes:0});const data=(await ratingRef.get()).data();document.getElementById("avgRating").innerText=data.totalVotes?(data.totalScore/data.totalVotes).toFixed(1):"—";document.getElementById("votesCount").innerText=data.totalVotes;}
+const starsRow=document.getElementById("starsRow");
+starsRow.querySelectorAll(".star").forEach(star=>{star.addEventListener("mouseover",()=>{const v=parseInt(star.dataset.value);starsRow.querySelectorAll(".star").forEach(s=>{s.style.color=parseInt(s.dataset.value)<=v?"var(--gold)":"#3a2c14";});});star.addEventListener("mouseleave",()=>{starsRow.querySelectorAll(".star").forEach(s=>s.style.color="#3a2c14");});star.onclick=async()=>{if(!currentUser)return alert("Войдите чтобы оценить!");const voteKey="rated_"+movieKey+"_"+currentUser;if(localStorage.getItem(voteKey))return alert("Вы уже оценили!");const value=parseInt(star.dataset.value);await ratingRef.update({totalScore:firebase.firestore.FieldValue.increment(value),totalVotes:firebase.firestore.FieldValue.increment(1)});localStorage.setItem(voteKey,"yes");document.getElementById("ratingResult").innerText="Вы поставили "+value+" ★";starsRow.querySelectorAll(".star").forEach((s,i)=>{s.style.color=i<value?"var(--gold)":"#3a2c14";});loadRating();}});
+commentsRef.orderBy("created").onSnapshot(snapshot=>{const all={};snapshot.forEach(doc=>{all[doc.id]={id:doc.id,...doc.data()}});document.getElementById("comments").innerHTML="";Object.values(all).filter(c=>!c.parent).forEach(c=>renderComment(c,all));});
+function renderComment(comment,all,parentEl=null){const div=document.createElement("div");div.className="comment"+(comment.parent?" reply":"");const time=comment.created?new Date(comment.created).toLocaleDateString("ru-RU",{day:"2-digit",month:"short",year:"numeric"}):"";const isAdmin=["Mister_fish","Mister_fish606","fish606"].includes(comment.user);const adminBadge=isAdmin?'<span style="color:#c0392b;font-family:Bebas Neue,sans-serif;font-size:0.72rem;letter-spacing:0.12em;margin-left:6px;border:1px solid rgba(192,57,43,0.4);padding:1px 7px;border-radius:2px;background:rgba(192,57,43,0.1);">Администратор</span>':"";div.innerHTML='<div class="comment-header"><span class="comment-user">'+comment.user+'</span>'+adminBadge+'<span class="comment-time">'+time+'</span></div><div class="comment-text">'+comment.text+'</div><div class="comment-actions"><button class="btn-action" onclick="likeComment(\''+comment.id+'\')">👍 '+(comment.likes||0)+'</button><button class="btn-action" onclick="dislikeComment(\''+comment.id+'\')">👎 '+(comment.dislikes||0)+'</button><button class="btn-action" onclick="openReply(\''+comment.id+'\')">↩ Ответить</button>'+(currentUser===comment.user?'<button class="btn-action delete" onclick="deleteComment(\''+comment.id+'\')">✕ Удалить</button>':'')+'</div>';(parentEl||document.getElementById("comments")).appendChild(div);Object.values(all).filter(c=>c.parent===comment.id).forEach(child=>renderComment(child,all,div));}
+async function addComment(parent=null,text=null){if(!currentUser)return alert("Войдите!");const val=text||document.getElementById("commentInput").value.trim();if(!val)return;await commentsRef.add({user:currentUser,text:val,parent:parent||null,likes:0,dislikes:0,created:Date.now()});if(!parent)document.getElementById("commentInput").value="";}
+async function likeComment(id){if(!currentUser)return alert("Войдите!");if(votingInProgress[id])return;votingInProgress[id]=true;const vd=votesRef.doc(currentUser+"_"+id);const vs=await vd.get();if(vs.exists){const t=vs.data().type;if(t==="like"){await commentsRef.doc(id).update({likes:firebase.firestore.FieldValue.increment(-1)});await vd.delete();}else if(t==="dislike"){await commentsRef.doc(id).update({dislikes:firebase.firestore.FieldValue.increment(-1),likes:firebase.firestore.FieldValue.increment(1)});await vd.update({type:"like"});}}else{await commentsRef.doc(id).update({likes:firebase.firestore.FieldValue.increment(1)});await vd.set({type:"like"});}votingInProgress[id]=false;}
+async function dislikeComment(id){if(!currentUser)return alert("Войдите!");if(votingInProgress[id])return;votingInProgress[id]=true;const vd=votesRef.doc(currentUser+"_"+id);const vs=await vd.get();if(vs.exists){const t=vs.data().type;if(t==="dislike"){await commentsRef.doc(id).update({dislikes:firebase.firestore.FieldValue.increment(-1)});await vd.delete();}else if(t==="like"){await commentsRef.doc(id).update({likes:firebase.firestore.FieldValue.increment(-1),dislikes:firebase.firestore.FieldValue.increment(1)});await vd.update({type:"dislike"});}}else{await commentsRef.doc(id).update({dislikes:firebase.firestore.FieldValue.increment(1)});await vd.set({type:"dislike"});}votingInProgress[id]=false;}
+async function deleteComment(id){const doc=await commentsRef.doc(id).get();if(!doc.exists||doc.data().user!==currentUser)return alert("Нельзя удалить!");await commentsRef.doc(id).delete();}
+function openReply(id){replyTo=id;document.getElementById("replyModal").classList.add("open");}
+function closeModal(){document.getElementById("replyModal").classList.remove("open");}
+async function saveReply(){const t=document.getElementById("modalText").value.trim();if(t)await addComment(replyTo,t);document.getElementById("modalText").value="";closeModal();}
+function openReport(){document.getElementById("reportModal").classList.add("open");}
+function closeReport(){document.getElementById("reportModal").classList.remove("open");document.getElementById("reportSentMsg").style.display="none";document.getElementById("reportText").value="";document.getElementById("reportName").value="";}
+async function sendReport(){const name=document.getElementById("reportName").value.trim()||"Аноним";const text=document.getElementById("reportText").value.trim();if(!text)return alert("Опиши проблему!");const sendBtn=document.querySelector("#reportModal .btn-red");sendBtn.innerText="Отправка...";sendBtn.disabled=true;try{await emailjs.send("service_m2itd3q","template_jvqfkhr",{from_name:name,message:text,page:"Мачо и Ботан"});document.getElementById("reportSentMsg").style.display="block";sendBtn.innerText="✅ Отправлено!";}catch(err){alert("Ошибка: "+JSON.stringify(err));sendBtn.innerText="📨 Отправить сообщение";sendBtn.disabled=false;}}
+window.onload=async()=>{const saved=localStorage.getItem("nickname");if(saved){currentUser=saved;document.getElementById("loginStatus").innerText="✓ Вы вошли как "+currentUser;}loadRating();initViews();renderSmartRecs("21 Jump Street 2012","smartRecs");};
+</script>
+</body>
+</html>
