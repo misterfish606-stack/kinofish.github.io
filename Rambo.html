@@ -24,7 +24,7 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 .report-btn{font-family:'Bebas Neue',sans-serif;font-size:0.78rem;letter-spacing:0.14em;color:var(--cream-dim);background:rgba(122,32,32,0.18);border:1px solid rgba(122,32,32,0.5);border-radius:2px;padding:8px 16px;margin-right:16px;cursor:pointer;transition:0.25s;display:flex;align-items:center;gap:7px;}
 .report-btn:hover{background:rgba(122,32,32,0.38);border-color:var(--red);color:var(--gold-light);}
 .hero{position:relative;min-height:520px;display:flex;align-items:flex-end;overflow:hidden;z-index:1;}
-.hero-bg{position:absolute;inset:0;background-image:url('https://kinogo.ec/uploads/posts/2020-03/1585442933-1829798561.jpg');background-size:cover;background-position:center top;filter:sepia(40%) brightness(0.35) contrast(1.1);transform:scale(1.04);animation:hero-zoom 20s ease-in-out infinite alternate;}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center top;filter:sepia(40%) brightness(0.35) contrast(1.1);transform:scale(1.04);animation:hero-zoom 20s ease-in-out infinite alternate;}
 @keyframes hero-zoom{from{transform:scale(1.04)}to{transform:scale(1.1)}}
 .hero-gradient{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,7,5,0.2) 0%,rgba(10,7,5,0.1) 30%,rgba(10,7,5,0.7) 65%,rgba(10,7,5,0.98) 100%);}
 .hero-gradient-left{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,7,5,0.85) 0%,transparent 50%);}
@@ -70,19 +70,12 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 .detail-value:hover{color:var(--gold-light);}
 .trailer-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border:2px solid var(--gold-dim);}
 .trailer-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
-.rec-header{display:flex;align-items:center;gap:20px;margin-bottom:28px;}
-.rec-header::before,.rec-header::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
-.rec-title-wrap{text-align:center;flex-shrink:0;}
-.rec-title-ornament{display:block;font-family:'Bebas Neue',sans-serif;font-size:0.62rem;letter-spacing:0.45em;color:var(--gold-dim);margin-bottom:4px;}
-.rec-title{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:900;font-style:italic;color:var(--gold);white-space:nowrap;animation:rec-glow 5s ease-in-out infinite alternate;}
-@keyframes rec-glow{from{text-shadow:0 0 18px rgba(201,168,76,0.25)}to{text-shadow:0 0 45px rgba(201,168,76,0.55)}}
-.rec-title-stars{display:block;font-size:0.6rem;letter-spacing:0.3em;color:var(--gold-dim);margin-top:4px;}
 .rec-category-label{font-family:'Bebas Neue',sans-serif;font-size:0.72rem;letter-spacing:0.28em;color:var(--gold-dim);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
 .rec-category-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(138,112,64,0.4),transparent);}
 .rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,200px));gap:18px;margin-bottom:36px;}
 .rec-card{position:relative;cursor:pointer;text-decoration:none;color:inherit;display:block;animation:rec-card-in 0.5s ease both;}
 @keyframes rec-card-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.rec-card:nth-child(1){animation-delay:0.05s}.rec-card:nth-child(2){animation-delay:0.12s}
+.rec-card:nth-child(1){animation-delay:0.05s}.rec-card:nth-child(2){animation-delay:0.12s}.rec-card:nth-child(3){animation-delay:0.19s}.rec-card:nth-child(4){animation-delay:0.26s}
 .rec-card-inner{position:relative;overflow:hidden;border:2px solid var(--gold-dim);transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;}
 .rec-card:hover .rec-card-inner{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 8px 30px rgba(0,0,0,0.85);transform:translateY(-6px) scale(1.02);}
 .rec-card-inner img{width:100%;aspect-ratio:2/3;object-fit:cover;object-position:center top;display:block;filter:sepia(12%) brightness(0.92);transition:filter 0.3s;}
@@ -92,10 +85,11 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 .rec-card:hover .rec-card-inner::before,.rec-card:hover .rec-card-inner::after{opacity:1;}
 .rec-card-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(8,5,2,0.96) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:8px;opacity:0;transition:opacity 0.3s;}
 .rec-card:hover .rec-card-overlay{opacity:1;}
-.rec-card-overlay-title{font-family:'Playfair Display',serif;font-size:0.8rem;color:var(--gold-light);font-weight:700;}
-.rec-card-overlay-meta{font-size:0.68rem;color:var(--cream-dim);font-style:italic;}
+.rec-card-overlay-title{font-family:'Playfair Display',serif;font-size:0.8rem;color:var(--gold-light);font-weight:700;line-height:1.2;}
+.rec-card-overlay-meta{font-size:0.68rem;color:var(--cream-dim);font-style:italic;margin-top:2px;}
 .rec-badge{position:absolute;top:5px;left:5px;z-index:4;font-family:'Bebas Neue',sans-serif;font-size:0.65rem;letter-spacing:0.1em;padding:2px 7px;border-radius:2px;pointer-events:none;}
-.rec-badge.sequel{background:linear-gradient(135deg,#7a3a00,#c06010);color:#fff;}
+.rec-badge.sequel{background:linear-gradient(135deg,#7a3a00,#c06010);color:#fff;animation:pulse-sequel 2.2s infinite alternate;}
+@keyframes pulse-sequel{from{box-shadow:0 0 5px rgba(200,90,0,0.35)}to{box-shadow:0 0 14px rgba(200,90,0,0.85)}}
 .rec-badge.similar{background:rgba(30,24,14,0.88);border:1px solid var(--gold-dim);color:var(--gold);}
 .rec-card-title{font-family:'Playfair Display',serif;font-size:0.82rem;color:var(--cream);margin-top:7px;text-align:center;line-height:1.3;transition:color 0.2s;word-break:break-word;}
 .rec-card:hover .rec-card-title{color:var(--gold);}
@@ -109,8 +103,9 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 .btn-gold:hover{box-shadow:0 0 16px rgba(212,175,55,0.4);}
 .login-status{font-style:italic;color:var(--cream-dim);font-size:0.9rem;}
 .login-error{color:#c0392b;font-size:0.88rem;}
-.comment{background:rgba(20,14,6,0.7);border:1px solid rgba(212,175,55,0.1);border-left:3px solid var(--gold-dim);padding:16px 18px;margin-bottom:14px;border-radius:2px;}
-.comment.reply{margin-left:30px;border-left-color:#3a3028;}
+.comment{background:rgba(20,14,6,0.7);border:1px solid rgba(212,175,55,0.1);border-left:3px solid var(--gold-dim);padding:16px 18px;margin-bottom:14px;border-radius:2px;animation:comment-in 0.4s ease both;}
+@keyframes comment-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.comment.reply{margin-left:30px;border-left-color:#3a3028;background:rgba(14,10,4,0.6);}
 .comment-header{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
 .comment-user{font-family:'Bebas Neue',sans-serif;letter-spacing:0.1em;color:var(--gold);font-size:0.9rem;}
 .comment-time{font-size:0.78rem;color:var(--cream-dim);font-style:italic;}
@@ -139,12 +134,25 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 ::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px;}
 .filmstrip-bottom{border-top:2px solid #1a1208;margin-top:60px;}
 
-.drive-player-box{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:320px;background:rgba(10,7,5,0.7);border:2px solid var(--gold-dim);}
-.drive-play-btn{display:flex;flex-direction:column;align-items:center;gap:16px;text-decoration:none;padding:40px 60px;border:2px solid var(--gold-dim);border-radius:4px;background:rgba(201,168,76,0.07);transition:0.3s;cursor:pointer;}
-.drive-play-btn:hover{background:rgba(201,168,76,0.18);border-color:var(--gold);box-shadow:0 0 30px rgba(201,168,76,0.3);}
-.play-icon{font-size:4rem;color:var(--gold);line-height:1;}
-.play-text{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.25em;color:var(--gold);}
-.drive-hint{font-family:'Crimson Text',serif;font-style:italic;color:var(--cream-dim);font-size:0.9rem;margin-top:16px;}
+.meta-tag{position:relative;}
+.meta-tag::after{content:"";position:absolute;bottom:0;left:10%;right:10%;height:1px;background:var(--gold);transform:scaleX(0);transition:transform 0.25s ease;}
+.meta-tag:hover::after{transform:scaleX(1);}
+.rating-badge{position:relative;overflow:hidden;}
+.rating-badge::after{content:"";position:absolute;bottom:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform 0.3s ease;}
+.rating-badge:hover::after{transform:scaleX(1);}
+.rating-badge .label{transition:color 0.2s;}
+.rating-badge:hover .label{color:var(--gold);}
+.rating-badge .value{transition:color 0.2s,text-shadow 0.2s;}
+.rating-badge:hover .value{color:var(--gold-light);text-shadow:0 0 18px rgba(201,168,76,0.5);}
+.detail-value{position:relative;}
+.detail-value::after{content:"";position:absolute;bottom:-2px;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--gold-dim),var(--gold),var(--gold-dim));transform:scaleX(0);transform-origin:left;transition:transform 0.3s ease;}
+.detail-item:hover .detail-value::after{transform:scaleX(1);}
+.detail-item:hover .detail-value{color:var(--gold-light);}
+.user-rating-wrap label{display:inline-block;cursor:default;position:relative;transition:color 0.2s;}
+.user-rating-wrap label::after{content:"";position:absolute;bottom:-2px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.25s ease;}
+.user-rating-wrap label:hover{color:var(--gold-light);}
+.user-rating-wrap label:hover::after{transform:scaleX(1);}
+
 </style>
 </head>
 <body>
@@ -158,7 +166,7 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
   <span class="nav-meta">◆ &nbsp; Боевик · 1982 &nbsp; ◆</span>
 </nav>
 <section class="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-bg" style="background-image:url('https://kinogo.ec/uploads/posts/2020-03/1585442933-1829798561.jpg')"></div>
   <div class="hero-gradient"></div>
   <div class="hero-gradient-left"></div>
   <div class="hero-content">
@@ -170,7 +178,7 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
     <div class="hero-info">
       <div class="hero-genre">◆ &nbsp; БОЕВИК &nbsp; ◆</div>
       <h1 class="hero-title">Рэмбо</h1>
-      <div class="hero-orig">First Blood · 1982</div>
+      <div class="hero-orig">First Blood &nbsp;·&nbsp; 1982</div>
       <div class="hero-meta">
         <span class="meta-tag">1982</span>
         <span class="meta-tag">США</span>
@@ -196,7 +204,7 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 </section>
 <div class="page-content">
   <div class="section-divider"><span class="section-label">✦ Описание фильма ✦</span></div>
-  <div class="description-block">2154 год. Богатые живут на роскошной орбитальной станции Элизиум, бедные — на умирающей Земле. Простой рабочий Макс получает смертельную дозу радиации и решается на отчаянный шаг — прорваться на Элизиум, где медицина способна вылечить любую болезнь.</div>
+  <div class="description-block">Джон Рэмбо — ветеран Вьетнама, странствующий в поисках старых товарищей. В маленьком городке его арестовывает шериф. Это роковая ошибка — Рэмбо объявляет войну всему городу, используя навыки, которым его учили убивать.</div>
   <div class="section-divider"><span class="section-label">✦ О фильме ✦</span></div>
   <div class="details-grid">
     <div class="detail-item"><span class="detail-label">Оригинальное название</span><span class="detail-value">First Blood</span></div>
@@ -212,34 +220,12 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
     <iframe src="https://drive.google.com/file/d/1TFYXbQ5ufpuDRohSUXrviTd81XxHRwoY/preview" allow="autoplay" allowfullscreen></iframe>
   </div>
   <div class="section-divider"><span class="section-label">✦ Смотрите также ✦</span></div>
-  <div class="rec-header">
-    <div class="rec-title-wrap">
-      <span class="rec-title-ornament">✦ &nbsp; ПОДБОРКА &nbsp; ✦</span>
-      <div class="rec-title">Рекомендуем к Просмотру</div>
-      <span class="rec-title-stars">★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★</span>
-    </div>
-  </div>
-  <div class="rec-category-label">◆ &nbsp; Боевики · Классика</div>
-  <div class="rec-grid"><a href="Rocky.html" class="rec-card"><div class="rec-card-inner"><img src="https://kinogo.online/uploads/posts/2021-02/1614398240-303155765.jpg" alt="Рокки"><div class="rec-card-overlay"><div class="rec-card-overlay-title">Рокки</div><div class="rec-card-overlay-meta">США · 1976 · Драма</div></div><span class="rec-badge similar">Похожее</span></div><div class="rec-card-title">Рокки</div><div class="rec-card-year">1976</div></a>
-<a href="Bad_boys.html" class="rec-card"><div class="rec-card-inner"><img src="https://kinogo.media/uploads/posts/2021-10/1634804136_iphone360_841277.jpg" alt="Плохие парни"><div class="rec-card-overlay"><div class="rec-card-overlay-title">Плохие парни</div><div class="rec-card-overlay-meta">США · 1995 · Боевик</div></div><span class="rec-badge similar">Похожее</span></div><div class="rec-card-title">Плохие парни</div><div class="rec-card-year">1995</div></a></div><div class="rec-card-overlay-meta">США · 2012 · Фантастика</div></div>
-        <span class="rec-badge similar">Похожее</span>
-      </div>
-      <div class="rec-card-title">Голодные игры</div>
-      <div class="rec-card-year">2012</div>
-    </a>
-    <a href="Star_trek.html" class="rec-card">
-      <div class="rec-card-inner">
-        <img src="https://kinogo.online/uploads/posts/2021-02/1614496303-1604412785.jpg" alt="Звёздный путь">
-        <div class="rec-card-overlay"><div class="rec-card-overlay-title">Звёздный путь</div><div class="rec-card-overlay-meta">США · 2009 · Фантастика</div></div>
-        <span class="rec-badge similar">Похожее</span>
-      </div>
-      <div class="rec-card-title">Звёздный путь</div>
-      <div class="rec-card-year">2009</div>
-    </a></div>
+  <div class="rec-category-label">◆ &nbsp; Похожие фильмы</div>
+  <div class="rec-grid" id="smartRecs"></div>
   <div class="section-divider"><span class="section-label">✦ Вход ✦</span></div>
   <div class="login-block">
     <input type="text" id="nickname" placeholder="Ваш ник" oninput="checkNick()">
-    <input type="password" id="adminPass" placeholder="Пароль" id="adminPassLoginField">
+    <input type="password" id="adminPassLoginField" placeholder="Пароль">
     <button class="btn-gold" onclick="login()">Войти</button>
     <span class="login-status" id="loginStatus"></span>
     <span class="login-error" id="loginError"></span>
@@ -268,6 +254,7 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>emailjs.init("xQFu4rTTN_OUgE6zH");</script>
+<script src="movies_data.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 <script>
@@ -285,7 +272,7 @@ let currentUser=null,replyTo=null,votingInProgress={};
 const PROTECTED_NICKS=["Mister_fish","Mister_fish606","fish606"];
 const ADMIN_PASS="xhidid";
 function checkNick(){const nick=document.getElementById("nickname").value.trim();const pf=document.getElementById("adminPassLoginField");if(PROTECTED_NICKS.includes(nick)){pf.style.display="inline-block";document.getElementById("loginError").innerText="⚠ Ник администратора";}else{pf.style.display="none";document.getElementById("loginError").innerText="";}}
-async function login(){const nick=document.getElementById("nickname").value.trim();if(!nick)return alert("Введите ник!");if(PROTECTED_NICKS.includes(nick)){const pass=document.getElementById("adminPass").value;if(pass!==ADMIN_PASS)return document.getElementById("loginError").innerText="❌ Неверный пароль!";localStorage.setItem("nickname",nick);currentUser=nick;document.getElementById("loginStatus").innerText="👑 Добро пожаловать, "+nick+"!";return;}const saved=localStorage.getItem("nickname");if(saved){if(saved!==nick)return alert("Ваш ник уже: "+saved);currentUser=saved;document.getElementById("loginStatus").innerText="✓ Вы вошли как "+currentUser;return;}const doc=await usersRef.doc(nick).get();if(doc.exists)return alert("Ник '"+nick+"' уже занят!");await usersRef.doc(nick).set({createdAt:firebase.firestore.FieldValue.serverTimestamp(),uid:Date.now()+"_"+Math.random()});localStorage.setItem("nickname",nick);currentUser=nick;document.getElementById("loginStatus").innerText="✓ Зарегистрирован как "+currentUser;}
+async function login(){const nick=document.getElementById("nickname").value.trim();if(!nick)return alert("Введите ник!");if(PROTECTED_NICKS.includes(nick)){const pass=document.getElementById("adminPassLoginField").value;if(pass!==ADMIN_PASS)return document.getElementById("loginError").innerText="❌ Неверный пароль!";localStorage.setItem("nickname",nick);currentUser=nick;document.getElementById("loginStatus").innerText="👑 Добро пожаловать, "+nick+"!";return;}const saved=localStorage.getItem("nickname");if(saved){if(saved!==nick)return alert("Ваш ник уже: "+saved);currentUser=saved;document.getElementById("loginStatus").innerText="✓ Вы вошли как "+currentUser;return;}const doc=await usersRef.doc(nick).get();if(doc.exists)return alert("Ник '"+nick+"' уже занят!");await usersRef.doc(nick).set({createdAt:firebase.firestore.FieldValue.serverTimestamp(),uid:Date.now()+"_"+Math.random()});localStorage.setItem("nickname",nick);currentUser=nick;document.getElementById("loginStatus").innerText="✓ Зарегистрирован как "+currentUser;}
 function initViews(){const ref=statsRef.doc("views");ref.onSnapshot(doc=>{if(doc.exists)document.getElementById("views").innerText=doc.data().count||0;});if(!localStorage.getItem("viewed_"+movieKey)){ref.set({count:firebase.firestore.FieldValue.increment(1)},{merge:true});localStorage.setItem("viewed_"+movieKey,"yes");}}
 const ratingRef=statsRef.doc("rating");
 async function loadRating(){const snap=await ratingRef.get();if(!snap.exists)await ratingRef.set({totalScore:0,totalVotes:0});const data=(await ratingRef.get()).data();document.getElementById("avgRating").innerText=data.totalVotes?(data.totalScore/data.totalVotes).toFixed(1):"—";document.getElementById("votesCount").innerText=data.totalVotes;}
@@ -302,8 +289,8 @@ function closeModal(){document.getElementById("replyModal").classList.remove("op
 async function saveReply(){const t=document.getElementById("modalText").value.trim();if(t)await addComment(replyTo,t);document.getElementById("modalText").value="";closeModal();}
 function openReport(){document.getElementById("reportModal").classList.add("open");}
 function closeReport(){document.getElementById("reportModal").classList.remove("open");document.getElementById("reportSentMsg").style.display="none";document.getElementById("reportText").value="";document.getElementById("reportName").value="";}
-async function sendReport(){const name=document.getElementById("reportName").value.trim()||"Аноним";const text=document.getElementById("reportText").value.trim();if(!text)return alert("Опиши проблему!");const sendBtn=document.querySelector("#reportModal .btn-red");sendBtn.innerText="Отправка...";sendBtn.disabled=true;try{await emailjs.send("service_m2itd3q","template_jvqfkhr",{from_name:name,message:text,page:"Элизиум: Рай не на Земле"});document.getElementById("reportSentMsg").style.display="block";sendBtn.innerText="✅ Отправлено!";}catch(err){alert("Ошибка: "+JSON.stringify(err));sendBtn.innerText="📨 Отправить сообщение";sendBtn.disabled=false;}}
-window.onload=async()=>{const saved=localStorage.getItem("nickname");if(saved){currentUser=saved;document.getElementById("loginStatus").innerText="✓ Вы вошли как "+currentUser;}loadRating();initViews();};
+async function sendReport(){const name=document.getElementById("reportName").value.trim()||"Аноним";const text=document.getElementById("reportText").value.trim();if(!text)return alert("Опиши проблему!");const sendBtn=document.querySelector("#reportModal .btn-red");sendBtn.innerText="Отправка...";sendBtn.disabled=true;try{await emailjs.send("service_m2itd3q","template_jvqfkhr",{from_name:name,message:text,page:"Рэмбо"});document.getElementById("reportSentMsg").style.display="block";sendBtn.innerText="✅ Отправлено!";}catch(err){alert("Ошибка: "+JSON.stringify(err));sendBtn.innerText="📨 Отправить сообщение";sendBtn.disabled=false;}}
+window.onload=async()=>{const saved=localStorage.getItem("nickname");if(saved){currentUser=saved;document.getElementById("loginStatus").innerText="✓ Вы вошли как "+currentUser;}loadRating();initViews();renderSmartRecs("Rambo First Blood 1982","smartRecs");};
 </script>
 </body>
 </html>
