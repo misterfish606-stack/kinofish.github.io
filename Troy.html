@@ -138,6 +138,85 @@ body{font-family:'Crimson Text',Georgia,serif;background:var(--bg);color:var(--c
 .btn-red:hover{box-shadow:0 0 16px rgba(122,32,32,0.6);}
 ::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px;}
 .filmstrip-bottom{border-top:2px solid #1a1208;margin-top:60px;}
+
+/* GOLD UNDERLINES ON HOVER */
+.meta-tag {
+  position:relative;
+}
+.meta-tag::after {
+  content:"";
+  position:absolute;
+  bottom:0; left:10%; right:10%;
+  height:1px;
+  background:var(--gold);
+  transform:scaleX(0);
+  transition:transform 0.25s ease;
+}
+.meta-tag:hover::after { transform:scaleX(1); }
+
+.rating-badge {
+  position:relative; overflow:hidden;
+}
+.rating-badge::after {
+  content:"";
+  position:absolute;
+  bottom:0; left:10%; right:10%;
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform:scaleX(0);
+  transition:transform 0.3s ease;
+}
+.rating-badge:hover::after { transform:scaleX(1); }
+.rating-badge .label { transition:color 0.2s; }
+.rating-badge:hover .label { color:var(--gold); }
+.rating-badge .value { transition:color 0.2s, text-shadow 0.2s; }
+.rating-badge:hover .value {
+  color:var(--gold-light);
+  text-shadow:0 0 18px rgba(201,168,76,0.5);
+}
+
+.detail-value {
+  position:relative;
+}
+.detail-value::after {
+  content:"";
+  position:absolute;
+  bottom:-2px; left:0; right:0;
+  height:1px;
+  background:linear-gradient(90deg, var(--gold-dim), var(--gold), var(--gold-dim));
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.3s ease;
+}
+.detail-item:hover .detail-value::after { transform:scaleX(1); }
+.detail-item:hover .detail-value { color:var(--gold-light); }
+
+.detail-value a { color:var(--gold); text-decoration:none; position:relative; transition:color 0.2s; }
+.detail-value a::after {
+  content:""; position:absolute;
+  bottom:-1px; left:0; right:0; height:1px;
+  background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.25s ease;
+}
+.detail-value a:hover { color:var(--gold-light); }
+.detail-value a:hover::after { transform:scaleX(1); }
+
+.user-rating-wrap label {
+  display:inline-block; cursor:default;
+  position:relative; transition:color 0.2s;
+}
+.user-rating-wrap label::after {
+  content:"";
+  position:absolute;
+  bottom:-2px; left:0; right:0;
+  height:1px;
+  background:var(--gold);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.25s ease;
+}
+.user-rating-wrap label:hover { color:var(--gold-light); }
+.user-rating-wrap label:hover::after { transform:scaleX(1); }
+
 </style>
 </head>
 <body>
