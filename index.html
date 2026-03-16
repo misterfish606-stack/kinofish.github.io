@@ -366,6 +366,85 @@ body {
   .catalog{padding:18px;}
   .movies-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:14px;}
 }
+
+/* GOLD UNDERLINES ON HOVER */
+.meta-tag {
+  position:relative;
+}
+.meta-tag::after {
+  content:"";
+  position:absolute;
+  bottom:0; left:10%; right:10%;
+  height:1px;
+  background:var(--gold);
+  transform:scaleX(0);
+  transition:transform 0.25s ease;
+}
+.meta-tag:hover::after { transform:scaleX(1); }
+
+.rating-badge {
+  position:relative; overflow:hidden;
+}
+.rating-badge::after {
+  content:"";
+  position:absolute;
+  bottom:0; left:10%; right:10%;
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform:scaleX(0);
+  transition:transform 0.3s ease;
+}
+.rating-badge:hover::after { transform:scaleX(1); }
+.rating-badge .label { transition:color 0.2s; }
+.rating-badge:hover .label { color:var(--gold); }
+.rating-badge .value { transition:color 0.2s, text-shadow 0.2s; }
+.rating-badge:hover .value {
+  color:var(--gold-light);
+  text-shadow:0 0 18px rgba(201,168,76,0.5);
+}
+
+.detail-value {
+  position:relative;
+}
+.detail-value::after {
+  content:"";
+  position:absolute;
+  bottom:-2px; left:0; right:0;
+  height:1px;
+  background:linear-gradient(90deg, var(--gold-dim), var(--gold), var(--gold-dim));
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.3s ease;
+}
+.detail-item:hover .detail-value::after { transform:scaleX(1); }
+.detail-item:hover .detail-value { color:var(--gold-light); }
+
+.detail-value a { color:var(--gold); text-decoration:none; position:relative; transition:color 0.2s; }
+.detail-value a::after {
+  content:""; position:absolute;
+  bottom:-1px; left:0; right:0; height:1px;
+  background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.25s ease;
+}
+.detail-value a:hover { color:var(--gold-light); }
+.detail-value a:hover::after { transform:scaleX(1); }
+
+.user-rating-wrap label {
+  display:inline-block; cursor:default;
+  position:relative; transition:color 0.2s;
+}
+.user-rating-wrap label::after {
+  content:"";
+  position:absolute;
+  bottom:-2px; left:0; right:0;
+  height:1px;
+  background:var(--gold);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.25s ease;
+}
+.user-rating-wrap label:hover { color:var(--gold-light); }
+.user-rating-wrap label:hover::after { transform:scaleX(1); }
+
 </style>
 </head>
 <body>
@@ -572,7 +651,7 @@ const movies=[
   {title:"Полицейская академия",            file:"Police_academy.html",                        movieKey:"Police Academy 1984",                   year:1984, country:"США",             hot:false, isNew:false, desc:"Самая нелепая команда курсантов в истории полицейской академии.",                      img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvEIwhv3Ckww8VTUJpnjBaYVSC6YcVJl0Lhg&s", actors:["Стив Гуттенберг","Ким Кэтролл"]},
   {title:"Очень страшное кино",             file:"Scary_movie.html",                           movieKey:"Scary Movie 2000",                      year:2000, country:"США",             hot:false, isNew:false, desc:"Безумная пародия на хоррор-хиты 90-х — один из самых смешных фильмов своего времени.", img:"https://kinogo.online/uploads/posts/2021-02/1614431711-60734677.jpg", actors:["Шон Уэйанс","Марлон Уэйанс","Анна Фэрис"]},
   {title:"Майор Пейн",                      file:"Major_payne.html",                           movieKey:"Major Payne 1995",                      year:1995, country:"США",             hot:false, isNew:false, desc:"Жёсткий военный становится командиром школьного отряда и получает урок человечности.", img:"https://kinogo.online/uploads/mini/shortstory-mob/81e/1614363946-1621052681.jpg", actors:["Дэймон Уэйанс"]},
-  {title:"Без чувств",                      file:"Bez_chuvstv_1998.html",                      movieKey:"Bez chuvstv 1998",                      year:1998, country:"Украина",         hot:false, isNew:false, desc:"История о людях, которые разучились чувствовать, и о важности оставаться живым внутри.",img:"https://mobb.kinovasek.men/uploads/posts/2025-03/67dafbd41d177.webp", actors:["Богдан Ступка","Ада Роговцева"]},
+  {title:"Без чувств",                      file:"Bez_chuvstv.html",                      movieKey:"Bez chuvstv 1998",                      year:1998, country:"Украина",         hot:false, isNew:false, desc:"История о людях, которые разучились чувствовать, и о важности оставаться живым внутри.",img:"https://mobb.kinovasek.men/uploads/posts/2025-03/67dafbd41d177.webp", actors:["Богдан Ступка","Ада Роговцева"]},
   {title:"Робот по имени Чаппи",            file:"Chappie.html",                               movieKey:"Chappie 2015",                          year:2015, country:"ЮАР / США",      hot:false, isNew:false, desc:"Робот получает сознание и учится жить, чувствовать и мечтать.",                         img:"https://www.hdclub.ua/files/film_release/big/bigi55759efdc9425.jpg", actors:["Дев Патель","Хью Джекман","Шарлто Копли"]},
   {title:"Рокки",                           file:"Rocky.html",                                 movieKey:"Rocky 1976",                            year:1976, country:"США",             hot:true,  isNew:false, desc:"Второразрядный боксёр получает шанс жизни — бой с чемпионом мира. Оскар.",             img:"https://kinogo.online/uploads/posts/2021-02/1614398240-303155765.jpg", actors:["Сильвестр Сталлоне","Тэлия Шайр","Берт Янг"]},
   {title:"Да здравствует Франция!",         file:"Vive_la_France.html",                        movieKey:"Vive la France 2013",                   year:2013, country:"Франция",         hot:false, isNew:false, desc:"Два террориста приезжают в Париж и влюбляются во французский образ жизни.",            img:"https://play-lh.googleusercontent.com/whxZ9r9DvZKBef7_ZorHAtbD5MINTF9xVk_pTcOvhwVCRYMfnOszsqAAoKkb4fvnON8aag", actors:["Жозе Гарсия","Мед Хондо"]},
@@ -582,11 +661,11 @@ const movies=[
   {title:"Выживший",                        file:"The_Revenant.html",                          movieKey:"The Revenant 2015",                     year:2015, country:"США",             hot:true,  isNew:false, desc:"Охотник выживает после предательства и ползёт сквозь тайгу ради мести. Оскар ДиКаприо.",img:"https://kinogo.online/uploads/posts/2021-02/1614528568-1065569495.jpg", actors:["Леонардо ДиКаприо","Том Харди"]},
   {title:"Апокалипсис по-голливудски",      file:"This_is_the_End.html",                       movieKey:"This Is the End 2013",                  year:2013, country:"США",             hot:false, isNew:false, desc:"Звёзды Голливуда на вечеринке — и тут начинается настоящий апокалипсис.",              img:"https://play-lh.googleusercontent.com/AoLjRe-KKJqd8ogN33AhIdbpQTOQFvaUDZjIkuf5v0LaPGdKv4N--FX97XkDpuWA4i9V", actors:["Джеймс Франко","Джона Хилл","Сет Роген"]},
   {title:"Мост в Терабитию",                file:"Bridge_to_Terabithia.html",                  movieKey:"Bridge to Terabithia 2007",             year:2007, country:"США",             hot:false, isNew:false, desc:"Два подростка создают волшебное королевство в лесу. Трогательная история о дружбе.",   img:"https://mobb.kinovasek.men/uploads/posts/2025-03/67db17498a418.webp", actors:["Джош Хатчерсон","АннаСофия Робб"]},
-  {title:"Банда Келли",                     file:"Ned_Kelly.html",                             movieKey:"Ned Kelly 2003",                        year:2003, country:"Австралия",       hot:false, isNew:false, desc:"Хит Леджер в роли легендарного австралийского бандита и народного героя.",             img:"https://kinogo.media/uploads/posts/2021-10/1634994106_iphone360_5572.jpg", actors:["Хит Леджер","Орландо Блум","Наоми Уоттс"]},
+  {title:"Банда Келли",                     file:"Ned_Kelly.html",                             movieKey:"ned_kelly_2003",                        year:2003, country:"Австралия",       hot:false, isNew:false, desc:"Хит Леджер в роли легендарного австралийского бандита и народного героя.",             img:"https://kinogo.media/uploads/posts/2021-10/1634994106_iphone360_5572.jpg", actors:["Хит Леджер","Орландо Блум","Наоми Уоттс"]},
   {title:"Хоббит: Нежданное путешествие",   file:"Hobbit.html",                                movieKey:"The Hobbit 2012",                       year:2012, country:"Новая Зеландия",  hot:false, isNew:false, desc:"Хоббит Бильбо отправляется с гномами вернуть королевство от дракона Смауга.",          img:"https://kinogo.online/uploads/posts/2021-02/1614408723-1574705447.jpg", actors:["Мартин Фриман","Иэн МакКеллен","Ричард Армитидж"]},
-  {title:"Ущелье",                          file:"Gorge.html",                                 movieKey:"The Gorge 2025",                        year:2025, country:"США",             hot:true,  isNew:false, desc:"Два снайпера по разные стороны ущелья влюбляются и спускаются внутрь.",                img:"https://kinogo.online/uploads/posts/2025-02/1741618926-95a5cfd520_124112.jpg", actors:["Майлз Теллер","Аня Тейлор-Джой"]},
+  {title:"Ущелье",                          file:"The_Gorge.html",                                 movieKey:"The Gorge 2025",                        year:2025, country:"США",             hot:true,  isNew:false, desc:"Два снайпера по разные стороны ущелья влюбляются и спускаются внутрь.",                img:"https://kinogo.online/uploads/posts/2025-02/1741618926-95a5cfd520_124112.jpg", actors:["Майлз Теллер","Аня Тейлор-Джой"]},
   {title:"Криминальное чтиво",              file:"Pulp_fiction.html",                          movieKey:"Pulp Fiction 1994",                     year:1994, country:"США",             hot:true,  isNew:false, desc:"Несколько криминальных историй переплетаются в нелинейном шедевре Тарантино.",         img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFOc_nYJ6EvcrCVy6WQ-t5tTCtRvw12buu9Q&s", actors:["Джон Траволта","Сэмюэл Л. Джексон","Ума Турман","Брюс Уиллис"]},
-  {title:"Где моя тачка, чувак?",           file:"Dude_wheres_my_car.html",                    movieKey:"Dude Wheres My Car 2000",               year:2000, country:"США",             hot:false, isNew:false, desc:"Двое друзей ищут машину после вечеринки и встречают инопланетян.",                     img:"https://upload.wikimedia.org/wikipedia/ru/f/fe/Dude%2C_Where%27s_My_Car.jpg", actors:["Эштон Катчер","Шон Уильям Скотт"]},
+  {title:"Где моя тачка, чувак?",           file:"Dude_Wheres_My_Car.html",                    movieKey:"Dude Wheres My Car 2000",               year:2000, country:"США",             hot:false, isNew:false, desc:"Двое друзей ищут машину после вечеринки и встречают инопланетян.",                     img:"https://upload.wikimedia.org/wikipedia/ru/f/fe/Dude%2C_Where%27s_My_Car.jpg", actors:["Эштон Катчер","Шон Уильям Скотт"]},
   {title:"Джанго освобождённый",            file:"Django.html",                                movieKey:"Django Unchained 2012",                 year:2012, country:"США",             hot:true,  isNew:false, desc:"Бывший раб и охотник за головами едут освобождать жену. Тарантино переосмысляет вестерн.",img:"https://kinogo.online/uploads/posts/2021-02/1614410299-1099694772.jpg", actors:["Джейми Фокс","Кристоф Вальц","Леонардо ДиКаприо"]},
   {title:"Карате-пацан",                    file:"Karate_kid.html",                            movieKey:"The Karate Kid 2010",                   year:2010, country:"США / Китай",     hot:false, isNew:false, desc:"Мальчик переезжает в Китай и учится кунг-фу у мастера Джеки Чана.",                    img:"https://kinogo.online/uploads/mini/shortstory-mob/492/1614458213-830135586.jpg", actors:["Джейден Смит","Джеки Чан"]},
   {title:"Муви 43",                         file:"Movie_43.html",                              movieKey:"Movie 43 2013",                         year:2013, country:"США",             hot:false, isNew:false, desc:"Сборник безумных скетчей со звёздами первой величины. Самый эпатажный альманах.",      img:"https://mobb.kinovasek.men/uploads/posts/2025-03/67daf54f2f903.webp", actors:["Хью Джекман","Кейт Уинслет","Хэлли Берри"]},
@@ -596,10 +675,10 @@ const movies=[
   {title:"Время",                           file:"In_Time.html",                               movieKey:"in_time_2011",                          year:2011, country:"США",             hot:false, isNew:true,  desc:"В будущем время — это деньги. Буквально.",                                            img:"https://kinogo.online/uploads/posts/2021-02/1614395730-1614395730.jpg", actors:["Джастин Тимберлейк","Аманда Сейфрид","Киллиан Мёрфи"]},
   {title:"Белые цыпочки",                   file:"White_Chicks.html",                          movieKey:"white_chicks_2004",                     year:2004, country:"США",             hot:false, isNew:true,  desc:"Два агента ФБР переодеваются в белых девушек.",                                       img:"https://upload.wikimedia.org/wikipedia/ru/5/51/White_Chicks.jpg", actors:["Шон Уэйанс","Марлон Уэйанс","Терри Крюс"]},
   {title:"Бегущий в лабиринте",             file:"Maze_Runner.html",                           movieKey:"maze_runner_2014",                      year:2014, country:"США",             hot:false, isNew:true,  desc:"Подростки заперты в лабиринте без воспоминаний.",                                     img:"https://kinogo.online/uploads/posts/2021-02/1614420018-1614420018.jpg", actors:["Дилан О'Брайен","Кая Скоделарио","Томас Броди-Сангстер"]},
-  {title:"Гладиатор",                       file:"Gladiator.html",                             movieKey:"gladiator_2000",                        year:2000, country:"США",             hot:true,  isNew:true,  desc:"Генерал стал рабом. Раб стал гладиатором. Оскар.",                                    img:"https://kinogo.online/uploads/posts/2021-02/1614399274-1614399274.jpg", actors:["Рассел Кроу","Хоакин Феникс","Конни Нильсен"]},
+  {title:"Гладиатор",                       file:"Gladiator.html",                             movieKey:"gladiator_2000",                        year:2000, country:"США",             hot:true,  isNew:true,  desc:"Генерал стал рабом. Раб стал гладиатором. Оскар.",                                    img:"https://kinogo.online/uploads/posts/2021-02/1614441975-2608244.jpg", actors:["Рассел Кроу","Хоакин Феникс","Конни Нильсен"]},
   {title:"Миллион способов потерять голову",file:"Million_Ways.html",                          movieKey:"million_ways_2014",                     year:2014, country:"США",             hot:false, isNew:true,  desc:"Пародийный вестерн от создателя Теда.",                                               img:"https://kinogo.online/uploads/posts/2021-02/1614510276-1614510276.jpg", actors:["Сет МакФарлейн","Шарлиз Терон","Лиам Нисон","Аманда Сейфрид"]},
   {title:"50 первых поцелуев",              file:"50_First_Dates.html",                        movieKey:"50_first_dates_2004",                   year:2004, country:"США",             hot:false, isNew:true,  desc:"Она забывает его каждое утро. Он влюбляется снова.",                                  img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkQmxUJWzAX-Jnp2vTDdO1RqJm5HgX5YN5Cw&s", actors:["Адам Сэндлер","Дрю Бэрримор","Роб Шнайдер"]},
-  {title:"Семь",                            file:"Seven.html",                                 movieKey:"seven_1995",                            year:1995, country:"США",             hot:true,  isNew:true,  desc:"7 грехов. 7 убийств. Финчер.",                                                        img:"https://kinogo.online/uploads/posts/2021-02/1614396506-1614396506.jpg", actors:["Брэд Питт","Морган Фриман","Кевин Спейси"]},
+  {title:"Семь",                            file:"Seven.html",                                 movieKey:"seven_1995",                            year:1995, country:"США",             hot:true,  isNew:true,  desc:"7 грехов. 7 убийств. Финчер.",                                                        img:"https://kinogo.org/uploads/posts/2021-09/1694491844-sem.jpg", actors:["Брэд Питт","Морган Фриман","Кевин Спейси"]},
   {title:"Матрица",                         file:"Matrix.html",                                movieKey:"matrix_1999",                           year:1999, country:"США",             hot:true,  isNew:true,  desc:"Реальность — симуляция. Нео должен её сломать.",                                      img:"https://kinogo.online/uploads/posts/2021-02/1614391860-1614391860.jpg", actors:["Киану Ривз","Лоренс Фишбёрн","Кэрри-Энн Мосс","Хьюго Уивинг"]},
   {title:"Смешанные",                       file:"Blended.html",                               movieKey:"blended_2014",                          year:2014, country:"США",             hot:false, isNew:true,  desc:"Два одиноких родителя застряли вместе в Африке.",                                     img:"https://kinogo.online/uploads/posts/2021-02/1614438920-1614438920.jpg", actors:["Адам Сэндлер","Дрю Бэрримор","Белла Торн"]},
   {title:"Папе снова 17",                   file:"17_Again.html",                              movieKey:"17_again_2009",                         year:2009, country:"США",             hot:false, isNew:true,  desc:"Взрослый мужик снова стал подростком.",                                               img:"https://kinogo.online/uploads/posts/2021-02/1614427008-1614427008.jpg", actors:["Зак Эфрон","Мэттью Перри","Лесли Манн"]},
