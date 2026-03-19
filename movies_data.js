@@ -69,11 +69,51 @@ const FISH_MOVIES = [
   { title:"Супер перцы",                    file:"Superbad.html",                              key:"superbad_2007",                         year:2007, country:"США",             genres:["комедия"],                     directors:["Грег Моттола"],                      actors:["Джона Хилл","Майкл Сера","Кристофер Минц-Пласс"],                      img:"https://m.media-amazon.com/images/M/MV5BY2IyNTE0NjYtNjNjMS00Zjk4LWI3YjktYzU1NTYxNzM0OTdiXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_.jpg" },
   { title:"Поймай меня если сможешь",       file:"Catch_Me_If_You_Can.html",                   key:"catch_me_if_you_can_2002",              year:2002, country:"США",             genres:["криминал","биография","драма"], directors:["Стивен Спилберг"],                  actors:["Леонардо ДиКаприо","Том Хэнкс","Кристофер Уокен"],                    img:"https://kinogo.online/uploads/posts/2021-02/1614393240-1614393240.jpg" },
   { title:"Солдаты неудачи",                file:"Tropic_Thunder.html",                        key:"tropic_thunder_2008",                   year:2008, country:"США",             genres:["комедия","боевик","пародия"],  directors:["Бен Стиллер"],                       actors:["Бен Стиллер","Джек Блэк","Роберт Дауни Мл."],                          img:"https://kinogo.online/uploads/posts/2021-02/1614436228-1614436228.jpg" },
-  { title:"Зелёная миля",                   file:"Green_Mile.html",                            key:"green_mile_1999",                       year:1999, country:"США",             genres:["драма","фэнтези","криминал"],  directors:["Фрэнк Дарабонт"],                    actors:["Том Хэнкс","Майкл Кларк Дункан","Дэвид Морс"],                         img:"https://kinogo.online/uploads/posts/2021-02/1614394116-1614394116.jpg" },
+  { title:"Зелёная миля",                   file:"Green_Mile.html",                            key:"green_mile_1999",                       year:1999, country:"США",             genres:["драма","фэнтези","криминал"],  directors:["Фрэнк Дарабонт"],                    actors:["Том Хэнкс","Майкл Кларк Дункан","Дэвид Морс"],                         img:"https://kinogo.ec/uploads/posts/2020-03/1585530011-1127491609.jpg" },
+  // ═══════════════════════════════════════════════════════
+  //  НОВЫЕ ФИЛЬМЫ
+  // ═══════════════════════════════════════════════════════
+  { title:"Шалун",                         file:"Little_Man.html",                    key:"little_man_2006",               year:2006, country:"США",            genres:["комедия","криминал"],               directors:["Кинан Айвори Уэйанс"],                    actors:["Марлон Уэйанс","Шон Уэйанс"],                                        img:"https://image.tmdb.org/t/p/w500/fNZW4gMLymN5SflFT8wQvfYvnGr.jpg" },
+  { title:"Лысый нянька: Спецзадание",     file:"The_Pacifier.html",                  key:"the_pacifier_2005",             year:2005, country:"США",            genres:["комедия","боевик","семейный"],      directors:["Адам Шэнкман"],                           actors:["Вин Дизель","Лорен Грэм"],                                            img:"https://image.tmdb.org/t/p/w500/5iu9TqnhNELEZ0QbvDUxBDhlqS5.jpg" },
+  { title:"Папа-досвидос",                 file:"Thats_My_Boy.html",                  key:"thats_my_boy_2012",             year:2012, country:"США",            genres:["комедия"],                          directors:["Шон Андерс"],                             actors:["Адам Сэндлер","Энди Сэмберг"],                                        img:"https://image.tmdb.org/t/p/w500/pq4P1MZZhDTe1xRYlQTDxrHT0Eh.jpg" },
+  { title:"Тронутые",                      file:"Road_Within.html",                   key:"road_within_2014",              year:2014, country:"США",            genres:["комедия","драма","приключения"],    directors:["Грен Уэллс"],                             actors:["Роберт Шиэн","Дев Патель","Зои Кравиц"],                              img:"https://image.tmdb.org/t/p/w500/p3QiGzGsK2tq2mRGkzLFNf2nE9G.jpg" },
+  { title:"На Западном фронте без перемен",file:"All_Quiet_on_the_Western_Front.html",key:"all_quiet_2022",                year:2022, country:"Германия",       genres:["драма","военный"],                  directors:["Эдвард Бергер"],                          actors:["Феликс Каммерер","Альбрехт Шух","Даниэль Брюль"],                     img:"https://image.tmdb.org/t/p/w500/hgRMSOt7a1b8qyQR68vUixJPang.jpg" },
+  { title:"Мальчишник в Вегасе",           file:"The_Hangover.html",                  key:"hangover_2009",                 year:2009, country:"США",            genres:["комедия","криминал"],               directors:["Тодд Филлипс"],                           actors:["Брэдли Купер","Зак Галифианакис","Эд Хелмс"],                         img:"https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggkn.jpg" },
+  { title:"Любовь зла",                    file:"Love_Is_Evil.html",                  key:"love_is_evil_1999",             year:1999, country:"США",            genres:["комедия","мелодрама"],              directors:["Джефф Фрэнклин"],                         actors:["Фрэнч Стюарт","Бриджит Уилсон"],                                      img:"https://image.tmdb.org/t/p/w500/cYqxn6VqMCBbpJEkxZ8Gvpz4oWX.jpg" },
+  { title:"Кровавый алмаз",                file:"Blood_Diamond.html",                 key:"blood_diamond_2006",            year:2006, country:"США",            genres:["триллер","драма","приключения"],    directors:["Эдвард Цвик"],                            actors:["Леонардо ДиКаприо","Дживон Хоузу","Дженнифер Коннелли"],              img:"https://image.tmdb.org/t/p/w500/6oKVF1tWPDUKyoFMdcXBpJRiFnI.jpg" },
+  { title:"Притворись моей женой",         file:"Just_Go_With_It.html",               key:"just_go_with_it_2011",          year:2011, country:"США",            genres:["комедия","мелодрама"],              directors:["Деннис Дуган"],                           actors:["Адам Сэндлер","Дженнифер Энистон","Бруклин Декер"],                   img:"https://image.tmdb.org/t/p/w500/9BW3HFUFd5y8dkXGXBFfpxsYF8W.jpg" },
+  { title:"Впритык",                       file:"Due_Date.html",                      key:"due_date_2010",                 year:2010, country:"США",            genres:["комедия"],                          directors:["Тодд Филлипс"],                           actors:["Роберт Дауни-мл.","Зак Галифианакис"],                                img:"https://image.tmdb.org/t/p/w500/4kJJ2lAFlqXMVQHVSF2DkMYsOfN.jpg" },
+  { title:"Телохранитель киллера",         file:"Hitmans_Bodyguard.html",             key:"hitmans_bodyguard_2017",        year:2017, country:"США",            genres:["комедия","боевик","криминал"],      directors:["Патрик Хьюз"],                            actors:["Райан Рейнольдс","Сэмюэл Л. Джексон","Салма Хайек"],                  img:"https://image.tmdb.org/t/p/w500/nPGtMSqkYnChfCfLMSvZofyGR3.jpg" },
+  { title:"Типа крутые легавые",           file:"Hot_Fuzz.html",                      key:"hot_fuzz_2007",                 year:2007, country:"Великобритания", genres:["комедия","боевик","детектив"],      directors:["Эдгар Райт"],                             actors:["Саймон Пегг","Ник Фрост","Тимоти Далтон"],                            img:"https://image.tmdb.org/t/p/w500/tID2wR9vHQo94vIlDxWXnJcQ0jO.jpg" },
+  { title:"Типа копы",                     file:"Lets_Be_Cops.html",                  key:"lets_be_cops_2014",             year:2014, country:"США",            genres:["комедия","боевик","криминал"],      directors:["Люк Гринфилд"],                           actors:["Дэймон Уэйанс-мл.","Джейк Джонсон"],                                  img:"https://image.tmdb.org/t/p/w500/ry1eFDpFDKHGXM5zFNYjHF3S2Bh.jpg" },
+  { title:"Третий лишний",                 file:"Ted.html",                           key:"ted_2012",                      year:2012, country:"США",            genres:["комедия","фэнтези"],                directors:["Сет Макфарлейн"],                         actors:["Марк Уолберг","Мила Кунис","Сет Макфарлейн"],                         img:"https://image.tmdb.org/t/p/w500/v1yOoCLPcfj3KR0E60m0jXY4j4V.jpg" },
+  { title:"Ночь в музее",                  file:"Night_at_the_Museum.html",           key:"night_at_museum_2006",          year:2006, country:"США",            genres:["комедия","приключения","фэнтези"], directors:["Шон Леви"],                               actors:["Бен Стиллер","Карла Гуджино","Дик Ван Дайк"],                         img:"https://image.tmdb.org/t/p/w500/uItKWHMKRzBqVbWpvBQqnHxfxVT.jpg" },
+  { title:"Эйс Вентура",                   file:"Ace_Ventura.html",                   key:"ace_ventura_1994",              year:1994, country:"США",            genres:["комедия","детектив"],               directors:["Том Шедьяк"],                             actors:["Джим Керри","Кортни Кокс","Шон Янг"],                                 img:"https://image.tmdb.org/t/p/w500/y9rTp4zJhfOsJPZq2Y6KT2wHGlk.jpg" },
+  { title:"Американский пирог",            file:"American_Pie.html",                  key:"american_pie_1999",             year:1999, country:"США",            genres:["комедия","мелодрама"],              directors:["Пол Вайц"],                               actors:["Джейсон Биггс","Шон Уильям Скотт","Алисон Ханниган"],                 img:"https://image.tmdb.org/t/p/w500/bMHLm5nvFlLmfXNmLqN1aTMnkL9.jpg" },
+  { title:"Брюс всемогущий",               file:"Bruce_Almighty.html",                key:"bruce_almighty_2003",           year:2003, country:"США",            genres:["комедия","фэнтези"],                directors:["Том Шедьяк"],                             actors:["Джим Керри","Морган Фримен","Дженнифер Энистон"],                     img:"https://image.tmdb.org/t/p/w500/qYgHpEqX6XTJHE9mWDI7DZNI7oY.jpg" },
+  { title:"Большой Стэн",                  file:"Big_Stan.html",                      key:"big_stan_2007",                 year:2007, country:"США",            genres:["комедия","боевик"],                 directors:["Роб Шнайдер"],                            actors:["Роб Шнайдер","Дэвид Кэррэдайн"],                                      img:"https://image.tmdb.org/t/p/w500/uGq7pHEiJXABPg7BsBzXwTa4H5b.jpg" },
+  { title:"Поймай толстуху, если сможешь", file:"Identity_Thief.html",                key:"identity_thief_2013",           year:2013, country:"США",            genres:["комедия","криминал"],               directors:["Сет Гордон"],                             actors:["Джейсон Бейтман","Мелисса Маккарти"],                                 img:"https://image.tmdb.org/t/p/w500/8qlFAJHxs0JhR0JOF1PLZPAH0ZZ.jpg" },
+  { title:"Каникулы",                      file:"Vacation.html",                      key:"vacation_2015",                 year:2015, country:"США",            genres:["комедия","приключения"],            directors:["Джон Фрэнсис Дэйли","Джонатан Голдштейн"],actors:["Эд Хелмс","Кристина Эпплгейт","Крис Хемсворт"],                       img:"https://image.tmdb.org/t/p/w500/glGjp6Nbi6F3Q1gnJMMoHBSUxcq.jpg" },
+  { title:"2012",                          file:"2012.html",                          key:"movie_2012",                    year:2009, country:"США",            genres:["фантастика","боевик","катастрофа"], directors:["Роланд Эммерих"],                         actors:["Джон Кьюсак","Аманда Пит","Чиветель Эджиофор"],                       img:"https://image.tmdb.org/t/p/w500/1s5yY94TFBRlUBfWMvSxrGAhQp7.jpg" },
+  { title:"План побега",                   file:"Escape_Plan.html",                   key:"escape_plan_2013",              year:2013, country:"США",            genres:["боевик","триллер","криминал"],      directors:["Микаэль Хофстрём"],                       actors:["Сильвестр Сталлоне","Арнольд Шварценеггер"],                          img:"https://image.tmdb.org/t/p/w500/lAzC6JOnBXpBbbHXgCdODEPOFHl.jpg" },
+  { title:"Джуманджи: Зов джунглей",      file:"Jumanji_2017.html",                  key:"jumanji_2017",                  year:2017, country:"США",            genres:["комедия","приключения","фантастика"],directors:["Джейк Кэздан"],                          actors:["Двейн Джонсон","Джек Блэк","Кевин Харт","Карен Гиллан"],             img:"https://image.tmdb.org/t/p/w500/bXrZ5iHBEjH7WMidbUDQ0U2xbmr.jpg" },
+  { title:"Начало",                        file:"Inception.html",                     key:"inception_2010",                year:2010, country:"США",            genres:["фантастика","триллер","боевик"],    directors:["Кристофер Нолан"],                        actors:["Леонардо ДиКаприо","Джозеф Гордон-Левитт","Эллиот Пейдж"],            img:"https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg" },
+  { title:"Волк с Уолл-стрит",            file:"Wolf_of_Wall_Street.html",           key:"wolf_of_wall_street_2013",      year:2013, country:"США",            genres:["драма","комедия","криминал","биография"],directors:["Мартин Скорсезе"],                   actors:["Леонардо ДиКаприо","Джона Хилл","Марго Робби"],                       img:"https://image.tmdb.org/t/p/w500/34m2tygAYBGqA9MXKhRDtzYd4MR.jpg" },
+  { title:"Однажды в… Голливуде",         file:"Once_Upon_Time_in_Hollywood.html",    key:"once_upon_time_hollywood_2019", year:2019, country:"США",            genres:["драма","комедия"],                  directors:["Квентин Тарантино"],                      actors:["Леонардо ДиКаприо","Брэд Питт","Марго Робби"],                        img:"https://image.tmdb.org/t/p/w500/8j58iEBbyxQNcsn9imHiS3LmWnj.jpg" },
+  { title:"Один дома",                    file:"Home_Alone.html",                     key:"home_alone_1990",               year:1990, country:"США",            genres:["комедия","семейный"],               directors:["Крис Коламбус"],                          actors:["Маколей Калкин","Джо Пеши","Дэниел Стерн"],                           img:"https://image.tmdb.org/t/p/w500/4LnSKEKpVh8pEABWfBQ4OvTiMTD.jpg" },
+  { title:"Дивергент",                    file:"Divergent.html",                      key:"divergent_2014",                year:2014, country:"США",            genres:["фантастика","приключения","боевик"],directors:["Нил Бёрджер"],                           actors:["Шейлин Вудли","Тео Джеймс","Кейт Уинслет"],                          img:"https://image.tmdb.org/t/p/w500/Aw5MCiAIHnTlcDfbFmr3IrX7YAK.jpg" },
+  { title:"Человек дождя",                file:"Rain_Man.html",                       key:"rain_man_1988",                 year:1988, country:"США",            genres:["драма","мелодрама"],                directors:["Барри Левинсон"],                         actors:["Дастин Хоффман","Том Круз","Валерия Голино"],                         img:"https://image.tmdb.org/t/p/w500/zaSQXlFEbBdGhASrCrFhFdTDm4Y.jpg" },
+  { title:"Терминал",                     file:"The_Terminal.html",                   key:"the_terminal_2004",             year:2004, country:"США",            genres:["комедия","драма","мелодрама"],      directors:["Стивен Спилберг"],                        actors:["Том Хэнкс","Кэтрин Зета-Джонс","Стэнли Туччи"],                      img:"https://image.tmdb.org/t/p/w500/bBNdI2kfKOVWPHx0S50RjnFVMuH.jpg" },
+  { title:"Диктатор",                     file:"The_Dictator.html",                   key:"the_dictator_2012",             year:2012, country:"США",            genres:["комедия"],                          directors:["Ларри Чарльз"],                           actors:["Саша Барон Коэн","Анна Фарис","Бен Кингсли"],                         img:"https://image.tmdb.org/t/p/w500/0AFAQHDSCdFfXN2vGYjGBiIE64F.jpg" },
+  { title:"Всегда говори «Да»",           file:"Yes_Man.html",                        key:"yes_man_2008",                  year:2008, country:"США",            genres:["комедия","мелодрама"],              directors:["Пейтон Рид"],                             actors:["Джим Керри","Зои Дешанель","Брэдли Купер"],                           img:"https://image.tmdb.org/t/p/w500/4EM8jJTX3yjCMwF7PU8BrHl0XQH.jpg" },
+  { title:"Пипец",                        file:"Kick_Ass.html",                       key:"kickass_2010",                  year:2010, country:"США",            genres:["комедия","боевик","криминал"],      directors:["Мэттью Вон"],                             actors:["Аарон Тейлор-Джонсон","Хлоя Грейс Морец","Николас Кейдж"],          img:"https://image.tmdb.org/t/p/w500/lxi3OM3kBXHEL1c5lrBkfQi4v7.jpg" },
+  { title:"Копы в глубоком запасе",       file:"Other_Guys.html",                     key:"other_guys_2010",               year:2010, country:"США",            genres:["комедия","боевик","криминал"],      directors:["Адам МакКей"],                            actors:["Уилл Феррелл","Марк Уолберг","Ева Мендес"],                          img:"https://image.tmdb.org/t/p/w500/2lXH1WrL8dJbGm3T7K28AiWjPX1.jpg" },
+  { title:"Агент Джонни Инглиш",          file:"Johnny_English.html",                 key:"johnny_english_2003",           year:2003, country:"Великобритания", genres:["комедия","боевик","шпионаж"],       directors:["Питер Хоар"],                             actors:["Роуэн Аткинсон","Натали Имбрулья","Бен Миллер"],                     img:"https://image.tmdb.org/t/p/w500/1v6cCpBHy2eCrJCEiOtH5Qixzxv.jpg" },
+  { title:"Большая мамочка",              file:"Big_Mommas_House.html",               key:"big_mommas_house_2000",         year:2000, country:"США",            genres:["комедия","боевик","криминал"],      directors:["Раджа Госнелл"],                          actors:["Мартин Лоуренс","Нии Лонг","Пол Джиамати"],                          img:"https://image.tmdb.org/t/p/w500/jTWFQH3RXTk4cpTJWmFt9Qhj7mN.jpg" },
 ];
 
 // ═══════════════════════════════════════════════════════
-//  СЕРИИ / ПРОДОЛЖЕНИЯ — связываем вручную
+//  СЕРИИ / ПРОДОЛЖЕНИЯ
 // ═══════════════════════════════════════════════════════
 const SERIES_GROUPS = [
   ["Per un pugno di dollari", "For a Few Dollars More", "good-bad-ugly"],
@@ -90,6 +130,23 @@ const SERIES_GROUPS = [
   ["Star Trek 2009"],
   ["The Hobbit 2012"],
   ["The Equalizer"],
+  ["hangover_2009"],
+  ["jumanji_2017"],
+  ["american_pie_1999"],
+  ["inception_2010"],
+  ["kickass_2010"],
+  ["wolf_of_wall_street_2013", "once_upon_time_hollywood_2019"],
+  ["home_alone_1990"],
+  ["rain_man_1988"],
+  ["the_terminal_2004"],
+  ["ace_ventura_1994"],
+  ["hot_fuzz_2007"],
+  ["escape_plan_2013"],
+  ["all_quiet_2022"],
+  ["the_pacifier_2005"],
+  ["thats_my_boy_2012"],
+  ["little_man_2006"],
+  ["ted_2012"],
 ];
 
 // ═══════════════════════════════════════════════════════
@@ -105,7 +162,6 @@ function getSmartRecs(currentKey, count = 4) {
     let badge = "similar";
     let badgeText = "Похожее";
 
-    // 1. Продолжение/часть серии — высший приоритет
     const currentSeries = SERIES_GROUPS.find(g => g.includes(currentKey));
     if (currentSeries && currentSeries.includes(m.key)) {
       score += 100;
@@ -113,7 +169,6 @@ function getSmartRecs(currentKey, count = 4) {
       badgeText = "Из серии";
     }
 
-    // 2. Тот же главный актёр (первые 2 актёра — главные)
     const currentMainActors = current.actors.slice(0, 2);
     const matchActors = m.actors.filter(a => currentMainActors.includes(a));
     if (matchActors.length > 0) {
@@ -121,18 +176,15 @@ function getSmartRecs(currentKey, count = 4) {
       if (score < 100) { badge = "actor"; badgeText = matchActors[0]; }
     }
 
-    // 3. Тот же режиссёр
     const matchDir = m.directors.filter(d => current.directors.includes(d));
     if (matchDir.length > 0) {
       score += 30;
       if (score < 40) { badge = "director"; badgeText = "Тот же режиссёр"; }
     }
 
-    // 4. Совпадение жанров
     const matchGenres = m.genres.filter(g => current.genres.includes(g));
     score += matchGenres.length * 10;
 
-    // 5. Близкий год (+/- 5 лет)
     if (Math.abs(m.year - current.year) <= 5) score += 5;
 
     return { ...m, score, badge, badgeText };
